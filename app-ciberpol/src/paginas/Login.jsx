@@ -27,7 +27,7 @@ const Login = () => {
           </div>
 
           <div className="mx-8">
-            <Link to="/dashboard" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Ingresar</Link>
+            <Link to="/Delegaciones" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Ingresar</Link>
           </div>
 
         </form>
