@@ -2,7 +2,7 @@ import React from 'react'
 
 const Delegaciones = () => {
   return (
-    <div>Delegaciones aaa</div>
+    <div className="h-screen bg-cover bg-center" style={{backgroundImage: `url('/fondo.jpg')`}} >Delegaciones aaa</div>
   )
 }
 
