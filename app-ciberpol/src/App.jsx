@@ -3,6 +3,8 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Login from './paginas/Login'
 import Panel from './Layout/Panel'
 import Delegaciones from './paginas/Delegaciones'
+import AgregarDelegacion from './paginas/AgregarDelegacion'
+
 
 
 
@@ -20,6 +22,8 @@ function App() {
 
         <Route path='/Delegaciones' element={<Panel />}>
           <Route index element={<Delegaciones />} />
+          <Route path='NuevaDelegacion' element={<AgregarDelegacion />} />
+         
           {/*
             <Route path='listar' element={<Listar />} />
           */}
