@@ -25,9 +25,9 @@ const TablaDelegaciones = () => {
                     <td>Gral</td>
                     <td>nombre</td>
                     <td className='py-2 text-center'>
-                        <VscOpenPreview className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2"/>
+                        <VscOpenPreview title='Visualizar'  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2"/>
 
-                        <MdEditDocument className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"/>
+                        <MdEditDocument  title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"/>
 
                         <MdDeleteForever className="h-7 w-7 text-red-900 cursor-pointer inline-block"/>
                     </td>
