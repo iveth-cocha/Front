@@ -32,6 +32,12 @@ const Login = () => {
 
         </form>
 
+        <div className="mt-3 text-sm flex justify-between items-center">
+          
+          <Link to="/Registrar" className=" text-gray-600 hover:text-blue-900 ">Solicitar Registro</Link>
+
+        </div>
+
 
       </div>
     </div>
