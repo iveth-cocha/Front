@@ -5,6 +5,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 const Panel = () => {
     const location = useLocation()
     const urlActual = location.pathname
+    const esDelegaciones = urlActual === '/Delegaciones' || urlActual === '/Delegaciones/NuevaDelegacion';
   return (
     <div className='md:flex md:min-h-screen font-serif '>
 
@@ -22,7 +23,7 @@ const Panel = () => {
         <ul className="mt-5">
 
             <li className="text-center">
-                <Link to='/Delegaciones' className={`${urlActual === '/Delegaciones' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
+                <Link to='/Delegaciones' className={`${esDelegaciones ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
             </li>
 
             <li className="text-center">
