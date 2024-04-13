@@ -5,6 +5,7 @@ import Panel from './Layout/Panel'
 import Delegaciones from './paginas/Delegaciones'
 import AgregarDelegacion from './paginas/AgregarDelegacion'
 import Registrar from './paginas/Registrar'
+import Registro from './paginas/Registro'
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/Delegaciones' element={<Panel />}>
           <Route index element={<Delegaciones />} />
           <Route path='NuevaDelegacion' element={<AgregarDelegacion />} />
+          <Route path='RegistroUsuario' element={<Registro />} />
          
           {/*
             <Route path='listar' element={<Listar />} />
