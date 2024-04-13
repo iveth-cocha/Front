@@ -3,7 +3,7 @@ import { BiCaretLeftCircle } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom'
 import Asignacion from '../componets/formularios/Asignacion';
 import Localizacion from '../componets/formularios/Localizacion';
-import Delito from '../componets/formularios/Delito';
+import DelegacionesDelito from '../componets/formularios/DelegacionesDelito';
 import Sospechoso from '../componets/formularios/Sospechoso';
 import Fiscal from '../componets/formularios/Fiscal';
 import Boleta from '../componets/formularios/Boleta';
@@ -27,7 +27,7 @@ const AgregarDelegacion = () => {
         <form >
         <Asignacion/>
         <Localizacion/>
-        <Delito/>
+        <DelegacionesDelito/>
         <Sospechoso/>
         <Fiscal/>
         <Boleta/>

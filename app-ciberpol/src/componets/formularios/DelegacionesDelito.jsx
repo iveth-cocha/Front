@@ -1,7 +1,7 @@
 import React from 'react'
 import TipoDelito from '../AutoComplete/TipoDelito'
 
-const Delito = () => {
+const DelegacionesDelito = () => {
   return (
     <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
         
@@ -46,4 +46,4 @@ const Delito = () => {
   )
 }
 
-export default Delito
+export default DelegacionesDelito
