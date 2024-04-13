@@ -26,6 +26,10 @@ const Panel = () => {
             </li>
 
             <li className="text-center">
+                <Link to='/Delegaciones/DelitosyTipificaciones' className={`${urlActual === '/Delegaciones/DelitosyTipificaciones' ? 'text-slate-200 bg-gray-900 px-3 py-2 rounded-md text-center' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Nuevo Delito</Link>
+            </li>
+
+            <li className="text-center">
                 <Link to='/Delegaciones/RegistroUsuario' className={`${urlActual === '/Delegaciones/RegistroUsuario' ? 'text-slate-200 bg-gray-900 px-3 py-2 rounded-md text-center' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Usuario</Link>
             </li>
 

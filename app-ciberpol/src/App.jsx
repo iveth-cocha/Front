@@ -7,6 +7,7 @@ import AgregarDelegacion from './paginas/AgregarDelegacion'
 import Registrar from './paginas/Registrar'
 import Registro from './paginas/Registro'
 import Usuarios from './paginas/Usuarios'
+import TipDelitos from './paginas/TipDelitos'
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/Delegaciones' element={<Panel />}>
           <Route index element={<Delegaciones />} />
           <Route path='NuevaDelegacion' element={<AgregarDelegacion />} />
+          <Route path='DelitosyTipificaciones' element={<TipDelitos/>} />
           <Route path='RegistroUsuario' element={<Registro />} />
           <Route path='Usuarios' element={<Usuarios />} />
          
