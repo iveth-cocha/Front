@@ -1,6 +1,7 @@
 import React from 'react'
-import { MdDeleteForever,MdEditDocument  } from "react-icons/md";
+import { MdDelete, MdEditDocument  } from "react-icons/md";
 import { VscOpenPreview } from "react-icons/vsc";
+
 
 const TablaUsuarios = () => {
   return (
@@ -27,7 +28,7 @@ const TablaUsuarios = () => {
 
                         <MdEditDocument  title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"/>
 
-                        <MdDeleteForever  title='Eliminar'className="h-7 w-7 text-red-900 cursor-pointer inline-block"/>
+                        <MdDelete  title='Eliminar'className="h-7 w-7 text-red-900 cursor-pointer inline-block"/>
                     </td>
                 </tr>
             </tbody>
