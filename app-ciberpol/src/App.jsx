@@ -9,6 +9,7 @@ import Registro from './paginas/Registro'
 import Usuarios from './paginas/Usuarios'
 import TipDelitos from './paginas/TipDelitos'
 import DetalleDelegacion from './paginas/DetalleDelegacion'
+import ActualizarDelegacion from './paginas/ActualizarDelegacion'
 
 
 
@@ -32,8 +33,9 @@ function App() {
           <Route index element={<Delegaciones />} />
           <Route path='NuevaDelegacion' element={<AgregarDelegacion />} />
           <Route path='DetalleDelegacion' element={<DetalleDelegacion />}/>
+          <Route path='ActualizarDelegacion' element={<ActualizarDelegacion />}/>
 
-          
+
           <Route path='DelitosyTipificaciones' element={<TipDelitos/>} />
           <Route path='RegistroUsuario' element={<Registro />} />
           <Route path='Usuarios' element={<Usuarios />} />

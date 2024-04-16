@@ -30,7 +30,7 @@ const TablaDelegaciones = () => {
                     <td className='py-2 text-center'>
                         <VscOpenPreview title='Detalle'  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2" onClick={() => navigate(`/Delegaciones/DetalleDelegacion`)} />
 
-                        <MdEditDocument  title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"/>
+                        <MdEditDocument  title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"  onClick={() => navigate(`/Delegaciones/ActualizarDelegacion`)} />
 
                         <MdDeleteForever className="h-7 w-7 text-red-900 cursor-pointer inline-block"/>
                     </td>
