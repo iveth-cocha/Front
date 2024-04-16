@@ -27,7 +27,7 @@ const TablaUsuarios = () => {
 
                         <MdEditDocument  title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"/>
 
-                        <MdDeleteForever className="h-7 w-7 text-red-900 cursor-pointer inline-block"/>
+                        <MdDeleteForever  title='Eliminar'className="h-7 w-7 text-red-900 cursor-pointer inline-block"/>
                     </td>
                 </tr>
             </tbody>

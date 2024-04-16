@@ -59,7 +59,7 @@ const RegistroUsu = () => {
         freeSolo
         options={clientNames}
         onChange={handleClientSelect}
-        renderInput={(params) => <TextField {...params} label="cedula " />}
+        renderInput={(params) => <TextField {...params} label="cédula " />}
       />
 
       <div className='text-xl '>

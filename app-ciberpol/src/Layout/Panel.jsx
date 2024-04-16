@@ -5,7 +5,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 const Panel = () => {
     const location = useLocation()
     const urlActual = location.pathname
-    const esDelegaciones = urlActual === '/Delegaciones' || urlActual === '/Delegaciones/NuevaDelegacion';
+    const esDelegaciones = urlActual === '/Delegaciones' || urlActual === '/Delegaciones/NuevaDelegacion' || urlActual === '/Delegaciones/DetalleDelegacion';
   return (
     <div className='md:flex md:min-h-screen font-serif '>
 

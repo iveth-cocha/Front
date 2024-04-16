@@ -7,7 +7,7 @@ const Informe = () => {
             <div className='flex  mb-3'>
                 <label className='mr-7 '>Informe o Descargo</label>
                 <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' >
-                    <option value="">Seleccione el sexo</option>
+                    <option value="">Seleccione una opcion</option>
                     <option >aaaa</option>
                 </select>
             </div>

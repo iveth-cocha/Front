@@ -1,8 +1,11 @@
 import React from 'react'
 import { MdDeleteForever,MdEditDocument  } from "react-icons/md";
 import { VscOpenPreview } from "react-icons/vsc";
+import { useNavigate } from 'react-router-dom'
 
 const TablaDelegaciones = () => {
+
+    const navigate = useNavigate()
   return (
     <table className='w-full mt-5 table-auto shadow-lg  bg-white'>
             <thead className='bg-sky-950 text-white'>
@@ -25,7 +28,7 @@ const TablaDelegaciones = () => {
                     <td>Gral</td>
                     <td>nombre</td>
                     <td className='py-2 text-center'>
-                        <VscOpenPreview title='Visualizar'  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2"/>
+                        <VscOpenPreview title='Detalle'  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2" onClick={() => navigate(`/Delegaciones/DetalleDelegacion`)} />
 
                         <MdEditDocument  title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"/>
 
