@@ -6,6 +6,7 @@ const Panel = () => {
     const location = useLocation();
     const urlActual = location.pathname;
     const esDelegaciones = urlActual.startsWith('/Delegaciones');
+    const esMapeo = urlActual.startsWith('/Mapeo');
 
     return (
         <div className='md:flex md:min-h-screen font-serif'>
@@ -24,7 +25,7 @@ const Panel = () => {
                         <Link to='/DelitosyTipificaciones' className={`${urlActual === '/DelitosyTipificaciones' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Agregar Delitos</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/Mapeo' className={`${urlActual === '/Mapeo' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Mapeo</Link>
+                        <Link to='/Mapeo' className={`${esMapeo ?  'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Mapeo</Link>
                     </li>
                     <li className="text-center">
                         <Link to='/RegistroUsuario' className={`${urlActual === '/RegistroUsuario' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Usuario</Link>

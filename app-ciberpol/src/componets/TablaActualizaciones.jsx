@@ -1,8 +1,9 @@
 import React from 'react'
 import { VscOpenPreview } from 'react-icons/vsc'
-
+import { useNavigate } from 'react-router-dom'
 
 export const TablaActualizaciones = () => {
+    const navigate = useNavigate()
     
   return (
     <table className='w-full mt-5 table-auto shadow-lg  bg-white'>
@@ -25,7 +26,7 @@ export const TablaActualizaciones = () => {
                     <td>00023</td>
                     
                     <td className='py-2 text-center'>
-                        <VscOpenPreview  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2"    />
+                        <VscOpenPreview  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2" onClick={() => navigate(`/Mapeo/DetalleMapeo`)} />
 
                         
                     </td>

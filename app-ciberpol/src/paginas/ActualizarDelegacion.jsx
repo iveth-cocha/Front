@@ -17,7 +17,7 @@ const ActualizarDelegacion = () => {
         
       </div>
       <hr className='my-4 border-sky-950  '/>
-        <p >agregar el id para la funcionalida app, panel y en la ruta que viene desde la tabla </p>
+        <p >agregar el id para la funcionalida app, (panel) y en la ruta que viene desde la tabla </p>
         <p >importar el resto del formulario </p>
 
         <form >

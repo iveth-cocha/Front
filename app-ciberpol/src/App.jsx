@@ -11,6 +11,7 @@ import TipDelitos from './paginas/TipDelitos'
 import DetalleDelegacion from './paginas/DetalleDelegacion'
 import ActualizarDelegacion from './paginas/ActualizarDelegacion'
 import Mapeo from './paginas/Mapeo'
+import DetalleMapeo from './paginas/DetalleMapeo'
 
 
 
@@ -48,6 +49,7 @@ function App() {
 
         <Route path='Mapeo'  element={<Panel />}>
           <Route index element={<Mapeo/>} />
+          <Route path='DetalleMapeo' element={<DetalleMapeo />}/>
         </Route>
 
         <Route path='RegistroUsuario'  element={<Panel />}>
