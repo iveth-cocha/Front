@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div  className="h-screen bg-cover bg-center" style={{backgroundImage: `url('/fondo_base.jpg')`}} >
       <div className="flex flex-col justify-center items-center h-full">
-        <div className='flex items-center justify-center bg-no-repeat bg-top'>
+        <div className='flex flex-row flex-wrap  gap-8 mb-5'>
           <img src="/logo_policia.png" className=' h-32' />
           <img src="/logo_ciberpol.png" className='h-32' />
         </div>
