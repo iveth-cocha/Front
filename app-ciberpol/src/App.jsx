@@ -31,34 +31,38 @@ function App() {
          
 
 
-        <Route path='/Delegaciones' element={<Panel />}>
+        <Route path="Delegaciones/*" element={<Panel />}>
           <Route index element={<Delegaciones />} />
           <Route path='NuevaDelegacion' element={<AgregarDelegacion />} />
           <Route path='DetalleDelegacion' element={<DetalleDelegacion />}/>
           <Route path='ActualizarDelegacion' element={<ActualizarDelegacion />}/>
-
-
-          <Route path='DelitosyTipificaciones' element={<TipDelitos/>} />
-
-          <Route path='Mapeo' element={<Mapeo/>} />
-          
-
-          <Route path='RegistroUsuario' element={<Registro />} />
-          <Route path='Usuarios' element={<Usuarios />} />
-          
-          
-         
           {/*
             <Route path='listar' element={<Listar />} />
           */}
-           
-          
+  
         </Route>
 
+        <Route path='DelitosyTipificaciones'  element={<Panel />}>
+          <Route index element={<TipDelitos/>} />
+        </Route>
 
+        <Route path='Mapeo'  element={<Panel />}>
+          <Route index element={<Mapeo/>} />
+        </Route>
 
+        <Route path='RegistroUsuario'  element={<Panel />}>
+          <Route index element={<Registro/>} />
+        </Route>
+
+        <Route path='Usuarios'  element={<Panel />}>
+          <Route index element={<Usuarios/>} />
+        </Route>
+
+        
+        
+        
       </Routes>
-      </BrowserRouter>
+    </BrowserRouter>
       
       
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Registrar = () => {
     return (
-        <div className="h-screen bg-cover bg-center  flex flex-col justify-center items-center" style={{ backgroundImage: `url('/fondo.jpg')` }} >
+        <div className="h-screen bg-cover bg-center  flex flex-col justify-center items-center" style={{ backgroundImage: `url('/fondo_base.jpg')` }} >
             <div className="p-3 bg-blue-900 rounded-lg border  font-serif ">
                 <div className='flex items-center justify-center bg-no-repeat bg-top mb-2'>
                     <img src="/logo_policia.png" className=' h-20' />
