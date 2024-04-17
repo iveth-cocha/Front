@@ -13,6 +13,7 @@ import ActualizarDelegacion from './paginas/ActualizarDelegacion'
 import Mapeo from './paginas/Mapeo'
 import DetalleMapeo from './paginas/DetalleMapeo'
 import Confirmar from './paginas/Confirmar'
+import NoFound from './paginas/NoFound'
 
 
 
@@ -30,7 +31,8 @@ function App() {
       <Routes>
         <Route index element={<Login/>} />
         <Route path='Registrar' element={<Registrar />} />
-        <Route path='confirmar' element={<Confirmar />} />        
+        <Route path='confirmar' element={<Confirmar />} />  
+        <Route path='/*' element={<NoFound />} />        
          
 
 
