@@ -31,6 +31,10 @@ const Panel = () => {
             </li>
 
             <li className="text-center">
+                <Link to='/Delegaciones/Mapeo' className={`${urlActual === '/Delegaciones/Mapeo' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Mapeo</Link>
+            </li>
+
+            <li className="text-center">
                 <Link to='/Delegaciones/RegistroUsuario' className={`${urlActual === '/Delegaciones/RegistroUsuario' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Usuario</Link>
             </li>
 

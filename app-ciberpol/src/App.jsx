@@ -10,6 +10,8 @@ import Usuarios from './paginas/Usuarios'
 import TipDelitos from './paginas/TipDelitos'
 import DetalleDelegacion from './paginas/DetalleDelegacion'
 import ActualizarDelegacion from './paginas/ActualizarDelegacion'
+import Mapeo from './paginas/Mapeo'
+
 
 
 
@@ -37,6 +39,10 @@ function App() {
 
 
           <Route path='DelitosyTipificaciones' element={<TipDelitos/>} />
+
+          <Route path='Mapeo' element={<Mapeo/>} />
+          
+
           <Route path='RegistroUsuario' element={<Registro />} />
           <Route path='Usuarios' element={<Usuarios />} />
           
