@@ -1,5 +1,5 @@
 import './App.css'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Route, Routes,Navigate} from 'react-router-dom'
 import Login from './paginas/Login'
 import Panel from './Layout/Panel'
 import Delegaciones from './paginas/Delegaciones'
@@ -36,12 +36,13 @@ function App() {
         <Route path='confirmar' element={<Confirmar />} />  
         <Route path='/*' element={<NoFound />} />  */}
 
-        <Route  element={<Auth/>}>
-          <Route path='/' element={<Login/>}/>
-          <Route path='Registrar' element={<Registrar />} />
-          <Route path='confirmar' element={<Confirmar />} />  
-          <Route path='/*' element={<NoFound />} /> 
-        </Route>
+<Route path='/' element={<Auth/>}>
+  <Route index element={<Navigate to="Login" />} />
+  <Route path='Login' element={<Login/>} />
+  <Route path='Registrar' element={<Registrar />} />
+  <Route path='Confirmar' element={<Confirmar />} />
+  <Route path='*' element={<NoFound />} />
+</Route>
        
          
 
