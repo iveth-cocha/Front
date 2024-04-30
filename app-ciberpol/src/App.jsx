@@ -14,6 +14,7 @@ import Mapeo from './paginas/Mapeo'
 import DetalleMapeo from './paginas/DetalleMapeo'
 import Confirmar from './paginas/Confirmar'
 import NoFound from './paginas/NoFound'
+import Auth from './Layout/Auth'
 
 
 
@@ -29,10 +30,19 @@ function App() {
     <>
       <BrowserRouter>
       <Routes>
-        <Route index element={<Login/>} />
+
+        {/* <Route index element={<Login/>} />
         <Route path='Registrar' element={<Registrar />} />
         <Route path='confirmar' element={<Confirmar />} />  
-        <Route path='/*' element={<NoFound />} />        
+        <Route path='/*' element={<NoFound />} />  */}
+
+        <Route  element={<Auth/>}>
+          <Route path='/' element={<Login/>}/>
+          <Route path='Registrar' element={<Registrar />} />
+          <Route path='confirmar' element={<Confirmar />} />  
+          <Route path='/*' element={<NoFound />} /> 
+        </Route>
+       
          
 
 

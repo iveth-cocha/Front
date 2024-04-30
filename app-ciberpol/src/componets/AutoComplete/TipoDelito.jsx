@@ -62,6 +62,14 @@ const TipoDelito = () => {
           {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
         </p>
       </div>
+
+      <div>
+        <p>
+          <span className='mr-7 '>Tipo Desgregado</span>
+          {selectedClient && clientEmails[selectedClient]}
+          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
+        </p>
+      </div>
       
 
 
