@@ -36,13 +36,13 @@ function App() {
         <Route path='confirmar' element={<Confirmar />} />  
         <Route path='/*' element={<NoFound />} />  */}
 
-<Route path='/' element={<Auth/>}>
-  <Route index element={<Navigate to="Login" />} />
-  <Route path='Login' element={<Login/>} />
-  <Route path='Registrar' element={<Registrar />} />
-  <Route path='Confirmar' element={<Confirmar />} />
-  <Route path='*' element={<NoFound />} />
-</Route>
+          <Route path='/' element={<Auth />}>
+            <Route index element={<Navigate to="Login" />} />
+            <Route path='Login' element={<Login />} />
+            <Route path='Registrar' element={<Registrar />} />
+            <Route path='Confirmar' element={<Confirmar />} />
+            <Route path='*' element={<NoFound />} />
+          </Route>
        
          
 
