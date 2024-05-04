@@ -17,6 +17,8 @@ import NoFound from './paginas/NoFound'
 import Auth from './Layout/Auth'
 import Forgot from './paginas/Forgot'
 import Restablecer from './paginas/Restablecer'
+import { AuthProvider } from './componets/context/AuthProvider'
+
 
 
 
@@ -31,60 +33,68 @@ function App() {
 
     <>
       <BrowserRouter>
-      <Routes>
+      <AuthProvider>  
+          <Routes>
 
-        {/* <Route index element={<Login/>} />
-        <Route path='Registrar' element={<Registrar />} />
-        <Route path='confirmar' element={<Confirmar />} />  
-        <Route path='/*' element={<NoFound />} />  */}
+            {/* <Route index element={<Login/>} />
+              <Route path='Registrar' element={<Registrar />} />
+              <Route path='confirmar' element={<Confirmar />} />  
+              <Route path='/*' element={<NoFound />} />  */}
 
-          <Route path='/' element={<Auth />}>
-            <Route index element={<Navigate to="login" />} />
-            <Route path='login' element={<Login />} />
-            <Route path='registrar' element={<Registrar />} />
-            <Route path='confirmar' element={<Confirmar />} />
-            <Route path="forgot" element={<Forgot />} />
-            <Route path="recuperar-password" element={<Restablecer />}
-                />
-            <Route path='*' element={<NoFound />} />
+            <Route path='/' element={<Auth />}>
+              <Route index element={<Navigate to="login" />} />
+              <Route path='login' element={<Login />} />
+              <Route path='registrar' element={<Registrar />} />
+              <Route path='confirmar' element={<Confirmar />} />
+              <Route path="forgot" element={<Forgot />} />
+              <Route path="recuperar-password" element={<Restablecer />}
+              />
+              <Route path='*' element={<NoFound />} />
+
+            </Route>
+
+
+           
             
-          </Route>
-       
-         
+            <Route path="delegaciones/*" element={<Panel />}>
+              <Route index element={<Delegaciones />} />
+              <Route path='nuevaDelegacion' element={<AgregarDelegacion />} />
+              <Route path='detalleDelegacion' element={<DetalleDelegacion />} />
+              <Route path='actualizarDelegacion' element={<ActualizarDelegacion />} />
+              {/*
+                <Route path='listar' element={<Listar />} />
+              */}
+
+            </Route>
+
+            <Route path='delitosyTipificaciones' element={<Panel />}>
+              <Route index element={<TipDelitos />} />
+            </Route>
+
+            <Route path='mapeo' element={<Panel />}>
+              <Route index element={<Mapeo />} />
+              <Route path='detalleMapeo' element={<DetalleMapeo />} />
+            </Route>
+
+            <Route path='registroUsuario' element={<Panel />}>
+              <Route index element={<Registro />} />
+            </Route>
+
+            <Route path='usuarios' element={<Panel />}>
+              <Route index element={<Usuarios />} />
+            </Route>
+
+           
+
+            
 
 
-        <Route path="delegaciones/*" element={<Panel />}>
-          <Route index element={<Delegaciones />} />
-          <Route path='nuevaDelegacion' element={<AgregarDelegacion />} />
-          <Route path='detalleDelegacion' element={<DetalleDelegacion />}/>
-          <Route path='actualizarDelegacion' element={<ActualizarDelegacion />}/>
-          {/*
-            <Route path='listar' element={<Listar />} />
-          */}
-  
-        </Route>
 
-        <Route path='delitosyTipificaciones'  element={<Panel />}>
-          <Route index element={<TipDelitos/>} />
-        </Route>
 
-        <Route path='mapeo'  element={<Panel />}>
-          <Route index element={<Mapeo/>} />
-          <Route path='detalleMapeo' element={<DetalleMapeo />}/>
-        </Route>
+          </Routes>
 
-        <Route path='registroUsuario'  element={<Panel />}>
-          <Route index element={<Registro/>} />
-        </Route>
-
-        <Route path='usuarios'  element={<Panel />}>
-          <Route index element={<Usuarios/>} />
-        </Route>
-
-        
-        
-        
-      </Routes>
+      </AuthProvider>
+      
     </BrowserRouter>
       
       

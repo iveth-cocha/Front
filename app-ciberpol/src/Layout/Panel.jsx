@@ -1,21 +1,26 @@
-import React from 'react';
+import {React,useContext } from 'react';
 import { FaRegUserCircle } from "react-icons/fa";
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import AuthContext from '../componets/context/AuthProvider';
+
+
 
 const Panel = () => {
     const location = useLocation();
     const urlActual = location.pathname;
     const esDelegaciones = urlActual.startsWith('/delegaciones');
     const esMapeo = urlActual.startsWith('/mapeo');
+    const { auth} = useContext(AuthContext)
+    const autenticado = localStorage.getItem('token')
 
     return (
         <div className='md:flex md:min-h-screen font-serif'>
             <div className='md:w-1/5 bg-blue-950 px-5 py-4'>
-                <h2 className='text-4xl font-black text-center text-slate-200'>Bienvenido</h2>
+                <h2 className='text-4xl font-black text-center text-slate-200'>Bienvenido </h2>
                 <div className='flex items-center justify-center mt-4'>
                     <FaRegUserCircle className='h-20 w-20 text-slate-200' />
                 </div>
-                <p className='text-slate-400 text-center my-4 text-sm font-bold'>Grado. Usuario - Rol</p>
+                <p className='text-slate-400 text-center my-4 text-sm font-bold'>{auth?.grado}{auth?.nombre} - {auth?.Rol}</p>
                 <hr className="mt-5 border-slate-500" />
                 <ul className="mt-5">
                     <li className="text-center">
@@ -43,7 +48,7 @@ const Panel = () => {
                     </div>
                 </div>
                 <div className='overflow-y-scroll h-screen bg-cover bg-center p-10' style={{backgroundImage: `url('/fondo_base.jpg')`}}>
-                    <Outlet />
+                    {autenticado ? <Outlet /> : <Navigate to="/" />}
                 </div>
             </div>
         </div>
