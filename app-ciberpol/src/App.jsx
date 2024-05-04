@@ -15,6 +15,8 @@ import DetalleMapeo from './paginas/DetalleMapeo'
 import Confirmar from './paginas/Confirmar'
 import NoFound from './paginas/NoFound'
 import Auth from './Layout/Auth'
+import Forgot from './paginas/Forgot'
+import Restablecer from './paginas/Restablecer'
 
 
 
@@ -37,41 +39,45 @@ function App() {
         <Route path='/*' element={<NoFound />} />  */}
 
           <Route path='/' element={<Auth />}>
-            <Route index element={<Navigate to="Login" />} />
-            <Route path='Login' element={<Login />} />
-            <Route path='Registrar' element={<Registrar />} />
-            <Route path='Confirmar' element={<Confirmar />} />
+            <Route index element={<Navigate to="login" />} />
+            <Route path='login' element={<Login />} />
+            <Route path='registrar' element={<Registrar />} />
+            <Route path='confirmar' element={<Confirmar />} />
+            <Route path="forgot" element={<Forgot />} />
+            <Route path="recuperar-password" element={<Restablecer />}
+                />
             <Route path='*' element={<NoFound />} />
+            
           </Route>
        
          
 
 
-        <Route path="Delegaciones/*" element={<Panel />}>
+        <Route path="delegaciones/*" element={<Panel />}>
           <Route index element={<Delegaciones />} />
-          <Route path='NuevaDelegacion' element={<AgregarDelegacion />} />
-          <Route path='DetalleDelegacion' element={<DetalleDelegacion />}/>
-          <Route path='ActualizarDelegacion' element={<ActualizarDelegacion />}/>
+          <Route path='nuevaDelegacion' element={<AgregarDelegacion />} />
+          <Route path='detalleDelegacion' element={<DetalleDelegacion />}/>
+          <Route path='actualizarDelegacion' element={<ActualizarDelegacion />}/>
           {/*
             <Route path='listar' element={<Listar />} />
           */}
   
         </Route>
 
-        <Route path='DelitosyTipificaciones'  element={<Panel />}>
+        <Route path='delitosyTipificaciones'  element={<Panel />}>
           <Route index element={<TipDelitos/>} />
         </Route>
 
-        <Route path='Mapeo'  element={<Panel />}>
+        <Route path='mapeo'  element={<Panel />}>
           <Route index element={<Mapeo/>} />
-          <Route path='DetalleMapeo' element={<DetalleMapeo />}/>
+          <Route path='detalleMapeo' element={<DetalleMapeo />}/>
         </Route>
 
-        <Route path='RegistroUsuario'  element={<Panel />}>
+        <Route path='registroUsuario'  element={<Panel />}>
           <Route index element={<Registro/>} />
         </Route>
 
-        <Route path='Usuarios'  element={<Panel />}>
+        <Route path='usuarios'  element={<Panel />}>
           <Route index element={<Usuarios/>} />
         </Route>
 

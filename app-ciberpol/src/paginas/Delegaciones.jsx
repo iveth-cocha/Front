@@ -27,7 +27,7 @@ const Delegaciones = () => {
         type="submit"
         className='bg-sky-950 w-auto p-3  text-slate-300 font-bold rounded-lg 
                     hover:bg-blue-950 cursor-pointer transition-all ml-auto'
-        onClick={() => navigate(`/Delegaciones/NuevaDelegacion`)}
+        onClick={() => navigate(`/delegaciones/nuevaDelegacion`)}
         value='Nueva Delegación'
       />
 

@@ -27,14 +27,14 @@ const Login = () => {
           </div>
 
           <div className="mx-8">
-            <Link to="/Delegaciones" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Ingresar</Link>
+            <Link to="/delegaciones" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Ingresar</Link>
           </div>
 
         </form>
 
         <div className="mt-3 text-sm flex justify-between items-center">
           
-          <Link to="/Registrar" className=" text-gray-600 hover:text-blue-900 ">Solicitar Registro</Link>
+          <Link to="/registrar" className=" text-gray-600 hover:text-blue-900 ">Solicitar Registro</Link>
 
         </div>
 

@@ -26,7 +26,7 @@ export const TablaActualizaciones = () => {
                     <td>00023</td>
                     
                     <td className='py-2 text-center'>
-                        <VscOpenPreview  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2" onClick={() => navigate(`/Mapeo/DetalleMapeo`)} />
+                        <VscOpenPreview  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2" onClick={() => navigate(`/mapeo/detalleMapeo`)} />
 
                         
                     </td>

@@ -11,9 +11,9 @@ const Confirmar = () => {
                   <img src="/logo_policia.png" className=' h-32' />
                   <img src="/logo_ciberpol.png" className='h-32' />
               </div>
-              <p className="text-3xl md:text-4xl lg:text-3xl text-gray-800 mt-8 uppercase">Muchas Gracias por confirmar tu cuenta</p>
-              <p className="md:text-lg lg:text-xl text-gray-600 mt-8 ">Ya puedes    
-                <Link to="/" className=" text-gray-600 hover:text-blue-900 underline ">Iniciar Seción</Link>
+              <p className="text-3xl md:text-4xl lg:text-3xl text-gray-800 mt-8 uppercase">Página de confirmación de cuenta</p>
+              <p className="md:text-lg lg:text-xl text-gray-600 mt-8  ">Ya puedes     
+                <Link to="/" className=" text-gray-600 hover:text-blue-900 underline pl-2">Iniciar Seción</Link>
               </p>
 
           </div>

@@ -28,9 +28,9 @@ const TablaDelegaciones = () => {
                     <td>Gral</td>
                     <td>nombre</td>
                     <td className='py-2 text-center'>
-                        <VscOpenPreview title='Detalle'  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2" onClick={() => navigate(`/Delegaciones/DetalleDelegacion`)} />
+                        <VscOpenPreview title='Detalle'  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2" onClick={() => navigate(`/delegaciones/detalleDelegacion`)} />
 
-                        <MdEditDocument  title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"  onClick={() => navigate(`/Delegaciones/ActualizarDelegacion`)} />
+                        <MdEditDocument  title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"  onClick={() => navigate(`/delegaciones/actualizarDelegacion`)} />
 
                         <MdDeleteForever className="h-7 w-7 text-red-900 cursor-pointer inline-block"/>
                     </td>

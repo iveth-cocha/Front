@@ -5,8 +5,8 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 const Panel = () => {
     const location = useLocation();
     const urlActual = location.pathname;
-    const esDelegaciones = urlActual.startsWith('/Delegaciones');
-    const esMapeo = urlActual.startsWith('/Mapeo');
+    const esDelegaciones = urlActual.startsWith('/delegaciones');
+    const esMapeo = urlActual.startsWith('/mapeo');
 
     return (
         <div className='md:flex md:min-h-screen font-serif'>
@@ -19,19 +19,19 @@ const Panel = () => {
                 <hr className="mt-5 border-slate-500" />
                 <ul className="mt-5">
                     <li className="text-center">
-                        <Link to='/Delegaciones' className={`${esDelegaciones ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
+                        <Link to='/delegaciones' className={`${esDelegaciones ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/DelitosyTipificaciones' className={`${urlActual === '/DelitosyTipificaciones' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Agregar Delitos</Link>
+                        <Link to='/delitosyTipificaciones' className={`${urlActual === '/DelitosyTipificaciones' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Agregar Delitos</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/Mapeo' className={`${esMapeo ?  'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Mapeo</Link>
+                        <Link to='/mapeo' className={`${esMapeo ?  'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Mapeo</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/RegistroUsuario' className={`${urlActual === '/RegistroUsuario' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Usuario</Link>
+                        <Link to='/registroUsuario' className={`${urlActual === '/RegistroUsuario' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Usuario</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/Usuarios' className={`${urlActual === '/Usuarios' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Usuarios</Link>
+                        <Link to='/usuarios' className={`${urlActual === '/Usuarios' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Usuarios</Link>
                     </li>
                 </ul>
             </div>

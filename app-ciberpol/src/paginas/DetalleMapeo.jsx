@@ -8,7 +8,7 @@ const DetalleMapeo = () => {
     <div>
         <div className='flex items-center'>
         <BiCaretLeftCircle  className='text-6xl text-sky-950'
-        onClick={() => navigate(`/Mapeo`)}/>
+        onClick={() => navigate(`/mapeo`)}/>
         <h1 className='font-black text-4xl text-gray-500 uppercase'>Detalle de las actualizaciones Realizadas</h1>
         
       </div>

@@ -12,7 +12,7 @@ const ActualizarDelegacion = () => {
     <div>
         <div className='flex items-center'>
         <BiCaretLeftCircle  className='text-4xl text-sky-950'
-        onClick={() => navigate(`/Delegaciones`)}/>
+        onClick={() => navigate(`/delegaciones`)}/>
         <h1 className='font-black text-4xl text-gray-500 uppercase'>Actualizar Delegación</h1>
         
       </div>
