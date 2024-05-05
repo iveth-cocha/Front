@@ -113,7 +113,7 @@ const RegistroUsu = () => {
             <select className='border-2 w-2000 p-2 mt-2 rounded-md mb-5' id='rol'>
               <option value="">Seleccione el rol</option>
               <option value="Administrador">Administrador</option>
-              <option value="Registrador">Registrador</option>
+              <option value="Regristrador">Registrador</option>
               <option value="Visualizador">Visualizador</option>
             </select>
           </div>
