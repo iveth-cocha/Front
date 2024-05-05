@@ -4,18 +4,15 @@ import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 
-
-
 const RegistroUsu = () => {
-    const [clientNames, setClientNames] = useState([]);
-  const [clientEmails, setClientEmails] = useState({});
-  const [selectedClient, setSelectedClient] = useState('');
+  const [usuarios, setUsuarios] = useState([]);
+  const [selectedAgente, setSelectedAgente] = useState(null);
 
   useEffect(() => {
-    const obtenerNombresClientes = async () => {
+    const obtenerAgentes = async () => {
       try {
         const token = localStorage.getItem('token');
-        const url = `${import.meta.env.VITE_BACKEND_URL}/clientes`;
+        const url = `${import.meta.env.VITE_BACKEND_URL}/agentes`;
         const options = {
           headers: {
             'Content-Type': 'application/json',
@@ -23,92 +20,92 @@ const RegistroUsu = () => {
           }
         };
         const respuesta = await axios.get(url, options);
-        const nombresClientes = respuesta.data.map(cliente => {
-          const nombreCompleto = `${cliente.nombre} ${cliente.apellido}`;
-          const email = cliente.email;
-          console.log(`Nombre: ${nombreCompleto}, Email: ${email}`);
-          setClientEmails(prevState => ({
-            ...prevState,
-            [nombreCompleto]: email
-          }));
-          return nombreCompleto;
-        });
-        setClientNames(nombresClientes);
+        const agentes = respuesta.data.map(agente => ({
+          cedula: agente.Cedula,
+          nombre: agente.Apellido_Nombre,
+          grado: agente.Grado,
+          email: agente.Email
+        }));
+        setUsuarios(agentes);
       } catch (error) {
-        console.error('Error al obtener los nombres de los clientes:', error);
+        console.error('Error al obtener la información de los agentes:', error);
       }
     };
 
-    obtenerNombresClientes();
+    obtenerAgentes();
   }, []);
 
-  const handleClientSelect = (event, value) => {
-    setSelectedClient(value);
-    console.log('Cliente seleccionado:', value);
+  const handleAgenteSelect = (event, value) => {
+    setSelectedAgente(value);
+    console.log('Agente seleccionado:', value);
   };
-
-
-
 
   return (
     <div className='flex flex-col justify-center items-center pt-8'>
-        <Stack spacing={2} sx={{ width: 300 }} >
-      <Autocomplete 
-      
-        id="free-solo-demo"
-        freeSolo
-        options={clientNames}
-        onChange={handleClientSelect}
-        renderInput={(params) => <TextField {...params} label="cédula " />}
-      />
-
-      <div className='text-xl '>
-        <form >
-        <p className='mb-2' >
-          <span className='mr-7'>Nombre y Apellido:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
-        <p className='mb-2'>
-          <span className='mr-7'>Grado:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
-        <p className='mb-2'>
-          <span className='mr-7'>Cédula:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
-
-        <div className='flex mb-3'>
-                  <label className='mr-7'>Correo</label>
-                  <input type="String" className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
-        </div>
-
-            <div className='flex  mb-3'>
-                <label className='mr-7 '>Rol:</label>
-                <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' >
-                    <option value="">Seleccione el rol</option>
-                    <option >Administrador</option>
-                    <option >Registrador</option>
-                    <option >Visulaizador</option>
-                </select>
-            </div>
-
-            <div className='mt-6'>
-                <button  className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-900 hover:text-white">Crear Usuario</button>
-            </div>
-
+      <Stack spacing={2} sx={{ width: 300 }}>
+        <Autocomplete
+          id="free-solo-demo"
+          freeSolo
+          options={usuarios.map(agente => `${agente.cedula} - ${agente.nombre}`)}
+          onChange={handleAgenteSelect}
+          renderInput={(params) => <TextField {...params} label="Cédula - Nombre" />}
+        />
+        <form className='w-96'>
+          <div className='flex items-center justify-center mb-2'>
+            <label className='mr-7'>Cédula: </label>
+            <input
+              type="text"
+              disabled
+              value={selectedAgente ? usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.cedula : ''}
+              className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+            />
+          </div>
+          <div className='flex items-center justify-center mb-2'>
+            <label className='mr-7'>Nombre: </label>
+            <input
+              type="text"
+              disabled
+              value={selectedAgente ? usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.nombre : ''}
+              className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+              name='paciente'
+            />
+          </div>
+          <div className='flex items-center justify-center mb-2'>
+            <label className='mr-7'>Grado: </label>
+            <input
+              type="text"
+              disabled
+              value={selectedAgente ? usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.grado : ''}
+              className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+              name='paciente'
+            />
+          </div>
+          <div className='flex items-center justify-center mb-2'>
+            <label className='mr-7'>Correo: </label>
+            <input
+              type="text"
+              disabled
+              value={selectedAgente ? usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.email : ''}
+              className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+              name='paciente'
+            />
+          </div>
+          <div className='flex mb-3'>
+            <label className='mr-7'>Rol:</label>
+            <select className='border-2 w-2000 p-2 mt-2 rounded-md mb-5'>
+              <option value="">Seleccione el rol</option>
+              <option>Administrador</option>
+              <option>Registrador</option>
+              <option>Visualizador</option>
+            </select>
+          </div>
+          <div className='mt-6'>
+            <button className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-900 hover:text-white">Crear Usuario</button>
+          </div>
         </form>
-        
-      </div>
-    </Stack>
+      </Stack>
     </div>
-
-
-    
-    
   );
 };
 
-export default RegistroUsu
+export default RegistroUsu;
