@@ -18,6 +18,7 @@ import Auth from './Layout/Auth'
 import Forgot from './paginas/Forgot'
 import Restablecer from './paginas/Restablecer'
 import { AuthProvider } from './componets/context/AuthProvider'
+import { PrivateRoute } from './Routes/PrivateRoute'
 
 
 
@@ -53,19 +54,28 @@ function App() {
 
             </Route>
 
+            <Route path="delegaciones/*" element={
+              <PrivateRoute>
+              <Routes>
+                <Route element={ <Panel />}>
+                  <Route index element={<Delegaciones />} />
+                  <Route path='nuevaDelegacion' element={<AgregarDelegacion />} />
+                  <Route path='detalleDelegacion' element={<DetalleDelegacion />} />
+                  <Route path='actualizarDelegacion' element={<ActualizarDelegacion />} />                 
+                </Route>
+              </Routes>
+            </PrivateRoute>
+            }/>
+
 
            
             
-            <Route path="delegaciones/*" element={<Panel />}>
+            {/* <Route path="delegaciones/*" element={<Panel />}>
               <Route index element={<Delegaciones />} />
               <Route path='nuevaDelegacion' element={<AgregarDelegacion />} />
               <Route path='detalleDelegacion' element={<DetalleDelegacion />} />
               <Route path='actualizarDelegacion' element={<ActualizarDelegacion />} />
-              {/*
-                <Route path='listar' element={<Listar />} />
-              */}
-
-            </Route>
+            </Route> */}
 
             <Route path='delitosyTipificaciones' element={<Panel />}>
               <Route index element={<TipDelitos />} />

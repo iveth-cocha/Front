@@ -1,7 +1,8 @@
 import {React,useContext } from 'react';
 import { FaRegUserCircle } from "react-icons/fa";
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, Navigate, } from 'react-router-dom';
 import AuthContext from '../componets/context/AuthProvider';
+
 
 
 
@@ -44,7 +45,7 @@ const Panel = () => {
             <div className='flex-1 flex flex-col justify-between h-screen'>
                 <div className='bg-gradient-to-r from-blue-950 to-sky-950 py-2 flex md:justify-end items-center gap-5 justify-center'>
                     <div>
-                        <Link to='/' className="text-white mr-3 text-md block hover:bg-red-900 text-center bg-red-800 px-4 py-1 rounded-lg">Salir</Link>
+                        <Link to='/' className="text-white mr-3 text-md block hover:bg-red-900 text-center bg-red-800 px-4 py-1 rounded-lg" onClick={()=>{localStorage.removeItem('token')}}>Salir</Link>
                     </div>
                 </div>
                 <div className='overflow-y-scroll h-screen bg-cover bg-center p-10' style={{backgroundImage: `url('/fondo_base.jpg')`}}>
