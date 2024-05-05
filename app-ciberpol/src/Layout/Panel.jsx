@@ -27,16 +27,16 @@ const Panel = () => {
                         <Link to='/delegaciones' className={`${esDelegaciones ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/delitosyTipificaciones' className={`${urlActual === '/DelitosyTipificaciones' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Agregar Delitos</Link>
+                        <Link to='/delitosyTipificaciones' className={`${urlActual === '/delitosyTipificaciones' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Agregar Delitos</Link>
                     </li>
                     <li className="text-center">
                         <Link to='/mapeo' className={`${esMapeo ?  'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Mapeo</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/registroUsuario' className={`${urlActual === '/RegistroUsuario' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Usuario</Link>
+                        <Link to='/registroUsuario' className={`${urlActual === '/registroUsuario' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Usuario</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/usuarios' className={`${urlActual === '/Usuarios' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Usuarios</Link>
+                        <Link to='/usuarios' className={`${urlActual === '/usuarios' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Usuarios</Link>
                     </li>
                 </ul>
             </div>
