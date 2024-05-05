@@ -3,10 +3,12 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
+import Mensaje from '../Alertas/Mensaje';
 
 const RegistroUsu = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [selectedAgente, setSelectedAgente] = useState(null);
+  const [mensaje, setMensaje] = useState({});
 
   useEffect(() => {
     const obtenerAgentes = async () => {
@@ -40,6 +42,33 @@ const RegistroUsu = () => {
     console.log('Agente seleccionado:', value);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      const url = `${import.meta.env.VITE_BACKEND_URL}/registro`;
+      const options = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      };
+      const form = {
+        agenteID: selectedAgente ? selectedAgente.split(' - ')[0] : '',
+        nombre: selectedAgente ? selectedAgente.split(' - ')[1] : '',
+        email: usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.email,
+        rol: document.getElementById('rol').value
+      };
+      await axios.post(url, form, options);
+      setMensaje({ respuesta: 'Registro exitoso', tipo: true });
+    } catch (error) {
+      setMensaje({ respuesta: error.response.data.msg, tipo: false });
+      setTimeout(() => {
+        setMensaje({});
+      }, 3000);
+    }
+  };
+
   return (
     <div className='flex flex-col justify-center items-center pt-8'>
       <Stack spacing={2} sx={{ width: 300 }}>
@@ -50,13 +79,14 @@ const RegistroUsu = () => {
           onChange={handleAgenteSelect}
           renderInput={(params) => <TextField {...params} label="Cédula - Nombre" />}
         />
-        <form className='w-96'>
+        <form className='w-96' onSubmit={handleSubmit}>
+          {mensaje.respuesta && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
           <div className='flex items-center justify-center mb-2'>
             <label className='mr-7'>Cédula: </label>
             <input
               type="text"
               disabled
-              value={selectedAgente ? usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.cedula : ''}
+              value={selectedAgente ? selectedAgente.split(' - ')[0] : ''}
               className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
             />
           </div>
@@ -65,19 +95,8 @@ const RegistroUsu = () => {
             <input
               type="text"
               disabled
-              value={selectedAgente ? usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.nombre : ''}
-              className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-              name='paciente'
-            />
-          </div>
-          <div className='flex items-center justify-center mb-2'>
-            <label className='mr-7'>Grado: </label>
-            <input
-              type="text"
-              disabled
-              value={selectedAgente ? usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.grado : ''}
-              className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-              name='paciente'
+              value={selectedAgente ? selectedAgente.split(' - ')[1] : ''}
+              className='border-2 w-96 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
             />
           </div>
           <div className='flex items-center justify-center mb-2'>
@@ -85,18 +104,17 @@ const RegistroUsu = () => {
             <input
               type="text"
               disabled
-              value={selectedAgente ? usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.email : ''}
+              value={usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.email || ''}
               className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-              name='paciente'
             />
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Rol:</label>
-            <select className='border-2 w-2000 p-2 mt-2 rounded-md mb-5'>
+            <select className='border-2 w-2000 p-2 mt-2 rounded-md mb-5' id='rol'>
               <option value="">Seleccione el rol</option>
-              <option>Administrador</option>
-              <option>Registrador</option>
-              <option>Visualizador</option>
+              <option value="Administrador">Administrador</option>
+              <option value="Registrador">Registrador</option>
+              <option value="Visualizador">Visualizador</option>
             </select>
           </div>
           <div className='mt-6'>
