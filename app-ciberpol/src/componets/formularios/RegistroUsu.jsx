@@ -6,6 +6,7 @@ import axios from 'axios';
 import Mensaje from '../Alertas/Mensaje';
 
 const RegistroUsu = () => {
+  //---------------logica para autocompletado
   const [usuarios, setUsuarios] = useState([]);
   const [selectedAgente, setSelectedAgente] = useState(null);
   const [mensaje, setMensaje] = useState({});
@@ -41,6 +42,8 @@ const RegistroUsu = () => {
     setSelectedAgente(value);
     console.log('Agente seleccionado:', value);
   };
+  //-------------logica oara registrar usuario
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,15 +60,16 @@ const RegistroUsu = () => {
         agenteID: selectedAgente ? selectedAgente.split(' - ')[0] : '',
         nombre: selectedAgente ? selectedAgente.split(' - ')[1] : '',
         email: usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.email,
-        rol: document.getElementById('rol').value
+        Rol: document.getElementById('Rol').value
       };
       await axios.post(url, form, options);
       setMensaje({ respuesta: 'Registro exitoso', tipo: true });
+      
     } catch (error) {
-      setMensaje({ respuesta: error.response.data.msg, tipo: false });
+      setMensaje({respuesta:error?.response?.data?.msg,tipo:false});
       setTimeout(() => {
         setMensaje({});
-      }, 3000);
+      }, 2000);
     }
   };
 
@@ -86,15 +90,18 @@ const RegistroUsu = () => {
             <input
               type="text"
               disabled
+              id='agenteID'
               value={selectedAgente ? selectedAgente.split(' - ')[0] : ''}
               className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
             />
           </div>
+          
           <div className='flex items-center justify-center mb-2'>
             <label className='mr-7'>Nombre: </label>
             <input
               type="text"
               disabled
+              name='nombre'
               value={selectedAgente ? selectedAgente.split(' - ')[1] : ''}
               className='border-2 w-96 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
             />
@@ -104,16 +111,17 @@ const RegistroUsu = () => {
             <input
               type="text"
               disabled
+              name='email'
               value={usuarios.find(agente => `${agente.cedula} - ${agente.nombre}` === selectedAgente)?.email || ''}
               className='border-2 w-full p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
             />
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Rol:</label>
-            <select className='border-2 w-2000 p-2 mt-2 rounded-md mb-5' id='rol'>
+            <select className='border-2 w-2000 p-2 mt-2 rounded-md mb-5' id='Rol'>
               <option value="">Seleccione el rol</option>
               <option value="Administrador">Administrador</option>
-              <option value="Regristrador">Registrador</option>
+              <option value="Registrador">Registrador</option>
               <option value="Visualizador">Visualizador</option>
             </select>
           </div>
