@@ -85,6 +85,13 @@ const handleSubmit = async(e) => {
           <Link to="/registrar" className=" text-gray-600 hover:text-blue-900 ">Solicitar Registro</Link>
 
         </div>
+        
+        <div className="mt-3 text-sm flex justify-between items-center">
+          
+          <Link to="/forgot" className=" text-gray-600 hover:text-blue-900 ">Olvidó su contraseña</Link>
+
+        </div>
+        
 
 
       </div>
