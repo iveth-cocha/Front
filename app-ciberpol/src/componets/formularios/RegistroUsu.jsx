@@ -83,6 +83,7 @@ const RegistroUsu = () => {
           onChange={handleAgenteSelect}
           renderInput={(params) => <TextField {...params} label="Cédula - Nombre" />}
         />
+        
         <form className='w-96' onSubmit={handleSubmit}>
           {mensaje.respuesta && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
           <div className='flex items-center justify-center mb-2'>

@@ -8,6 +8,7 @@ const TablaUsuarios = () => {
 
 
     const [usuarios, setUsuarios] = useState([])
+    const [mensaje, setMensaje] = useState({})
 
     const listarUsuarios = async () => {
         try {
@@ -28,6 +29,29 @@ const TablaUsuarios = () => {
     useEffect(() => {
         listarUsuarios();
     }, [])
+
+    const handleDelete = async (id) => {
+        try {
+            const confirmar = confirm("Eliminar al usuario")
+            if (confirmar) {
+                const token = localStorage.getItem('token')
+                const url = `${import.meta.env.VITE_BACKEND_URL}/eliminar/usuario/${id}`
+                const headers= {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                const data ={
+                    salida:new Date().toString()
+                }
+                await axios.delete(url, {headers, data});
+                listarUsuarios()
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
 
     return (
 
@@ -61,7 +85,7 @@ const TablaUsuarios = () => {
                                         <td className='py-2 text-center'>
                                             <MdEditDocument title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2" />
 
-                                            <MdDelete title='Eliminar' className="h-7 w-7 text-red-900 cursor-pointer inline-block" />
+                                            <MdDelete title='Eliminar' className="h-7 w-7 text-red-900 cursor-pointer inline-block" onClick={() => { handleDelete(usuarios.id) }} />
                                         </td>
                                     </tr>
                                 ))
