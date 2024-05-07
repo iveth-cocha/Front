@@ -19,6 +19,7 @@ import Forgot from './paginas/Forgot'
 import Restablecer from './paginas/Restablecer'
 import { AuthProvider } from './componets/context/AuthProvider'
 import { PrivateRoute } from './Routes/PrivateRoute'
+import Newpassword from './paginas/Newpassword'
 
 
 
@@ -46,7 +47,8 @@ function App() {
               <Route index element={<Navigate to="login" />} />
               <Route path='login' element={<Login />} />
               <Route path='registrar' element={<Registrar />} />
-              <Route path='confirmar' element={<Confirmar />} />
+              <Route path='confirmar/:token' element={<Confirmar />} />
+              <Route path='actualizar-contrasena/:token' element={<Newpassword />} />
               <Route path="forgot" element={<Forgot />} />
               <Route path="recuperar-password" element={<Restablecer />}
               />
