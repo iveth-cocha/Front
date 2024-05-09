@@ -72,7 +72,11 @@ const Newpassword = () => {
           </div>
         </form>
 
+        <div className="mt-3 text-sm flex justify-between items-center">
+          
+          <Link to="/" className=" text-gray-600 hover:text-blue-900 ">Iniciar Seción</Link>
 
+        </div>
       </div>
     </div>
   );
