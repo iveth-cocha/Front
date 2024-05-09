@@ -20,6 +20,7 @@ import Restablecer from './paginas/Restablecer'
 import { AuthProvider } from './componets/context/AuthProvider'
 import { PrivateRoute } from './Routes/PrivateRoute'
 import Newpassword from './paginas/Newpassword'
+import AddDelitos from './paginas/AddDelitos'
 
 
 
@@ -81,6 +82,7 @@ function App() {
 
             <Route path='delitosyTipificaciones' element={<Panel />}>
               <Route index element={<TipDelitos />} />
+              <Route path='agregarDelito' element={<AddDelitos />} />
             </Route>
 
             <Route path='mapeo' element={<Panel />}>
