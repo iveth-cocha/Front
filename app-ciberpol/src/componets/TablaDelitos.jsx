@@ -30,9 +30,7 @@ const Paginator = ({ pageCount, handlePageClick, currentPage }) => {
       setCurrentPage(selected);
     };
   
-    useEffect(() => {
-      // Lógica para cargar los datos y actualizar la paginación
-      const fetchData = async () => {
+    const fetchData = async () => {
         try {
           const token = localStorage.getItem('token');
           const url = `${import.meta.env.VITE_BACKEND_URL}/delitos`;
@@ -49,8 +47,30 @@ const Paginator = ({ pageCount, handlePageClick, currentPage }) => {
           console.log(error);
         }
       };
-      fetchData();
-    }, [currentPage, perPage]);
+    
+      useEffect(() => {
+        fetchData();
+      }, [currentPage, perPage]);
+
+    const handleDelete = async (id) => {
+        try {
+            const confirmar = confirm("Eliminar el delito")
+            if (confirmar) {
+                const token = localStorage.getItem('token')
+                const url = `${import.meta.env.VITE_BACKEND_URL}/eliminar/delito/${id}`
+                const headers= {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                await axios.delete(url, {headers});
+                fetchData();
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
   
     const displayDelitos = tipDelitos
       .slice(currentPage * perPage, (currentPage + 1) * perPage)
@@ -71,6 +91,10 @@ const Paginator = ({ pageCount, handlePageClick, currentPage }) => {
           </td>
         </tr>
       ));
+
+    
+     
+
   
     return (
       <>
