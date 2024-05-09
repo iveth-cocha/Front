@@ -4,13 +4,13 @@ const AddDelitos = () => {
   return (
     <div >
         <form >
-            <div className='flex flex-row flex-wrap  gap-8'>
+            <div className='flex flex-row flex-wrap  gap-8 mb-3'>
                   <div >
-                      <label >Delito</label>
+                      <label className='mr-2' >Delito</label>
                       <input type="String" className="w-15 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
                   </div>
                   <div >
-                      <label >Sección</label>
+                      <label className='mr-2'>Sección</label>
                       <input type="String" className=" rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
                   </div>
 
