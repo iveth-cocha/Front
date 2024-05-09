@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom'; 
 import axios from 'axios';
 import Mensaje from '../componets/Alertas/Mensaje';
@@ -47,7 +47,7 @@ const Newpassword = () => {
         <h2 className="text-3xl font-bold text-red mb-4">Crear contraseña</h2>
         {Object.keys(mensaje).length > 0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='bg-slate-300 rounded-lg border p-5'>
           <div className="mb-3">
             <label className="mr-4">Nueva Contraseña</label>
             <input
@@ -72,13 +72,13 @@ const Newpassword = () => {
           </div>
 
           <div className="mx-8">
-            <button to="/" type="submit" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Cambiar Contraseña</button>
+            <button to="/" type="submit" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Crear Contraseña</button>
           </div>
         </form>
 
         <div className="mt-3 text-sm flex justify-between items-center">
           
-          <Link to="/" className=" text-gray-600 hover:text-blue-900 ">Iniciar Seción</Link>
+          
 
         </div>
       </div>

@@ -40,9 +40,6 @@ const TablaUsuarios = () => {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`
                     }
-                const data ={
-                    salida:new Date().toString()
-                }
                 await axios.delete(url, {headers, data});
                 listarUsuarios()
             }

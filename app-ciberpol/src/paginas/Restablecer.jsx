@@ -74,7 +74,7 @@ const Restablecer = () => {
                 <h2 className="text-3xl font-bold text-red mb-4">Cambiar contraseña </h2>
                 
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='bg-slate-300 rounded-lg border p-5'>
                     <div className=' mb-3'>
                         <label className='mr-4'>Nueva Contraseña</label>
                         <input type="password" placeholder="**************" 

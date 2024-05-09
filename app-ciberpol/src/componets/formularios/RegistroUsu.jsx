@@ -4,6 +4,7 @@ import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 import Mensaje from '../Alertas/Mensaje';
+import { useNavigate } from 'react-router-dom';
 
 const RegistroUsu = () => {
   //---------------logica para autocompletado

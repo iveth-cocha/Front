@@ -25,7 +25,7 @@ const Confirmar = () => {
       <div className="h-screen bg-cover bg-center font-serif" style={{ backgroundImage: `url('/fondo_base.jpg')` }} >
           <div className="flex flex-col justify-center items-center h-full">
           {Object.keys(mensaje).length>0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
-            <p className='uppercase'>agregar el token en la ruta para la funcionalida en el archivo app</p>
+            
               <div className='flex flex-row flex-wrap  gap-8 mb-3'>
                   <img src="/logo_policia.png" className=' h-32' />
                   <img src="/logo_ciberpol.png" className='h-32' />
