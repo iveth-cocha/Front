@@ -50,7 +50,7 @@ function App() {
               <Route path='confirmar/:token' element={<Confirmar />} />
               <Route path='actualizar-contrasena/:token' element={<Newpassword />} />
               <Route path="forgot" element={<Forgot />} />
-              <Route path="recuperar-password" element={<Restablecer />}
+              <Route path="recuperar-password/:token" element={<Restablecer />}
               />
               <Route path='*' element={<NoFound />} />
 

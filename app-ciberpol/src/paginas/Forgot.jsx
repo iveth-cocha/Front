@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Mensaje from '../componets/Alertas/Mensaje';
 
 const Forgot = () => {
+    const navigate = useNavigate()
     const [mensaje, setMensaje] = useState({});
     const [email, setEmail] = useState({})
 
@@ -16,22 +17,21 @@ const Forgot = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         try {
             
-            console.log('Valor del correo electrónico enviado:', email);
             const url = `${import.meta.env.VITE_BACKEND_URL}/recuperar-password`;
             const respuesta = await axios.post(url, email);
             setMensaje({ respuesta: respuesta.data.msg, tipo: true });
             setEmail("")
             setTimeout(() => {
-                navigate('/')
+                navigate('/');
             }, 3000);
         } catch (error) {
-            setMensaje({ respuesta: error.response.data.msg, tipo: false });
+            setMensaje({respuesta:error.response.data.msg,tipo:false})
             setTimeout(() => {
                 setMensaje({});
-                setEmail("")
+                
             }, 3000);
         }
     };

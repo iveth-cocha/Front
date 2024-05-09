@@ -44,7 +44,7 @@ const RegistroUsu = () => {
   };
   //-------------logica oara registrar usuario
 
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -64,6 +64,9 @@ const RegistroUsu = () => {
       };
       await axios.post(url, form, options);
       setMensaje({ respuesta: 'Registro exitoso', tipo: true });
+      setTimeout(() => {
+        navigate('/usuarios');
+    }, 3000);
       
     } catch (error) {
       setMensaje({respuesta:error?.response?.data?.msg,tipo:false});
@@ -127,7 +130,7 @@ const RegistroUsu = () => {
             </select>
           </div>
           <div className='mt-6'>
-            <button className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-900 hover:text-white">Crear Usuario</button>
+            <button to="/usuarios" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-900 hover:text-white">Crear Usuario</button>
           </div>
         </form>
       </Stack>

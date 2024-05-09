@@ -5,6 +5,7 @@ import axios from 'axios';
 import Mensaje from '../componets/Alertas/Mensaje';
 
 const Newpassword = () => {
+  const navigate = useNavigate();
     const { token } = useParams(); 
   
     const [mensaje, setMensaje] = useState({})
@@ -27,6 +28,9 @@ const Newpassword = () => {
           const url = `${import.meta.env.VITE_BACKEND_URL}/actualizar-contrasena/${token}`;
           const response = await axios.put(url, form); // Envía los datos del formulario en la solicitud
           setMensaje({ respuesta: response.data.msg, tipo: true });
+          setTimeout(() => {
+            navigate('/');
+        }, 3000);
         } catch (error) {
           setMensaje({ respuesta: error.response.data.msg, tipo: false });
         }
@@ -68,7 +72,7 @@ const Newpassword = () => {
           </div>
 
           <div className="mx-8">
-            <button type="submit" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Cambiar Contraseña</button>
+            <button to="/" type="submit" className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Cambiar Contraseña</button>
           </div>
         </form>
 
