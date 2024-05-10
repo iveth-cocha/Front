@@ -13,7 +13,7 @@ const NombresAgente = () => {
     const agentesNombres = async () => {
       try {
         const token = localStorage.getItem('token');
-        const url = `${import.meta.env.VITE_BACKEND_URL}//agentes`;
+        const url = `${import.meta.env.VITE_BACKEND_URL}/agentes`;
         const options = {
           headers: {
             'Content-Type': 'application/json',

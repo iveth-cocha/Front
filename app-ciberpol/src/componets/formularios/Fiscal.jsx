@@ -1,4 +1,5 @@
 import React from 'react'
+import Fiscalias from '../AutoComplete/Fiscalias'
 
 const Fiscal = () => {
   return (
@@ -11,10 +12,8 @@ const Fiscal = () => {
               </div>
 
               <p className='text-red-500'>anadir para fiscalia autocompletado  y numero, que se concadenan en "Unidad Especializada de Fiscalia"</p>
-              <div className='flex mb-3'>
-                  <label className='mr-4'>Unidad Especializada de Fiscalia</label>
-                  <input type="String" className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
-              </div>
+              <Fiscalias/>
+              
 
               <div className='flex mb-3'>
                   <label className='mr-11'>Fecha de la Delegación</label>
