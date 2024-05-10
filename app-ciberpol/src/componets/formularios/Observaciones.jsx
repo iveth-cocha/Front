@@ -6,12 +6,13 @@ const Observaciones = () => {
       <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>observaciones</h1>
 
       <div className='flex mb-3'>
-        <label className='mr-7 '>Nombre del Requermimiento en la Boleta</label>
-        <input type="String" className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+        <label className='mr-7 '>Nombre del Requerido en la Boleta</label>
+        <input type="String" className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
       </div>
+      
       <div className='mb-3'>
         <label className='mr-7 '>Apellidos y Nombres de los Detenidos, producto del Cumplimiento de la Disposición Fiscal</label>
-        <input type="String" className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+        <input type="String" className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
       </div> 
       <div className='flex mb-3'>
         <label className='mr-7 '>N° Boletas Solicitadas</label>

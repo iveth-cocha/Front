@@ -17,7 +17,7 @@ const Asignacion = () => {
 
       <div className='flex mb-3'>
         <label className='mr-11'>N° de Instrucción Fiscal</label>
-        <input type="Number" className="block w-200 rounded-md border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+        <input type="text" className="block w-200 rounded-md border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 uppercase" />
       </div>
 
       <div className='flex  mb-3'>

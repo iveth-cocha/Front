@@ -7,7 +7,7 @@ const Localizacion = () => {
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Localización</h1>
 
           <div className='flex mb-3'>
-            <label className='mr-7'>Realice la Busqueda para la Localización </label>
+            <label className='mr-7'>Realice la Búsqueda para la Localización </label>
             <Localidad/>
           </div>
 
