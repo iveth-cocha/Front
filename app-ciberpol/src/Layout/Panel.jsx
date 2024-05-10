@@ -15,6 +15,18 @@ const Panel = () => {
     const { auth} = useContext(AuthContext)
     const autenticado = localStorage.getItem('token')
 
+    const grado = localStorage.getItem('grado');
+    const nombre = localStorage.getItem('nombre');
+    const rol = localStorage.getItem('Rol');
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('grado');
+        localStorage.removeItem('nombre');
+        localStorage.removeItem('Rol');
+    };
+
+
     return (
         <div className='md:flex md:min-h-screen font-serif'>
             <div className='md:w-1/5 bg-blue-950 px-5 py-4'>
@@ -22,7 +34,7 @@ const Panel = () => {
                 <div className='flex items-center justify-center mt-4'>
                     <FaRegUserCircle className='h-20 w-20 text-slate-200' />
                 </div>
-                <p className='text-slate-400 text-center my-4 text-sm font-bold'>{auth?.grado}{auth?.nombre} - {auth?.Rol}</p>
+                <p className='text-slate-400 text-center my-4 text-sm font-bold'>{grado && nombre && rol ? `${grado} ${nombre} - ${rol}` : ''}</p>
                 <hr className="mt-5 border-slate-500" />
                 <ul className="mt-5">
                     <li className="text-center">
@@ -46,7 +58,7 @@ const Panel = () => {
             <div className='flex-1 flex flex-col justify-between h-screen'>
                 <div className='bg-gradient-to-r from-blue-950 to-sky-950 py-2 flex md:justify-end items-center gap-5 justify-center'>
                     <div>
-                        <Link to='/' className="text-white mr-3 text-md block hover:bg-red-900 text-center bg-red-800 px-4 py-1 rounded-lg" onClick={()=>{localStorage.removeItem('token')}}>Salir</Link>
+                        <Link to='/' onClick={handleLogout}  className="text-white mr-3 text-md block hover:bg-red-900 text-center bg-red-800 px-4 py-1 rounded-lg">Salir</Link>
                     </div>
                 </div>
                 <div className='overflow-y-scroll h-screen bg-cover bg-center p-10' style={{backgroundImage: `url('/fondo_base.jpg')`}}>

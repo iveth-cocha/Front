@@ -32,6 +32,11 @@ const handleSubmit = async(e) => {
           const url = `${import.meta.env.VITE_BACKEND_URL}/login`
           const respuesta= await axios.post(url,form)
           localStorage.setItem('token',respuesta.data.token)
+          localStorage.setItem('grado',respuesta.data.grado);
+          localStorage.setItem('nombre',respuesta.data.nombre);
+          localStorage.setItem('Rol',respuesta.data.Rol);
+          console.log('Usuario almacenado en localStorage:', respuesta.data.grado + respuesta.data.nombre+respuesta.data.rol);
+
           setAuth(respuesta.data)
           navigate('/delegaciones')
       } catch (error) {

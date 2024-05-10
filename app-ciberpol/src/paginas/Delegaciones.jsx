@@ -12,14 +12,12 @@ const Delegaciones = () => {
 
       <div className=' flex justify-center items-center mb-2'>
         <div className='flex'>
-          <input type="String" placeholder="Buscar N° de Instrución Fiscal" className=" rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+          <label className='mr-3 mt-1'>Buscar</label>
+          <input type="String" placeholder=" Instrución Fiscal/Investugación Previa" className=" rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           <IoSearch className='p-2 h-9 w-9 bg-blue-950 rounded-md border text-slate-200 mr-8' />
         </div>
 
-        <div className='flex'>
-          <input type="String" placeholder="Buscar N° de Investugación Previa" className="ml-8 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
-          <IoSearch className='p-2 h-9 w-9 bg-blue-950 rounded-md border text-slate-200' />
-        </div>
+
 
       </div>
 
