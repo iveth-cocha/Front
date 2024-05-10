@@ -62,11 +62,7 @@ const NombresAgente = () => {
         value={selectedAgente && agenteGrado[selectedAgente]}
         className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
         />
-        {/* <p>
-          <span className='mr-7'>Grado del Agente:</span>
-          {selectedAgente && agenteGrado[selectedAgente]}
-          {console.log('Email Cliente:', selectedAgente && agenteGrado[selectedAgente])}
-        </p> */}
+        
       </div>
     </Stack>
   );

@@ -5,15 +5,16 @@ import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 
 const TipoDelito = () => {
-  const [clientNames, setClientNames] = useState([]);
-  const [clientEmails, setClientEmails] = useState({});
-  const [selectedClient, setSelectedClient] = useState('');
+  const [delitoNom, setDelitoNom] = useState([]);
+  const [delitoData, setDelitoData] = useState({});
+  const [delitoSeccion, setDelitoSeccion] = useState({});
+  const [selectedDelito, setSelectedDelito] = useState('');
 
   useEffect(() => {
-    const obtenerNombresClientes = async () => {
+    const obtenerDelitos = async () => {
       try {
         const token = localStorage.getItem('token');
-        const url = `${import.meta.env.VITE_BACKEND_URL}/clientes`;
+        const url = `${import.meta.env.VITE_BACKEND_URL}/delitos`;
         const options = {
           headers: {
             'Content-Type': 'application/json',
@@ -21,28 +22,31 @@ const TipoDelito = () => {
           }
         };
         const respuesta = await axios.get(url, options);
-        const nombresClientes = respuesta.data.map(cliente => {
-          const nombreCompleto = `${cliente.nombre} ${cliente.apellido}`;
-          const email = cliente.email;
-          console.log(`Nombre: ${nombreCompleto}, Email: ${email}`);
-          setClientEmails(prevState => ({
+        const delitos = respuesta.data.map(delito => {
+          const nombreDelito = `${delito.delito} - ${delito.seccion} `;
+          const seccion = delito.seccion;
+          console.log(`Nombre: ${nombreDelito}, seccion: ${seccion}`);
+          setDelitoData(prevState => ({
             ...prevState,
-            [nombreCompleto]: email
+            [nombreDelito]: {
+              seccion: delito.seccion,
+              delito: delito.delito
+            }
           }));
-          return nombreCompleto;
+          return nombreDelito;
         });
-        setClientNames(nombresClientes);
+        setDelitoNom(delitos);
       } catch (error) {
-        console.error('Error al obtener los nombres de los clientes:', error);
+        console.error('Error al obtener los delitos:', error);
       }
     };
 
-    obtenerNombresClientes();
+    obtenerDelitos();
   }, []);
 
   const handleClientSelect = (event, value) => {
-    setSelectedClient(value);
-    console.log('Cliente seleccionado:', value);
+    setSelectedDelito(value);
+    console.log('delito seleccionado:', value);
   };
 
   return (
@@ -50,26 +54,44 @@ const TipoDelito = () => {
       <Autocomplete
         id="free-solo-demo"
         freeSolo
-        options={clientNames}
+        options={delitoNom}
         onChange={handleClientSelect}
-        renderInput={(params) => <TextField {...params} label="Codigo-Distrito-Zona" />}
+        renderInput={(params) => <TextField {...params} label="Delito - Sección" />}
       />
+      <div className='flex flex-row'>
+        <label className='mr-7 pt-5'>Tipo Delito: </label>
+        <input type="text" 
+        disabled
+        value={selectedDelito && delitoData[selectedDelito]?.seccion}
+        className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+        />
+        
+      </div>
+      <div className='flex flex-row'>
+        <label className='mr-7 pt-5'>Tipo Desgregado: </label>
+        <input type="text" 
+        disabled
+        value={selectedDelito && delitoData[selectedDelito]?.delito}
+        className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+        />
+        
+      </div>
 
-      <div>
+      {/* <div>
         <p>
           <span className='mr-7'>Tipo Delito:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
+          {selectedDelito && delitoSeccion[selectedDelito]}
+          {console.log('Email Cliente:', selectedDelito && delitoSeccion[selectedDelito])}
         </p>
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         <p>
           <span className='mr-7 '>Tipo Desgregado</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
+          {selectedDelito && delitoSeccion[selectedDelito]}
+          {console.log('Email Cliente:', selectedDelito && delitoSeccion[selectedDelito])}
         </p>
-      </div>
+      </div> */}
       
 
 
