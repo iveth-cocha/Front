@@ -32,22 +32,28 @@ const TablaUsuarios = () => {
 
     const handleDelete = async (id) => {
         try {
-            const confirmar = confirm("Eliminar al usuario")
+            const confirmar = window.confirm("Eliminar el usuario");
             if (confirmar) {
-                const token = localStorage.getItem('token')
-                const url = `${import.meta.env.VITE_BACKEND_URL}/eliminar/usuario/${id}`
-                const headers= {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`
-                    }
-                await axios.delete(url, {headers, data});
-                listarUsuarios()
+                const token = localStorage.getItem('token');
+                const url = `${import.meta.env.VITE_BACKEND_URL}/eliminar/usuario/${id}`;
+                const headers = {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                };
+    
+                // Si necesitas enviar datos adicionales, defínelos aquí
+                // const data = { /* datos adicionales */ };
+    
+                // Si no necesitas enviar datos adicionales, elimina `{ data }`
+                await axios.delete(url, { headers /*, data */ });
+    
+                // Después de eliminar el usuario, actualiza la lista de usuarios
+                listarUsuarios();
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error);
         }
-    }
+    };
 
 
     return (
@@ -82,7 +88,7 @@ const TablaUsuarios = () => {
                                         <td className='py-2 text-center'>
                                             <MdEditDocument title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2" />
 
-                                            <MdDelete title='Eliminar' className="h-7 w-7 text-red-900 cursor-pointer inline-block" onClick={() => { handleDelete(usuarios.id) }} />
+                                            <MdDelete title='Eliminar' className="h-7 w-7 text-red-900 cursor-pointer inline-block" onClick={() => {handleDelete(usuarios.id)}} />
                                         </td>
                                     </tr>
                                 ))
