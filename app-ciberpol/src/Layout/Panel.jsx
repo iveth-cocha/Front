@@ -30,7 +30,7 @@ const Panel = () => {
     return (
         <div className='md:flex md:min-h-screen font-serif'>
             <div className='md:w-1/5 bg-blue-950 px-5 py-4'>
-                <h2 className='text-4xl font-black text-center text-slate-200'>Bienvenido </h2>
+                <h2 className='text-2xl font-black text-center text-slate-200'>Bienvenido </h2>
                 <div className='flex items-center justify-center mt-4'>
                     <FaRegUserCircle className='h-20 w-20 text-slate-200' />
                 </div>
