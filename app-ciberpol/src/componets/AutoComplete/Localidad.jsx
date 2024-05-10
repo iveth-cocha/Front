@@ -5,15 +5,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 
 const Localidad = () => {
-  const [clientNames, setClientNames] = useState([]);
-  const [clientEmails, setClientEmails] = useState({});
-  const [selectedClient, setSelectedClient] = useState('');
+  const [codDistrito, setCodDistrito] = useState([]);
+  const [distrito, setDistrito] = useState({});
+  const [selectedLocalidad, setSelectedLocalidad] = useState('');
 
   useEffect(() => {
-    const obtenerNombresClientes = async () => {
+    const obtenerLocalidad = async () => {
       try {
         const token = localStorage.getItem('token');
-        const url = `${import.meta.env.VITE_BACKEND_URL}/clientes`;
+        const url = `${import.meta.env.VITE_BACKEND_URL}/localizaciones`;
         const options = {
           headers: {
             'Content-Type': 'application/json',
@@ -21,81 +21,92 @@ const Localidad = () => {
           }
         };
         const respuesta = await axios.get(url, options);
-        const nombresClientes = respuesta.data.map(cliente => {
-          const nombreCompleto = `${cliente.nombre} ${cliente.apellido}`;
-          const email = cliente.email;
-          console.log(`Nombre: ${nombreCompleto}, Email: ${email}`);
-          setClientEmails(prevState => ({
-            ...prevState,
-            [nombreCompleto]: email
-          }));
-          return nombreCompleto;
-        });
-        setClientNames(nombresClientes);
+        const localidades = respuesta.data;
+        
+        // Mapear los datos de localidad y agregarlos a setDistrito
+        const distritosMap = localidades.reduce((acc, localidad) => {
+          const localidadesCom = `${localidad.cod_distrito} - ${localidad.distrito} - ${localidad.zona}`;
+          acc[localidadesCom] = {
+            id: localidad.id,
+            cod_distrito: localidad.cod_distrito,
+            distrito: localidad.distrito,
+            zona: localidad.zona,
+            canton: localidad.canton,
+            subzona: localidad.subzona,
+            
+            // Agrega más propiedades aquí si es necesario
+          };
+          return acc;
+        }, {});
+        
+        setDistrito(distritosMap);
+        setCodDistrito(Object.keys(distritosMap));
       } catch (error) {
-        console.error('Error al obtener los nombres de los clientes:', error);
+        console.error('Error al obtener las localidades', error);
       }
     };
 
-    obtenerNombresClientes();
+    obtenerLocalidad();
   }, []);
 
   const handleClientSelect = (event, value) => {
-    setSelectedClient(value);
-    console.log('Cliente seleccionado:', value);
+    setSelectedLocalidad(value);
+    console.log('localidad seleccionada:', value);
   };
-
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
         id="free-solo-demo"
         freeSolo
-        options={clientNames}
+        options={codDistrito}
         onChange={handleClientSelect}
         renderInput={(params) => <TextField {...params} label="Codigo-Distrito-Zona" />}
       />
 
-      <div>
-        <p>
-          <span className='mr-7'>Cod Distrito:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
-      </div>
-      <div>
-        <p>
-          <span className='mr-7'>Distrito:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
-      </div>
-      <div>
-        <p>
-          <span className='mr-7'>Zona:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
-      </div>
-      <div>
-        <p>
-          <span className='mr-7'>Cantón:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
-      </div>
-      <div>
-        <p>
-          <span className='mr-7'>Provincia:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
+      <div className='flex flex-row'>
+        <label className='mr-7 pt-5'>Cod Distrito:</label>
+        <input type="text"
+          disabled
+          value={selectedLocalidad && distrito[selectedLocalidad]?.cod_distrito}
+          className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+        />
       </div>
 
-
-
-
-
+      <div className='flex flex-row'>
+        <label className='mr-7 pt-5'>Distrito:</label>
+        <input type="text"
+          disabled
+          value={selectedLocalidad && distrito[selectedLocalidad]?.distrito}
+          className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+        />
+      </div>
+      <div className='flex flex-row'>
+        <label className='mr-7 pt-5'>Zona:</label>
+        <input type="text"
+          disabled
+          value={selectedLocalidad && distrito[selectedLocalidad]?.zona}
+          className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+        />
+      </div>
+      <div className='flex flex-row'>
+        <label className='mr-7 pt-5'>Canton:</label>
+        <input type="text"
+          disabled
+          value={selectedLocalidad && distrito[selectedLocalidad]?.canton}
+          className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+        />
+      </div>
+      {/* Agrega más divs para otras propiedades si es necesario */}
+      <div className='flex flex-row'>
+        <label className='mr-7 pt-5'>Provincia:</label>
+        <input type="text"
+          disabled
+          value={selectedLocalidad && distrito[selectedLocalidad]?.subzona}
+          className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+        />
+      </div>
     </Stack>
   );
 };
+
 export default Localidad;

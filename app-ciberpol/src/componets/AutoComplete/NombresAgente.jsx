@@ -5,15 +5,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 
 const NombresAgente = () => {
-  const [clientNames, setClientNames] = useState([]);
-  const [clientEmails, setClientEmails] = useState({});
-  const [selectedClient, setSelectedClient] = useState('');
+  const [agenteNom, setAgenteNom] = useState([]);
+  const [agenteGrado, setAgenteGrado] = useState({});
+  const [selectedAgente, setSelectedAgente] = useState('');
 
   useEffect(() => {
-    const obtenerNombresClientes = async () => {
+    const agentesNombres = async () => {
       try {
         const token = localStorage.getItem('token');
-        const url = `${import.meta.env.VITE_BACKEND_URL}/clientes`;
+        const url = `${import.meta.env.VITE_BACKEND_URL}//agentes`;
         const options = {
           headers: {
             'Content-Type': 'application/json',
@@ -21,28 +21,28 @@ const NombresAgente = () => {
           }
         };
         const respuesta = await axios.get(url, options);
-        const nombresClientes = respuesta.data.map(cliente => {
-          const nombreCompleto = `${cliente.nombre} ${cliente.apellido}`;
-          const email = cliente.email;
-          console.log(`Nombre: ${nombreCompleto}, Email: ${email}`);
-          setClientEmails(prevState => ({
+        const nombresAgentes = respuesta.data.map(agentes => {
+          const nombre = `${agentes.Apellido_Nombre}`;
+          const grado = agentes.Grado;
+          //console.log(`Nombre: ${nombre}, Grado: ${grado}`);
+          setAgenteGrado(prevState => ({
             ...prevState,
-            [nombreCompleto]: email
+            [nombre]: grado
           }));
-          return nombreCompleto;
+          return nombre;
         });
-        setClientNames(nombresClientes);
+        setAgenteNom(nombresAgentes);
       } catch (error) {
-        console.error('Error al obtener los nombres de los clientes:', error);
+        //console.error('Error al obtener los nombres de los agentes:', error);
       }
     };
 
-    obtenerNombresClientes();
+    agentesNombres();
   }, []);
 
   const handleClientSelect = (event, value) => {
-    setSelectedClient(value);
-    console.log('Cliente seleccionado:', value);
+    setSelectedAgente(value);
+    //console.log('Agente seleccionado:', value);
   };
 
   return (
@@ -50,17 +50,23 @@ const NombresAgente = () => {
       <Autocomplete
         id="free-solo-demo"
         freeSolo
-        options={clientNames}
+        options={agenteNom}
         onChange={handleClientSelect}
-        renderInput={(params) => <TextField {...params} label=" " />}
+        renderInput={(params) => <TextField {...params} />}
       />
 
-      <div>
-        <p>
+      <div className='flex flex-row'>
+        <label className='mr-7 pt-5'>Grado Agente: </label>
+        <input type="text" 
+        disabled
+        value={selectedAgente && agenteGrado[selectedAgente]}
+        className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+        />
+        {/* <p>
           <span className='mr-7'>Grado del Agente:</span>
-          {selectedClient && clientEmails[selectedClient]}
-          {console.log('Email Cliente:', selectedClient && clientEmails[selectedClient])}
-        </p>
+          {selectedAgente && agenteGrado[selectedAgente]}
+          {console.log('Email Cliente:', selectedAgente && agenteGrado[selectedAgente])}
+        </p> */}
       </div>
     </Stack>
   );
