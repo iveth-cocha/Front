@@ -44,7 +44,7 @@ const TipoDelito = () => {
     obtenerDelitos();
   }, []);
 
-  const handleClientSelect = (event, value) => {
+  const handleDelitoSelect = (event, value) => {
     setSelectedDelito(value);
     console.log('delito seleccionado:', value);
   };
@@ -55,7 +55,7 @@ const TipoDelito = () => {
         id="free-solo-demo"
         freeSolo
         options={delitoNom}
-        onChange={handleClientSelect}
+        onChange={handleDelitoSelect}
         renderInput={(params) => <TextField {...params} label="Delito - Sección" />}
       />
       <div className='flex flex-row'>

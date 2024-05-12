@@ -40,7 +40,7 @@ const NombresAgente = () => {
     agentesNombres();
   }, []);
 
-  const handleClientSelect = (event, value) => {
+  const handlenomAgenteSelect = (event, value) => {
     setSelectedAgente(value);
     //console.log('Agente seleccionado:', value);
   };
@@ -51,7 +51,7 @@ const NombresAgente = () => {
         id="free-solo-demo"
         freeSolo
         options={agenteNom}
-        onChange={handleClientSelect}
+        onChange={handlenomAgenteSelect}
         renderInput={(params) => <TextField {...params} />}
       />
 

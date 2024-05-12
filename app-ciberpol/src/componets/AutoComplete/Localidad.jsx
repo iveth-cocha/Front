@@ -49,7 +49,7 @@ const Localidad = () => {
     obtenerLocalidad();
   }, []);
 
-  const handleClientSelect = (event, value) => {
+  const handleLocalizacionSelect = (event, value) => {
     setSelectedLocalidad(value);
     console.log('localidad seleccionada:', value);
   };
@@ -59,7 +59,7 @@ const Localidad = () => {
         id="free-solo-demo"
         freeSolo
         options={codDistrito}
-        onChange={handleClientSelect}
+        onChange={handleLocalizacionSelect}
         renderInput={(params) => <TextField {...params} label="Codigo-Distrito-Zona" />}
       />
 
