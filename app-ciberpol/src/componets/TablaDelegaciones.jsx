@@ -71,11 +71,11 @@ const TablaDelegaciones = () => {
           <table className="w-full  table-auto shadow-lg bg-white">
             <thead className="bg-sky-950 text-white">
               <tr>
-                <th className="p-2">N° de orden</th>
-                <th className="p-2">Año Ingreso</th>
-                <th className="p-2">N° Instrucción Fiscal</th>
+                <th className="p-2 w-4">N° Orden</th>
+                <th className="p-3 w-7">Año Ingreso</th>
+                <th className="p-3 w-20">N° Instrucción Fiscal</th>
                 <th className="p-2">N° Investigación Previa</th>
-                <th className="p-2">Grado</th>
+                <th className="p-2 w-3">Grado</th>
                 <th className="p-2">Agente</th>
                 <th className="p-2">Acciones</th>
               </tr>
@@ -93,7 +93,7 @@ const TablaDelegaciones = () => {
                     <td>{delegacion.numero_instruccion_fiscal}</td>
                     <td>{delegacion.numero_investigacion_previa}</td>
                     <td>{delegacion.grado_agente}</td>
-                    <td>{delegacion.appellidos_nombres_agente}</td>
+                    <td>{delegacion.apellidos_nombres_agente}</td>
                     <td className="py-2 text-center">
                       <VscOpenPreview
                         title="Detalle"

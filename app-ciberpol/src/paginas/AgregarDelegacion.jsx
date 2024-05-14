@@ -292,29 +292,29 @@ const AgregarDelegacion = () => {
           //conversion de datos 
           const formData = {
             ...form,
-            numero_investigacion_previa: parseInt(form.numero_investigacion_previa),
-            edad_victima: parseInt(form.edad_victima),
-            plazo_otorgado_dias: parseInt(form.plazo_otorgado_dias),
-            versiones: parseInt(form.versiones),
-            reconocimientos_lugar_hechos: parseInt(form.reconocimientos_lugar_hechos),
-            no_boletas_solicitadas: parseInt(form.no_boletas_solicitadas),
-            no_detenidos_producto_investigacion: parseInt(form.no_detenidos_producto_investigacion),
-            allanamientos_numero: parseInt(form.allanamientos_numero),
-            recuperacion_bienes_evidencias: parseInt(form.recuperacion_bienes_evidencias),
-            recuperacion_automotores: parseInt(form.recuperacion_automotores),
-            recuperacion_otros: parseInt(form.recuperacion_otros),
-            notificaciones: parseInt(form.notificaciones),
-            citaciones: parseInt(form.citaciones),
-            peritajes: parseInt(form.peritajes),
-            traslados: parseInt(form.traslados),
-            //fechas
+            numero_investigacion_previa: form.numero_investigacion_previa !== null && form.numero_investigacion_previa !== '' ? parseInt(form.numero_investigacion_previa) : null,
+            edad_victima: form.edad_victima !== null && form.edad_victima !== '' ? parseInt(form.edad_victima) : null,
+            plazo_otorgado_dias: form.plazo_otorgado_dias !== null && form.plazo_otorgado_dias !== '' ? parseInt(form.plazo_otorgado_dias) : null,
+            versiones: form.versiones !== null && form.versiones !== '' ? parseInt(form.versiones) : null,
+            reconocimientos_lugar_hechos: form.reconocimientos_lugar_hechos !== null && form.reconocimientos_lugar_hechos !== '' ? parseInt(form.reconocimientos_lugar_hechos) : null,
+            no_boletas_solicitadas: form.no_boletas_solicitadas !== null && form.no_boletas_solicitadas !== '' ? parseInt(form.no_boletas_solicitadas) : null,
+            no_detenidos_producto_investigacion: form.no_detenidos_producto_investigacion !== null && form.no_detenidos_producto_investigacion !== '' ? parseInt(form.no_detenidos_producto_investigacion) : null,
+            allanamientos_numero: form.allanamientos_numero !== null && form.allanamientos_numero !== '' ? parseInt(form.allanamientos_numero) : null,
+            recuperacion_bienes_evidencias: form.recuperacion_bienes_evidencias !== null && form.recuperacion_bienes_evidencias !== '' ? parseInt(form.recuperacion_bienes_evidencias) : null,
+            recuperacion_automotores: form.recuperacion_automotores !== null && form.recuperacion_automotores !== '' ? parseInt(form.recuperacion_automotores) : null,
+            recuperacion_otros: form.recuperacion_otros !== null && form.recuperacion_otros !== '' ? parseInt(form.recuperacion_otros) : null,
+            notificaciones: form.notificaciones !== null && form.notificaciones !== '' ? parseInt(form.notificaciones) : null,
+            citaciones: form.citaciones !== null && form.citaciones !== '' ? parseInt(form.citaciones) : null,
+            peritajes: form.peritajes !== null && form.peritajes !== '' ? parseInt(form.peritajes) : null,
+            traslados: form.traslados !== null && form.traslados !== '' ? parseInt(form.traslados) : null,
+            // Fechas
             fecha_infraccion_delito: form.fecha_infraccion_delito ? new Date(form.fecha_infraccion_delito) : null,
             fecha_delegacion: form.fecha_delegacion ? new Date(form.fecha_delegacion) : null,
             fecha_recepcion_pj: form.fecha_recepcion_pj ? new Date(form.fecha_recepcion_pj) : null,
             fecha_recepcion_agente_investigador: form.fecha_recepcion_agente_investigador ? new Date(form.fecha_recepcion_agente_investigador) : null,
             fecha_cumplimiento: form.fecha_cumplimiento ? new Date(form.fecha_cumplimiento) : null,
-            
-        };
+          };
+          
 
           const options={
               headers: {
