@@ -213,7 +213,7 @@ const AgregarDelegacion = () => {
       });
   };
     
-    //--------------------------LOGICA DEL FORMULARIO
+    /////////////////////--------------------------LOGICA DEL FORMULARIO
     
     const [mensaje, setMensaje] = useState({})
     const [form, setform] = useState({
@@ -279,6 +279,7 @@ const AgregarDelegacion = () => {
       entidad_financiera: ""
     })
     const handleChange = (e) => {
+      
       setform({...form,
           [e.target.name]:e.target.value
       })
@@ -289,15 +290,43 @@ const AgregarDelegacion = () => {
       try {
           const token = localStorage.getItem('token')
           const url = `${import.meta.env.VITE_BACKEND_URL}/registro/delegacion`
+          //conversion de datos 
+          const formData = {
+            ...form,
+            numero_investigacion_previa: parseInt(form.numero_investigacion_previa),
+            edad_victima: parseInt(form.edad_victima),
+            plazo_otorgado_dias: parseInt(form.plazo_otorgado_dias),
+            versiones: parseInt(form.versiones),
+            reconocimientos_lugar_hechos: parseInt(form.reconocimientos_lugar_hechos),
+            no_boletas_solicitadas: parseInt(form.no_boletas_solicitadas),
+            no_detenidos_producto_investigacion: parseInt(form.no_detenidos_producto_investigacion),
+            allanamientos_numero: parseInt(form.allanamientos_numero),
+            recuperacion_bienes_evidencias: parseInt(form.recuperacion_bienes_evidencias),
+            recuperacion_automotores: parseInt(form.recuperacion_automotores),
+            recuperacion_otros: parseInt(form.recuperacion_otros),
+            notificaciones: parseInt(form.notificaciones),
+            citaciones: parseInt(form.citaciones),
+            peritajes: parseInt(form.peritajes),
+            traslados: parseInt(form.traslados),
+            //fechas
+            fecha_infraccion_delito: form.fecha_infraccion_delito ? new Date(form.fecha_infraccion_delito) : null,
+            fecha_delegacion: form.fecha_delegacion ? new Date(form.fecha_delegacion) : null,
+            fecha_recepcion_pj: form.fecha_recepcion_pj ? new Date(form.fecha_recepcion_pj) : null,
+            fecha_recepcion_agente_investigador: form.fecha_recepcion_agente_investigador ? new Date(form.fecha_recepcion_agente_investigador) : null,
+            fecha_cumplimiento: form.fecha_cumplimiento ? new Date(form.fecha_cumplimiento) : null,
+            
+        };
+
           const options={
               headers: {
                   'Content-Type': 'application/json',
                   Authorization: `Bearer ${token}`
               }
           }
-          console.log('ANTES:', form);
-          await axios.post(url,form,options)
-          console.log('DESPUES:', form);
+
+          console.log('ANTES:', formData);
+          await axios.post(url,formData,options)
+          console.log('DESPUES:', formData);
           setMensaje({ respuesta:"Delegación agregada Correctamente", tipo: true })
           setTimeout(() => {
               //navigate('/dashboard/listar');
