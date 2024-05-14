@@ -328,13 +328,14 @@ const AgregarDelegacion = () => {
           console.log('DESPUES:', formData);
           setMensaje({ respuesta:"Delegación agregada Correctamente", tipo: true })
           setTimeout(() => {
-              //navigate('/dashboard/listar');
+              navigate('/delegaciones');
           }, 3000);
       } catch (error) {
           setMensaje({ respuesta: error.response.data.msg, tipo: false })
           setTimeout(() => {
               setMensaje({})
-          }, 3000);
+              setform
+          }, 6000);
       }
   }
 
