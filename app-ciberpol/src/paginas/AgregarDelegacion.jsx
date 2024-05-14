@@ -279,10 +279,9 @@ const AgregarDelegacion = () => {
       entidad_financiera: ""
     })
     const handleChange = (e) => {
-      
-      setform({...form,
-          [e.target.name]:e.target.value
-      })
+      const { name, value } = e.target;
+    const uppercaseValue = value.toUpperCase(); // Convertir el valor a mayúsculas
+    setform({...form, [name]: uppercaseValue });
   }
 
   const handleSubmit = async(e) => { 
@@ -349,10 +348,10 @@ const AgregarDelegacion = () => {
         <div className='flex items-center'>
         <BiCaretLeftCircle  className='text-4xl text-sky-950'
         onClick={() => navigate(`/delegaciones`)}/>
-        <h1 className='font-black text-4xl text-gray-500 '>AGREGAR DELEGACIÓN</h1>
-        {Object.keys(mensaje).length>0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}     
+        <h1 className='font-black text-4xl text-gray-500 '>AGREGAR DELEGACIÓN</h1>     
         </div>
         <hr className='my-4 border-sky-950  '/>
+        {Object.keys(mensaje).length>0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
 
       <form onSubmit={handleSubmit} >
 
