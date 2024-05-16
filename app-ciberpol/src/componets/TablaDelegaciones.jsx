@@ -99,7 +99,7 @@ const TablaDelegaciones = () => {
                         title="Detalle"
                         className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2"
                         onClick={() =>
-                          navigate(`/delegaciones/detalleDelegacion`)
+                          navigate(`/delegaciones/detalleDelegacion/${delegacion.id}`)
                         }
                       />
                       <MdEditDocument
