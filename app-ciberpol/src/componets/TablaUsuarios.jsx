@@ -1,4 +1,5 @@
-import { React, useState, useNavigate, useEffect } from 'react'
+import { React, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { MdDelete, MdEditDocument } from "react-icons/md";
 import Mensaje from './Alertas/Mensaje';
 import axios from 'axios';
@@ -6,9 +7,10 @@ import axios from 'axios';
 
 const TablaUsuarios = () => {
 
+    const navigate = useNavigate();
 
     const [usuarios, setUsuarios] = useState([])
-    const [mensaje, setMensaje] = useState({})
+   
 
     const listarUsuarios = async () => {
         try {
@@ -86,7 +88,7 @@ const TablaUsuarios = () => {
                                         <td>{usuarios.agenteID}</td>
                                         <td>{usuarios.Rol}</td>
                                         <td className='py-2 text-center'>
-                                            <MdEditDocument title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2" />
+                                            <MdEditDocument title='Actualizar' className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2" onClick={() => navigate(`/usuarios/actualizarUsuario/${usuarios.id}`)}   />
 
                                             <MdDelete title='Eliminar' className="h-7 w-7 text-red-900 cursor-pointer inline-block" onClick={() => {handleDelete(usuarios.id)}} />
                                         </td>

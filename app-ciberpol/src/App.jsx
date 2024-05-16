@@ -21,6 +21,7 @@ import { AuthProvider } from './componets/context/AuthProvider'
 import { PrivateRoute } from './Routes/PrivateRoute'
 import Newpassword from './paginas/Newpassword'
 import AddDelitos from './paginas/AddDelitos'
+import ActualizarUser from './paginas/ActualizarUser'
 
 
 
@@ -96,6 +97,7 @@ function App() {
 
             <Route path='usuarios' element={<Panel />}>
               <Route index element={<Usuarios />} />
+              <Route path='actualizarUsuario/:id' element={<ActualizarUser />} /> 
             </Route>
 
            

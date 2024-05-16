@@ -12,6 +12,7 @@ const Panel = () => {
     const esDelegaciones = urlActual.startsWith('/delegaciones');
     const esDelito = urlActual.startsWith('/delitosyTipificaciones');
     const esMapeo = urlActual.startsWith('/mapeo');
+    const esUsuario = urlActual.startsWith('/usuarios');
     const { auth} = useContext(AuthContext)
     const autenticado = localStorage.getItem('token')
 
@@ -50,7 +51,7 @@ const Panel = () => {
                         <Link to='/registroUsuario' className={`${urlActual === '/registroUsuario' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Usuario</Link>
                     </li>
                     <li className="text-center">
-                        <Link to='/usuarios' className={`${urlActual === '/usuarios' ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Usuarios</Link>
+                        <Link to='/usuarios' className={`${esUsuario ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Usuarios</Link>
                     </li>
                 </ul>
             </div>
