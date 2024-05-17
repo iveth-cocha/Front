@@ -106,7 +106,7 @@ const TablaDelegaciones = () => {
                         title="Actualizar"
                         className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"
                         onClick={() =>
-                          navigate(`/delegaciones/actualizarDelegacion`)
+                          navigate(`/delegaciones/actualizarDelegacion/${delegacion.id}`)
                         }
                       />
                     </td>

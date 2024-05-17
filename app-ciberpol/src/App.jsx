@@ -65,7 +65,7 @@ function App() {
                   <Route index element={<Delegaciones />} />
                   <Route path='nuevaDelegacion' element={<AgregarDelegacion />} />
                   <Route path='detalleDelegacion/:id' element={<DetalleDelegacion />} />
-                  <Route path='actualizarDelegacion' element={<ActualizarDelegacion />} />                 
+                  <Route path='actualizarDelegacion/:id' element={<ActualizarDelegacion />} />                 
                 </Route>
               </Routes>
             </PrivateRoute>
