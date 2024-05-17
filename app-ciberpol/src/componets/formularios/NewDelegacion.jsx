@@ -77,7 +77,13 @@ const NewDelegacion = ({ delegacion }) => {
 
   useEffect(() => {
     if (delegacion?.id) {
-        setForm(delegacion);
+        setForm(delegacion);console.log("Delegacion recibida:", delegacion);
+        if (delegacion.unidad_especializada) {
+            const [selected, numero] = delegacion.unidad_especializada.split('-');
+            setSelectedFiscalia(selected);
+            setNumeroFiscalia(numero);
+            console.log("Valores extraídos:", { selected, numero });
+        }
     }
 }, [delegacion]);
 
@@ -237,8 +243,8 @@ const NewDelegacion = ({ delegacion }) => {
 
 // Estado para fiscalías
 const [fiscaliaNom, setFiscaliaNom] = useState([]);
-const [selectedFiscalia, setSelectedFiscalia] = useState('');
-const [numeroFiscalia, setNumeroFiscalia] = useState('');
+const [selectedFiscalia, setSelectedFiscalia] = useState("");
+const [numeroFiscalia, setNumeroFiscalia] = useState("");
 
 // Efecto para obtener fiscalías
 useEffect(() => {
