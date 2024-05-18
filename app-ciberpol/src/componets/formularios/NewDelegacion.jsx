@@ -26,7 +26,7 @@ const NewDelegacion = ({ delegacion }) => {
     tipo_delito: delegacion?.tipo_delito?? "",
     delito_tipificado_delegacion: delegacion?.delito_tipificado_delegacion?? "",
     delito_desagregacion_policia_judicial: delegacion?.delito_desagregacion_policia_judicial?? "",
-    fecha_infraccion_delito: delegacion?.fecha_infraccion_delito?? null, //ver formato fecha
+    fecha_infraccion_delito: delegacion?.fecha_infraccion_delito?? "", //ver formato fecha
     apellidos_nombres_victima: delegacion?.apellidos_nombres_victima?? "",
     sexo_victima: delegacion?.sexo_victima??"",
     edad_victima: delegacion?.edad_victima?? null,
@@ -37,9 +37,9 @@ const NewDelegacion = ({ delegacion }) => {
     placa_vehiculo_involucrado: delegacion?.placa_vehiculo_involucrado?? "",
     apellidos_nombres_fiscal: delegacion?.apellidos_nombres_fiscal?? "",
     unidad_especializada: delegacion?.unidad_especializada?? "",
-    fecha_delegacion: delegacion?.fecha_delegacion?? null, //ver formato fecha
-    fecha_recepcion_pj: delegacion?.fecha_recepcion_pj?? null, //ver formato fecha
-    fecha_recepcion_agente_investigador: delegacion?.fecha_recepcion_agente_investigador?? null, //ver formato fecha
+    fecha_delegacion: delegacion?.fecha_delegacion?? "", //ver formato fecha
+    fecha_recepcion_pj: delegacion?.fecha_recepcion_pj?? "", //ver formato fecha
+    fecha_recepcion_agente_investigador: delegacion?.fecha_recepcion_agente_investigador?? "", //ver formato fecha
     no_oficio_recibe_diligencia: delegacion?.no_oficio_recibe_diligencia?? "",
     plazo_otorgado_dias: delegacion?.plazo_otorgado_dias?? null,
     numero_articulo: delegacion?.numero_articulo??"",
@@ -321,12 +321,6 @@ const handleChange = (e) => {
           citaciones: form.citaciones !== null && form.citaciones !== '' ? parseInt(form.citaciones) : null,
           peritajes: form.peritajes !== null && form.peritajes !== '' ? parseInt(form.peritajes) : null,
           traslados: form.traslados !== null && form.traslados !== '' ? parseInt(form.traslados) : null,
-          // Fechas
-          fecha_infraccion_delito: form.fecha_infraccion_delito ? new Date(form.fecha_infraccion_delito) : null,
-          fecha_delegacion: form.fecha_delegacion ? new Date(form.fecha_delegacion) : null,
-          fecha_recepcion_pj: form.fecha_recepcion_pj ? new Date(form.fecha_recepcion_pj) : null,
-          fecha_recepcion_agente_investigador: form.fecha_recepcion_agente_investigador ? new Date(form.fecha_recepcion_agente_investigador) : null,
-          fecha_cumplimiento: form.fecha_cumplimiento ? new Date(form.fecha_cumplimiento) : null,
         };
         const options={
             headers: {
@@ -361,12 +355,6 @@ const handleChange = (e) => {
             citaciones: form.citaciones !== null && form.citaciones !== '' ? parseInt(form.citaciones) : null,
             peritajes: form.peritajes !== null && form.peritajes !== '' ? parseInt(form.peritajes) : null,
             traslados: form.traslados !== null && form.traslados !== '' ? parseInt(form.traslados) : null,
-            // Fechas
-            fecha_infraccion_delito: form.fecha_infraccion_delito ? new Date(form.fecha_infraccion_delito) : null,
-            fecha_delegacion: form.fecha_delegacion ? new Date(form.fecha_delegacion) : null,
-            fecha_recepcion_pj: form.fecha_recepcion_pj ? new Date(form.fecha_recepcion_pj) : null,
-            fecha_recepcion_agente_investigador: form.fecha_recepcion_agente_investigador ? new Date(form.fecha_recepcion_agente_investigador) : null,
-            fecha_cumplimiento: form.fecha_cumplimiento ? new Date(form.fecha_cumplimiento) : null,
           };
           const options={
               headers: {
