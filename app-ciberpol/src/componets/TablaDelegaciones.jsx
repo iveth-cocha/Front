@@ -60,7 +60,7 @@ const TablaDelegaciones = () => {
   return (
     <>
       {delegaciones.length === 0 ? (
-        <Mensaje tipo={'active'}>{'No existen Usuarios'}</Mensaje>
+        <Mensaje tipo={'active'}>{'No existen Delegaciones'}</Mensaje>
       ) : (
         <>
           <Paginator
