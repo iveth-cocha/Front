@@ -27,7 +27,7 @@ const TablaDelegaciones = () => {
 
   const [delegaciones, setDelegaciones] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [perPage] = useState(3);
+  const [perPage] = useState(10);
   //const [perPage] = useState(8);
   const [pageCount, setPageCount] = useState(0);
 

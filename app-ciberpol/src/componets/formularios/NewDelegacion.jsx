@@ -153,7 +153,7 @@ const NewDelegacion = ({ delegacion }) => {
               const localidades = respuesta.data;
 
               const distritosMap = localidades.reduce((acc, localidad) => {
-                  const localidadesCom = `${localidad.cod_distrito} - ${localidad.distrito} - ${localidad.zona}`;
+                  const localidadesCom = `${localidad.cod_distrito} -${localidad.subzona}- ${localidad.distrito} - ${localidad.zona}`;
                   acc[localidadesCom] = {
                       id: localidad.id,
                       cod_distrito: localidad.cod_distrito,
@@ -463,7 +463,7 @@ const handleChange = (e) => {
                 freeSolo
                 options={codDistrito}
                 onChange={handleLocalizacionSelect}
-                renderInput={(params) => <TextField {...params} label="Codigo-Distrito-Zona" />}
+                renderInput={(params) => <TextField {...params} label="Codigo-Provincia-Distrito-Zona" />}
               />
             </Stack>
           </div>
