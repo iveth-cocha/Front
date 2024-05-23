@@ -34,7 +34,7 @@ const AddDelitos = () => {
             })
             setTimeout(() => {
                 setMensaje({});
-                navigate(`/delitosyTipificaciones`)
+                navigate(`/delitos`)
 
             }, 3000);
             
@@ -51,7 +51,7 @@ const AddDelitos = () => {
     <div >
         <div className='flex items-center'>
         <BiCaretLeftCircle  className='text-4xl text-sky-950'
-        onClick={() => navigate(`/delitosyTipificaciones`)}/>
+        onClick={() => navigate(`/delitos`)}/>
         <h1 className='font-black text-4xl text-gray-500 uppercase '>AGREGAR Delito</h1>
      
         </div>

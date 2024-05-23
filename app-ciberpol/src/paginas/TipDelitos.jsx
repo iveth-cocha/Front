@@ -20,7 +20,7 @@ const TipDelitos = () => {
 
 
       <div className=' mb-2 ml-10' >
-        <button  onClick={() => navigate(`/delitosyTipificaciones/agregarDelito`)}className="py-2 px-3 w-auto text-center bg-blue-950 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-sky-950 hover:text-white">Añadir Delito</button>
+        <button  onClick={() => navigate(`/delitos/agregarDelito`)}className="py-2 px-3 w-auto text-center bg-blue-950 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-sky-950 hover:text-white">Añadir Delito</button>
       </div>
       <TablaDelitos/>
 

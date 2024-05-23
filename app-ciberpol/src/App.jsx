@@ -81,7 +81,7 @@ function App() {
               <Route path='actualizarDelegacion' element={<ActualizarDelegacion />} />
             </Route> */}
 
-            <Route path='delitosyTipificaciones' element={<Panel />}>
+            <Route path='delitos' element={<Panel />}>
               <Route index element={<TipDelitos />} />
               <Route path='agregarDelito' element={<AddDelitos />} />
             </Route>
