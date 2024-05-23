@@ -91,12 +91,9 @@ function App() {
               <Route path='detalleMapeo' element={<DetalleMapeo />} />
             </Route>
 
-            <Route path='registroUsuario' element={<Panel />}>
-              <Route index element={<Registro />} />
-            </Route>
-
-            <Route path='usuarios' element={<Panel />}>
+             <Route path='usuarios' element={<Panel />}>
               <Route index element={<Usuarios />} />
+              <Route path='nuevoUsuario' element={<Registro />} />
               <Route path='actualizarUsuario/:id' element={<ActualizarUser />} /> 
             </Route>
 
