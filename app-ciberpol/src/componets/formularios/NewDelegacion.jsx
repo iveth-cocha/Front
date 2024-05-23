@@ -3,14 +3,22 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
-import Mensaje from '../Alertas/Mensaje';
+
 import { useNavigate } from 'react-router-dom';
+//dialogo 
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+
 
 const NewDelegacion = () => {
   
 
   const navigate = useNavigate();
   const [mensaje, setMensaje] = useState({})
+  const [tipo, setTipo] = useState({})
   const [form, setForm] = useState({
     numero_investigacion_previa: null,
     numero_instruccion_fiscal: "",
@@ -73,6 +81,8 @@ const NewDelegacion = () => {
     cantidad_sustraida: "",
     entidad_financiera: ""
   })
+  const [openDialog, setOpenDialog] = useState(false);
+  
 
  
 
@@ -319,21 +329,31 @@ const handleChange = (e) => {
           await axios.post(url,formData,options)
           console.log('DESPUES:', formData);
           setMensaje({ respuesta:"Delegación agregada Correctamente", tipo: true })
+          setTipo(tipo)
+          setOpenDialog(true);
           setTimeout(() => {
+            setOpenDialog(false);
               navigate('/delegaciones');
           }, 3000);
       } catch (error) {
           setMensaje({ respuesta: error.response.data.msg, tipo: false })
+          setTipo(tipo)
+          setOpenDialog(true);
           setTimeout(() => {
-              setMensaje({})
+            setOpenDialog(false);
               setForm
-          }, 6000);
+          }, 4000);
       }
       
   }
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+};
   return (
-    <form onSubmit={handleSubmit} >
-      {Object.keys(mensaje).length>0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
+    <div>
+      <form onSubmit={handleSubmit} >
+      
 
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2 '>
@@ -829,15 +849,36 @@ const handleChange = (e) => {
 
 
         </div>
-
+        
         <div className="mx-8">
-        <input 
-                type="submit" 
-                value={'Registrar Delegacion'} 
-                className="py-2 w-full block text-center bg-sky-950 text-gray-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-950 hover:text-white"
-            />        </div>
+        <button className="py-2 w-full block text-center bg-sky-950 text-gray-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-950 hover:text-white"
+                type="submit" >Agregar Delegacion</button>      
+        </div>
 
       </form>
+      <Dialog
+    open={openDialog}
+    onClose={handleCloseDialog}
+    aria-labelledby="alert-dialog-title"
+    aria-describedby="alert-dialog-description"
+    
+>
+    
+    <DialogContent>
+        <DialogContentText id="alert-dialog-description" tipo={mensaje.tipo}>
+            {mensaje.respuesta}
+        </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+        <Button onClick={handleCloseDialog} autoFocus>
+            Ok
+        </Button>
+    </DialogActions>
+</Dialog>
+
+    </div>
+    
+      
   )
 }
 
