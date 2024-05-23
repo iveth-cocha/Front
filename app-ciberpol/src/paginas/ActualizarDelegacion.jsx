@@ -5,7 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import axios from 'axios';
 import Mensaje from '../componets/Alertas/Mensaje';
-import NewDelegacion from '../componets/formularios/NewDelegacion';
+
+import UpdateDelegacion from '../componets/formularios/UpdateDelegacion';
 
 const ActualizarDelegacion = () => {
   
@@ -48,7 +49,10 @@ const ActualizarDelegacion = () => {
       <hr className='my-4 border-sky-950  '/>
       {
     (delegacion && Object.keys(delegacion).length !== 0) ? (
-      <NewDelegacion delegacion={delegacion}/>
+      
+      
+      <UpdateDelegacion delegacion={delegacion}/>
+      
       
       
     ) : (
