@@ -22,6 +22,8 @@ import { PrivateRoute } from './Routes/PrivateRoute'
 import Newpassword from './paginas/Newpassword'
 import AddDelitos from './paginas/AddDelitos'
 import ActualizarUser from './paginas/ActualizarUser'
+import Agentes from './paginas/Agentes'
+import AddAgente from './paginas/AddAgente'
 
 
 
@@ -71,16 +73,6 @@ function App() {
             </PrivateRoute>
             }/>
 
-
-           
-            
-            {/* <Route path="delegaciones/*" element={<Panel />}>
-              <Route index element={<Delegaciones />} />
-              <Route path='nuevaDelegacion' element={<AgregarDelegacion />} />
-              <Route path='detalleDelegacion' element={<DetalleDelegacion />} />
-              <Route path='actualizarDelegacion' element={<ActualizarDelegacion />} />
-            </Route> */}
-
             <Route path='delitos' element={<Panel />}>
               <Route index element={<TipDelitos />} />
               <Route path='agregarDelito' element={<AddDelitos />} />
@@ -95,6 +87,12 @@ function App() {
               <Route index element={<Usuarios />} />
               <Route path='nuevoUsuario' element={<Registro />} />
               <Route path='actualizarUsuario/:id' element={<ActualizarUser />} /> 
+            </Route>
+
+            <Route path='agentes' element={<Panel />}>
+              <Route index element={<Agentes />} />
+              <Route path='nuevoAgente' element={<AddAgente />} />
+              
             </Route>
 
            
