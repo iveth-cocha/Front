@@ -5,6 +5,13 @@ import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 import Mensaje from '../Alertas/Mensaje';
 import { useNavigate } from 'react-router-dom';
+//dialogo 
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+
 
 const UpdateDelegacion = ({ delegacion }) => {
     console.log("Prop  recibida:", delegacion);
@@ -74,6 +81,10 @@ const UpdateDelegacion = ({ delegacion }) => {
     cantidad_sustraida: delegacion?.cantidad_sustraida?? "",
     entidad_financiera: delegacion?.entidad_financiera??""
   })
+
+  const [tipo, setTipo] = useState({})
+  const [openDialog, setOpenDialog] = useState(false);
+  
 
   useEffect(() => {
     if (delegacion?.id) {
@@ -176,18 +187,7 @@ const UpdateDelegacion = ({ delegacion }) => {
   }, []);
 
   // Manejador de selección de localidad
-  const handleLocalizacionSelect = (event, value) => {
-      setSelectedLocalidad(value);
-      const localidadSeleccionada = distrito[value];
-      setForm({
-          ...form,
-          cod_distrito: localidadSeleccionada?.cod_distrito || '',
-          distrito: localidadSeleccionada?.distrito || '',
-          zona: localidadSeleccionada?.zona || '',
-          canton: localidadSeleccionada?.canton || '',
-          provincia: localidadSeleccionada?.subzona || ''
-      });
-  };
+  
 
   // Estado para delitos
   const [delitoNom, setDelitoNom] = useState([]);
@@ -229,18 +229,7 @@ const UpdateDelegacion = ({ delegacion }) => {
 
       obtenerDelitos();
   }, []);
-  const handleDelitoSelect = (event, value) => {
-    setSelectedDelito(value);
-    const seccionSeleccionada = delitoData[value]?.seccion || '';
-    const delitoSeleccionado = delitoData[value]?.delito || '';
-    setForm({
-        ...form,
-        tipo_delito: seccionSeleccionada,
-        delito_tipificado_delegacion: delitoSeleccionado,
-        delito_desagregacion_policia_judicial: delitoSeleccionado
-    });
-};
-
+  
 // Estado para fiscalías
 const [fiscaliaNom, setFiscaliaNom] = useState([]);
 const [selectedFiscalia, setSelectedFiscalia] = useState("");
@@ -298,47 +287,63 @@ const handleChange = (e) => {
 
   const handleSubmit = async(e) => { 
       e.preventDefault()
-
-      if(delegacion?.id){
-        console.log("if",delegacion?.id)
-        const token = localStorage.getItem('token')
-        const url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/delegacion/${delegacion?.id}`
-        //conversion de datos 
-        const formData = {
-          ...form,
-          numero_investigacion_previa: form.numero_investigacion_previa !== null && form.numero_investigacion_previa !== '' ? parseInt(form.numero_investigacion_previa) : null,
-          edad_victima: form.edad_victima !== null && form.edad_victima !== '' ? parseInt(form.edad_victima) : null,
-          plazo_otorgado_dias: form.plazo_otorgado_dias !== null && form.plazo_otorgado_dias !== '' ? parseInt(form.plazo_otorgado_dias) : null,
-          versiones: form.versiones !== null && form.versiones !== '' ? parseInt(form.versiones) : null,
-          reconocimientos_lugar_hechos: form.reconocimientos_lugar_hechos !== null && form.reconocimientos_lugar_hechos !== '' ? parseInt(form.reconocimientos_lugar_hechos) : null,
-          no_boletas_solicitadas: form.no_boletas_solicitadas !== null && form.no_boletas_solicitadas !== '' ? parseInt(form.no_boletas_solicitadas) : null,
-          no_detenidos_producto_investigacion: form.no_detenidos_producto_investigacion !== null && form.no_detenidos_producto_investigacion !== '' ? parseInt(form.no_detenidos_producto_investigacion) : null,
-          allanamientos_numero: form.allanamientos_numero !== null && form.allanamientos_numero !== '' ? parseInt(form.allanamientos_numero) : null,
-          recuperacion_bienes_evidencias: form.recuperacion_bienes_evidencias !== null && form.recuperacion_bienes_evidencias !== '' ? parseInt(form.recuperacion_bienes_evidencias) : null,
-          recuperacion_automotores: form.recuperacion_automotores !== null && form.recuperacion_automotores !== '' ? parseInt(form.recuperacion_automotores) : null,
-          recuperacion_otros: form.recuperacion_otros !== null && form.recuperacion_otros !== '' ? parseInt(form.recuperacion_otros) : null,
-          notificaciones: form.notificaciones !== null && form.notificaciones !== '' ? parseInt(form.notificaciones) : null,
-          citaciones: form.citaciones !== null && form.citaciones !== '' ? parseInt(form.citaciones) : null,
-          peritajes: form.peritajes !== null && form.peritajes !== '' ? parseInt(form.peritajes) : null,
-          traslados: form.traslados !== null && form.traslados !== '' ? parseInt(form.traslados) : null,
-        };
-        const options={
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            }
+      try{
+        if(delegacion?.id){
+          console.log("if",delegacion?.id)
+          const token = localStorage.getItem('token')
+          const url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/delegacion/${delegacion?.id}`
+          //conversion de datos 
+          const formData = {
+            ...form,
+            numero_investigacion_previa: form.numero_investigacion_previa !== null && form.numero_investigacion_previa !== '' ? parseInt(form.numero_investigacion_previa) : null,
+            edad_victima: form.edad_victima !== null && form.edad_victima !== '' ? parseInt(form.edad_victima) : null,
+            plazo_otorgado_dias: form.plazo_otorgado_dias !== null && form.plazo_otorgado_dias !== '' ? parseInt(form.plazo_otorgado_dias) : null,
+            versiones: form.versiones !== null && form.versiones !== '' ? parseInt(form.versiones) : null,
+            reconocimientos_lugar_hechos: form.reconocimientos_lugar_hechos !== null && form.reconocimientos_lugar_hechos !== '' ? parseInt(form.reconocimientos_lugar_hechos) : null,
+            no_boletas_solicitadas: form.no_boletas_solicitadas !== null && form.no_boletas_solicitadas !== '' ? parseInt(form.no_boletas_solicitadas) : null,
+            no_detenidos_producto_investigacion: form.no_detenidos_producto_investigacion !== null && form.no_detenidos_producto_investigacion !== '' ? parseInt(form.no_detenidos_producto_investigacion) : null,
+            allanamientos_numero: form.allanamientos_numero !== null && form.allanamientos_numero !== '' ? parseInt(form.allanamientos_numero) : null,
+            recuperacion_bienes_evidencias: form.recuperacion_bienes_evidencias !== null && form.recuperacion_bienes_evidencias !== '' ? parseInt(form.recuperacion_bienes_evidencias) : null,
+            recuperacion_automotores: form.recuperacion_automotores !== null && form.recuperacion_automotores !== '' ? parseInt(form.recuperacion_automotores) : null,
+            recuperacion_otros: form.recuperacion_otros !== null && form.recuperacion_otros !== '' ? parseInt(form.recuperacion_otros) : null,
+            notificaciones: form.notificaciones !== null && form.notificaciones !== '' ? parseInt(form.notificaciones) : null,
+            citaciones: form.citaciones !== null && form.citaciones !== '' ? parseInt(form.citaciones) : null,
+            peritajes: form.peritajes !== null && form.peritajes !== '' ? parseInt(form.peritajes) : null,
+            traslados: form.traslados !== null && form.traslados !== '' ? parseInt(form.traslados) : null,
+          };
+          const options={
+              headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`
+              }
+          }
+          await axios.put(url,formData,options)
+            setMensaje({ respuesta:"Delegación Actualizada", tipo: true })
+            setTipo(tipo)
+            setOpenDialog(true);
+            setTimeout(() => {
+              setOpenDialog(false);
+                navigate('/delegaciones');
+            }, 3000);
         }
-        await axios.put(url,formData,options)
-          setMensaje({ respuesta:"Delegación Actualizada", tipo: true })
-          setTimeout(() => {
-              navigate('/delegaciones');
-          }, 3000);
+      }catch (error) {
+        setMensaje({ respuesta: error.response.data.msg, tipo: false })
+        setTipo(tipo)
+        setOpenDialog(true);
+        setTimeout(() => {
+          setOpenDialog(false);
+        }, 3000);
       }
+      
   }
 
-  return (
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+};
 
-    <form onSubmit={handleSubmit} >
+  return (
+      <div>
+        <form onSubmit={handleSubmit} >
       {Object.keys(mensaje).length>0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
 
 
@@ -785,13 +790,35 @@ const handleChange = (e) => {
         </div>
 
         <div className="mx-8">
-        <input 
-                type="submit" 
-                value={ 'Actualizar Delegacion'} 
-                className="py-2 w-full block text-center bg-sky-950 text-gray-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-950 hover:text-white"
-            />        </div>
+          <button type="submit" 
+             className="py-2 w-full block text-center bg-sky-950 text-gray-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-950 hover:text-white"
+            >
+          Actualizar Delegacion
+          </button>
+            </div>
 
       </form>
+      <Dialog
+    open={openDialog}
+    onClose={handleCloseDialog}
+    aria-labelledby="alert-dialog-title"
+    aria-describedby="alert-dialog-description"
+
+>
+
+    <DialogContent>
+        <DialogContentText id="alert-dialog-description" tipo={mensaje.tipo}>
+            {mensaje.respuesta}
+        </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+        <Button onClick={handleCloseDialog} autoFocus>
+            Ok
+        </Button>
+    </DialogActions>
+</Dialog>
+      </div>
+    
   )
 }
 
