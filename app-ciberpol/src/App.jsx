@@ -42,11 +42,6 @@ function App() {
       <AuthProvider>  
           <Routes>
 
-            {/* <Route index element={<Login/>} />
-              <Route path='Registrar' element={<Registrar />} />
-              <Route path='confirmar' element={<Confirmar />} />  
-              <Route path='/*' element={<NoFound />} />  */}
-
             <Route path='/' element={<Auth />}>
               <Route index element={<Navigate to="login" />} />
               <Route path='login' element={<Login />} />
