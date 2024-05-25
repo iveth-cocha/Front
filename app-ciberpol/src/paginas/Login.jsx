@@ -35,7 +35,14 @@ const handleSubmit = async(e) => {
           localStorage.setItem('grado',respuesta.data.grado);
           localStorage.setItem('nombre',respuesta.data.nombre);
           localStorage.setItem('Rol',respuesta.data.Rol);
-          console.log('Usuario almacenado en localStorage:', respuesta.data.grado + respuesta.data.nombre+respuesta.data.rol);
+          
+          if (respuesta.data.Rol === 'Visualizador') {
+            localStorage.setItem('accessBlocked', 'true');
+        } else {
+            localStorage.removeItem('accessBlocked');
+        }
+
+          console.log('Usuario almacenado en localStorage:', respuesta.data.grado + respuesta.data.nombre+respuesta.data.Rol);
 
           setAuth(respuesta.data)
           navigate('/delegaciones')

@@ -24,6 +24,7 @@ import AddDelitos from './paginas/AddDelitos'
 import ActualizarUser from './paginas/ActualizarUser'
 import Agentes from './paginas/Agentes'
 import AddAgente from './paginas/AddAgente'
+import PrivateRouteWithRole from './Routes/PrivateRouteWithRole'
 
 
 
@@ -60,9 +61,13 @@ function App() {
               <Routes>
                 <Route element={ <Panel />}>
                   <Route index element={<Delegaciones />} />
-                  <Route path='nuevaDelegacion' element={<AgregarDelegacion />} />
+                  <Route path='nuevaDelegacion' element={<PrivateRouteWithRole>
+                                                          <AgregarDelegacion />
+                                                        </PrivateRouteWithRole>}/>
                   <Route path='detalleDelegacion/:id' element={<DetalleDelegacion />} />
-                  <Route path='actualizarDelegacion/:id' element={<ActualizarDelegacion />} />                 
+                  <Route path='actualizarDelegacion/:id' element={<PrivateRouteWithRole>
+                                                                    <ActualizarDelegacion />
+                                                                  </PrivateRouteWithRole>} />                 
                 </Route>
               </Routes>
             </PrivateRoute>

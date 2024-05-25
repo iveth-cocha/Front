@@ -39,21 +39,47 @@ const Panel = () => {
                 <p className='text-slate-400 text-center my-4 text-sm font-bold'>{grado && nombre && rol ? `${grado} ${nombre} - ${rol}` : ''}</p>
                 <hr className="mt-5 border-slate-500" />
                 <ul className="mt-5">
-                    <li className="text-center">
-                        <Link to='/delegaciones' className={`${esDelegaciones ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
-                    </li>
-                    <li className="text-center">
-                        <Link to='/delitos' className={`${esDelito ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delitos</Link>
-                    </li>
-                    <li className="text-center">
-                        <Link to='/mapeo' className={`${esMapeo ?  'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Mapeo</Link>
-                    </li>
-                    <li className="text-center">
-                        <Link to='/usuarios' className={`${esUsuario ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Usuarios</Link>
-                    </li>
-                    <li className="text-center">
-                        <Link to='/agentes' className={`${esAgente ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Agentes</Link>
-                    </li>
+                    {rol === "Administrador" && (
+                        <>
+                            <li className="text-center">
+                                <Link to='/delegaciones' className={`${esDelegaciones ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
+                            </li>
+                            <li className="text-center">
+                                <Link to='/usuarios' className={`${esUsuario ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Usuarios</Link>
+                            </li>
+                            <li className="text-center">
+                                <Link to='/mapeo' className={`${esMapeo ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Mapeo</Link>
+                            </li>
+                            <li className="text-center">
+                                <Link to='/agentes' className={`${esAgente ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Agentes</Link>
+                            </li>
+                        </>
+                    )}
+                    {(rol === "Registrador" ) && (
+                        <>
+                            <li className="text-center">
+                                <Link to='/delegaciones' className={`${esDelegaciones ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
+                            </li>
+                            <li className="text-center">
+                                <Link to='/delitos' className={`${esDelito ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delitos</Link>
+                            </li>
+                        
+                            <li className="text-center">
+                                <Link to='/agentes' className={`${esAgente ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Agentes</Link>
+                            </li>
+                            
+                        </>
+                    )}
+                    
+                    {(rol === "Visualizador" ) && (
+                        <>
+                            <li className="text-center">
+                                <Link to='/delegaciones' className={`${esDelegaciones ? 'text-black-200 bg-gradient-to-r from-gray-300 to-slate-300  px-3 py-2 rounded-md text-center ' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Delegaciones</Link>
+                            </li>
+                            
+                            
+                        </>
+                    )}
                 </ul>
             </div>
 
