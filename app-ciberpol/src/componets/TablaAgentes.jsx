@@ -77,7 +77,7 @@ const TablaAgentes = () => {
         <MdEditDocument
           title="Actualizar"
           className="h-7 w-7 text-green-600 cursor-pointer inline-block mr-2"
-          onClick={() => navigate(`/agentes/${rowData.id}`)}
+          onClick={() => navigate(`/agentes/actualizarAgente/${rowData.Cedula}`)}
         />
         <MdDeleteForever
           onClick={() => handleDelete(rowData.id)}

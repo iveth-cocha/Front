@@ -7,34 +7,36 @@ import DialogContentText from '@mui/material/DialogContentText';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Agente = () => {
+const Agente = ({agente}) => {
+  console.log("prop",agente)
+  console.log("parametrocedula",agente.Cedula)
   const navigate = useNavigate();
   const [mensaje, setMensaje] = useState({})
   const [form, setForm] = useState({
-    Grado: "",
-    Apellido_Nombre: "",
-    Cedula: "",
-    PaseDNTH: "",
-    Funcion: "",
-    Novedad: "",
-    Detalle: "",
-    Documento: "",
-    Titulo: "",
-    IdiomaExtranjero: "",
-    Licencia: "",
-    Residencia: "",
-    Estado_Civil: "",
-    FechaNacimiento: "",
-    Genero: "",
-    Telefono: "",
-    Email: "",
-    NombresFamiliar: "",
-    Parentesco: "",
-    TelefonoFamiliar: "",
-    Terno: null,
-    Camisa: null,
-    Calzado: null,
-    Cabeza: null
+    Grado: agente?.Grado??"",
+    Apellido_Nombre: agente?.Apellido_Nombre??"",
+    Cedula: agente?.Cedula??"",
+    PaseDNTH: agente?.PaseDNTH??"",
+    Funcion: agente?.Funcion??"",
+    Novedad: agente?.Novedad??"",
+    Detalle: agente?.Detalle??"",
+    Documento: agente?.Documento??"",
+    Titulo: agente?.Titulo??"",
+    IdiomaExtranjero: agente?.IdiomaExtranjero?? "",
+    Licencia: agente?.Licencia??"",
+    Residencia: agente?.Residencia??"",
+    Estado_Civil: agente?.Estado_Civil??"",
+    FechaNacimiento: agente?.FechaNacimiento??"",
+    Genero: agente?.Genero??"",
+    Telefono: agente?.Telefono??"",
+    Email: agente?.Email??"",
+    NombresFamiliar: agente?.NombresFamiliar??"",
+    Parentesco: agente?.Parentesco??"",
+    TelefonoFamiliar: agente?.TelefonoFamiliar??"",
+    Terno: agente?.Terno??null,
+    Camisa: agente?.Camisa??null,
+    Calzado: agente?.Calzado??null,
+    Cabeza: agente?.Cabeza??null
   })
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,12 +44,14 @@ const Agente = () => {
     setForm({ ...form, [name]: formattedValue });
   };
 
-const [openDialog, setOpenDialog] = useState(false);
-const handleSubmit = async(e) => { 
-  e.preventDefault()
-  try {
-      const token = localStorage.getItem('token')
-      const url = `${import.meta.env.VITE_BACKEND_URL}/registro/agente`
+  const [openDialog, setOpenDialog] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (agente?.Cedula) {
+      console.log("dentro delif")
+      const token = localStorage.getItem('token');
+      let url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/agente/${agente?.Cedula}`;
+      
       const formData = {
         ...form,
         Terno: form.Terno !== null && form.Terno !== '' ? parseInt(form.Terno) : null,
@@ -55,32 +59,60 @@ const handleSubmit = async(e) => {
         Calzado: form.Calzado !== null && form.Calzado !== '' ? parseInt(form.Calzado) : null,
         Cabeza: form.Cabeza !== null && form.Cabeza !== '' ? parseInt(form.Cabeza) : null,
       };
-      const options={
+      const options = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      };
+      await axios.put(url, formData, options)
+      console.log("actualizar",formData)
+      setMensaje({ respuesta: 'Informacion delAgente actualizada correctamente', tipo: true });
+      setOpenDialog(true);
+      setTimeout(() => {
+        setOpenDialog(false);
+        navigate(`/agentes`)
+        }, 2000);
+    } else {
+      try {
+        const token = localStorage.getItem('token')
+        const url = `${import.meta.env.VITE_BACKEND_URL}/registro/agente`
+        const formData = {
+          ...form,
+          Terno: form.Terno !== null && form.Terno !== '' ? parseInt(form.Terno) : null,
+          Camisa: form.Camisa !== null && form.Camisa !== '' ? parseInt(form.Camisa) : null,
+          Calzado: form.Calzado !== null && form.Calzado !== '' ? parseInt(form.Calzado) : null,
+          Cabeza: form.Cabeza !== null && form.Cabeza !== '' ? parseInt(form.Cabeza) : null,
+        };
+        const options = {
           headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
           }
-      }
-      await axios.post(url,formData,options)
-      console.log('DESPUES:', formData);
-setMensaje({ respuesta:"Agente añadido a la Lista", tipo: true })
-setOpenDialog(true);
-setTimeout(() => {
-  setOpenDialog(false);
+        }
+        await axios.post(url, formData, options)
+        console.log('DESPUES:', formData);
+        setMensaje({ respuesta: "Agente añadido a la Lista", tipo: true })
+        setOpenDialog(true);
+        setTimeout(() => {
+          setOpenDialog(false);
           navigate(`/agentes`)
 
-      }, 3000);
-      
-  } catch (error) {
-setMensaje({respuesta: error?.response?.data?.errors?.[0]?.msg || error?.response?.data?.msg,
-  tipo: false})
+        }, 3000);
 
-setOpenDialog(true);
-setTimeout(() => {
-  setOpenDialog(false);
-      }, 3000);
+      } catch (error) {
+        setMensaje({
+          respuesta: error?.response?.data?.errors?.[0]?.msg || error?.response?.data?.msg,
+          tipo: false
+        })
+
+        setOpenDialog(true);
+        setTimeout(() => {
+          setOpenDialog(false);
+        }, 3000);
+      }
+    }
   }
-}
 
 const handleCloseDialog = () => {
   setOpenDialog(false);
@@ -105,6 +137,7 @@ const handleCloseDialog = () => {
             <input
               type="text"
               name="Grado"
+              id='Grado'
               value={form.Grado}
               onChange={handleChange}
               className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
@@ -338,9 +371,7 @@ const handleCloseDialog = () => {
           </div>
         </div>
         <div className="mx-8">
-          <button className="py-2 w-full block text-center bg-sky-950 text-gray-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-950 hover:text-white" type="submit">
-            Agregar Agente
-          </button>
+        <input type="submit"   value={agente?.Cedula ? 'Actualizar Agente' : 'Registrar Agente'} className="py-2 w-full block text-center bg-gray-500 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-900 hover:text-white"></input>
         </div>
       </form>
       <Dialog

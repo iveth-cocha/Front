@@ -25,6 +25,7 @@ import ActualizarUser from './paginas/ActualizarUser'
 import Agentes from './paginas/Agentes'
 import AddAgente from './paginas/AddAgente'
 import PrivateRouteWithRole from './Routes/PrivateRouteWithRole'
+import ActualizarAgente from './paginas/ActualizarAgente'
 
 
 
@@ -92,6 +93,7 @@ function App() {
             <Route path='agentes' element={<Panel />}>
               <Route index element={<Agentes />} />
               <Route path='nuevoAgente' element={<AddAgente />} />
+              <Route path='actualizarAgente/:Cedula' element={<ActualizarAgente />} />
               
             </Route>
 
