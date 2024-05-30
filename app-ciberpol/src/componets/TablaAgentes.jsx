@@ -72,7 +72,7 @@ const TablaAgentes = () => {
         <VscOpenPreview
           title="Detalle"
           className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2"
-          onClick={() => navigate(`/agentes/${rowData.id}`)}
+          onClick={() => navigate(`/agentes/VisualizarAgente/${rowData.Cedula}`)}
         />
         <MdEditDocument
           title="Actualizar"
