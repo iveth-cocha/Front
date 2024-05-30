@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import TablaAgentes from '../componets/TablaAgentes';
 
 const Agentes = () => {
     const navigate = useNavigate();
@@ -15,6 +16,8 @@ const Agentes = () => {
         onClick={() => navigate(`/agentes/nuevoAgente`)}
         value='Añadir Agente'
       />
+
+      <TablaAgentes/>
         
     </div>
   )
