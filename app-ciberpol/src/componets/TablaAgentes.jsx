@@ -66,6 +66,25 @@ const TablaAgentes = () => {
     setGlobalFilterValue(value);
   };
 
+  const handleDelete = async (Cedula) => {
+    try {
+        const confirmar = confirm("Eliminar Agente")
+        if (confirmar) {
+            const token = localStorage.getItem('token')
+            const url = `${import.meta.env.VITE_BACKEND_URL}/eliminar/agente/${Cedula}`
+            const headers= {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            await axios.delete(url, {headers});
+            listarAgentes();
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
@@ -80,7 +99,7 @@ const TablaAgentes = () => {
           onClick={() => navigate(`/agentes/actualizarAgente/${rowData.Cedula}`)}
         />
         <MdDeleteForever
-          onClick={() => handleDelete(rowData.id)}
+          onClick={() => handleDelete(rowData.Cedula)}
           className="h-7 w-7 text-red-900 cursor-pointer inline-block"
         />
       </React.Fragment>
