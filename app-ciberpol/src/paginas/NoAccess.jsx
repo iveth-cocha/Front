@@ -1,35 +1,27 @@
-import React, { useEffect } from 'react';
-import { ImCancelCircle } from "react-icons/im";
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+
+import { useNavigate } from 'react-router-dom'
+import { IoSearch } from "react-icons/io5";
+import Asiganacion from '../componets/formularios/Asignacion';
+import TablaVisualidorD from '../componets/TablaVisualidorD';
+
 
 const NoAccess = () => {
     const navigate = useNavigate();
+  return (
+    <div >
+      <h1 className='font-black text-4xl text-gray-500 '>DELEGACIONES</h1>
+      <hr className='my-4 border-sky-950  '/>
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            navigate('/delegaciones');
-        }, 3000);
 
-        // Limpia el temporizador en el desmontaje del componente
-        return () => clearTimeout(timer);
-    }, [navigate]);
 
-    return (
-        <div className="h-screen bg-cover bg-center font-serif relative" style={{ backgroundImage: `url('/fondo_base.jpg')` }}>
-            <div className="flex flex-col justify-center items-center h-full">
-                <ImCancelCircle className="absolute text-red-200 text-[35rem]" />
-                <div className='flex flex-col items-center gap-8 z-20'>
-                    <div className='flex flex-row flex-wrap gap-8 mb-3'>
-                        <img src="/logo_policia.png" className='h-32' />
-                        <img src="/logo_ciberpol.png" className='h-32' />
-                    </div>
-                    <p className="text-3xl md:text-4xl lg:text-3xl text-gray-800 mt-8">
-                        Su rol no cuenta con el permiso para acceder a esta acción
-                    </p>
-                </div>
-            </div>
-        </div>
-    );
+      <TablaVisualidorD/> 
+       
+    
+
+
+    </div>
+  )
 }
 
 export default NoAccess;
