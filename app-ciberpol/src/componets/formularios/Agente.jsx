@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Agente = ({agente}) => {
   console.log("prop",agente)
-  console.log("parametrocedula",agente.Cedula)
+  
   const navigate = useNavigate();
   const [mensaje, setMensaje] = useState({})
   const [form, setForm] = useState({
