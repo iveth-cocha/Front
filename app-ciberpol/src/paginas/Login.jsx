@@ -44,7 +44,8 @@ const Login = () => {
       setAuth(respuesta.data);
       navigate('/delegaciones');
     } catch (error) {
-      setMensaje({ respuesta: error?.response?.data?.msg, tipo: false });
+      setMensaje({respuesta: error?.response?.data?.errors?.[0]?.msg || error?.response?.data?.msg,
+        tipo: false})
       setForm({});
       setTimeout(() => {
         setMensaje({});

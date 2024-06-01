@@ -32,7 +32,8 @@ const Newpassword = () => {
             navigate('/');
         }, 3000);
         } catch (error) {
-          setMensaje({ respuesta: error.response.data.msg, tipo: false });
+          setMensaje({respuesta: error?.response?.data?.errors?.[0]?.msg || error?.response?.data?.msg,
+            tipo: false})
         }
       };
 
