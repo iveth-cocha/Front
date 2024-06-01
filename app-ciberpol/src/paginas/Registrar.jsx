@@ -26,7 +26,7 @@ const Registrar = () => {
     const handleSubmit = async(e) => { 
         e.preventDefault();
         try {
-            const url = "http://localhost:3000/api/solicitar-registro";
+            const url = `${import.meta.env.VITE_BACKEND_URL}/solicitar-registro`
             const respuesta = await axios.post(url, form);
             setMensaje({ respuesta: respuesta.data.msg, tipo: true });
             setform({});
