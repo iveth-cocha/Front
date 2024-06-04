@@ -11,6 +11,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import { useForm } from 'react-hook-form';
 
 
 const NewDelegacion = () => {
@@ -186,6 +187,7 @@ const NewDelegacion = () => {
           canton: localidadSeleccionada?.canton || '',
           provincia: localidadSeleccionada?.subzona || ''
       });
+      console.log("marets",setSelectedLocalidad(value))
   };
 
   // Estado para delitos
@@ -295,31 +297,36 @@ const handleChange = (e) => {
   setForm({...form, [name]: uppercaseValue });
 };
 
-  const handleSubmit = async(e) => { 
-      e.preventDefault()
+const { register, handleSubmit, formState: { errors } } = useForm();
 
+
+  const onSubmit = async(data) => { 
+      //e.preventDefault()
+        console.log("antes", data)
         try {
           const token = localStorage.getItem('token')
           const url = `${import.meta.env.VITE_BACKEND_URL}/registro/delegacion`
           //conversion de datos 
           const formData = {
             ...form,
-            numero_investigacion_previa: form.numero_investigacion_previa !== null && form.numero_investigacion_previa !== '' ? parseInt(form.numero_investigacion_previa) : null,
-            edad_victima: form.edad_victima !== null && form.edad_victima !== '' ? parseInt(form.edad_victima) : null,
-            plazo_otorgado_dias: form.plazo_otorgado_dias !== null && form.plazo_otorgado_dias !== '' ? parseInt(form.plazo_otorgado_dias) : null,
-            versiones: form.versiones !== null && form.versiones !== '' ? parseInt(form.versiones) : null,
-            reconocimientos_lugar_hechos: form.reconocimientos_lugar_hechos !== null && form.reconocimientos_lugar_hechos !== '' ? parseInt(form.reconocimientos_lugar_hechos) : null,
-            no_boletas_solicitadas: form.no_boletas_solicitadas !== null && form.no_boletas_solicitadas !== '' ? parseInt(form.no_boletas_solicitadas) : null,
-            no_detenidos_producto_investigacion: form.no_detenidos_producto_investigacion !== null && form.no_detenidos_producto_investigacion !== '' ? parseInt(form.no_detenidos_producto_investigacion) : null,
-            allanamientos_numero: form.allanamientos_numero !== null && form.allanamientos_numero !== '' ? parseInt(form.allanamientos_numero) : null,
-            recuperacion_bienes_evidencias: form.recuperacion_bienes_evidencias !== null && form.recuperacion_bienes_evidencias !== '' ? parseInt(form.recuperacion_bienes_evidencias) : null,
-            recuperacion_automotores: form.recuperacion_automotores !== null && form.recuperacion_automotores !== '' ? parseInt(form.recuperacion_automotores) : null,
-            recuperacion_otros: form.recuperacion_otros !== null && form.recuperacion_otros !== '' ? parseInt(form.recuperacion_otros) : null,
-            notificaciones: form.notificaciones !== null && form.notificaciones !== '' ? parseInt(form.notificaciones) : null,
-            citaciones: form.citaciones !== null && form.citaciones !== '' ? parseInt(form.citaciones) : null,
-            peritajes: form.peritajes !== null && form.peritajes !== '' ? parseInt(form.peritajes) : null,
-            traslados: form.traslados !== null && form.traslados !== '' ? parseInt(form.traslados) : null,
+            ...data,
+            numero_investigacion_previa: data.numero_investigacion_previa !== null && data.numero_investigacion_previa !== '' ? parseInt(data.numero_investigacion_previa) : null,
+            edad_victima: data.edad_victima !== null && data.edad_victima !== '' ? parseInt(data.edad_victima) : null,
+            plazo_otorgado_dias: data.plazo_otorgado_dias !== null && data.plazo_otorgado_dias !== '' ? parseInt(data.plazo_otorgado_dias) : null,
+            versiones: data.versiones !== null && data.versiones !== '' ? parseInt(data.versiones) : null,
+            reconocimientos_lugar_hechos: data.reconocimientos_lugar_hechos !== null && data.reconocimientos_lugar_hechos !== '' ? parseInt(data.reconocimientos_lugar_hechos) : null,
+            no_boletas_solicitadas: data.no_boletas_solicitadas !== null && data.no_boletas_solicitadas !== '' ? parseInt(data.no_boletas_solicitadas) : null,
+            no_detenidos_producto_investigacion: data.no_detenidos_producto_investigacion !== null && data.no_detenidos_producto_investigacion !== '' ? parseInt(data.no_detenidos_producto_investigacion) : null,
+            allanamientos_numero: data.allanamientos_numero !== null && data.allanamientos_numero !== '' ? parseInt(data.allanamientos_numero) : null,
+            recuperacion_bienes_evidencias: data.recuperacion_bienes_evidencias !== null && data.recuperacion_bienes_evidencias !== '' ? parseInt(data.recuperacion_bienes_evidencias) : null,
+            recuperacion_automotores: data.recuperacion_automotores !== null && data.recuperacion_automotores !== '' ? parseInt(data.recuperacion_automotores) : null,
+            recuperacion_otros: data.recuperacion_otros !== null && data.recuperacion_otros !== '' ? parseInt(data.recuperacion_otros) : null,
+            notificaciones: data.notificaciones !== null && data.notificaciones !== '' ? parseInt(data.notificaciones) : null,
+            citaciones: data.citaciones !== null && data.citaciones !== '' ? parseInt(data.citaciones) : null,
+            peritajes: data.peritajes !== null && data.peritajes !== '' ? parseInt(data.peritajes) : null,
+            traslados: data.traslados !== null && data.traslados !== '' ? parseInt(data.traslados) : null,
           };
+          console.log('ANTES DE ENVIAR:', formData);
           const options={
               headers: {
                   'Content-Type': 'application/json',
@@ -352,36 +359,72 @@ const handleChange = (e) => {
 };
   return (
     <div>
-      <form onSubmit={handleSubmit} >
-      
-
-
+      <form onSubmit={handleSubmit(onSubmit)}>
+     
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2 '>
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Asiganción de la Investigacion </h1>
 
-
-          <div className='flex mb-3'>
-            <label className='mr-7'>N° de Investigación Previa</label>
-            <input type="Number"
+          <div className='flex mb-3 items-center'>
+            <label className='mr-11'>N° de Investigación Previa</label>
+            <input
+              type="Number"
               id='numero_investigacion_previa'
               name='numero_investigacion_previa'
-              
               onChange={handleChange}
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              {...register('numero_investigacion_previa', {
+                required: 'El campo Investigación Previa es obligatorio',
+                maxLength: {
+                  value: 15,
+                  message: 'El campo Investigación Previa debe tener 15 caracteres'
+                },
+                minLength: {
+                  value: 15,
+                  message: 'El campo Investigación Previa debe tener 15 caracteres'
+                },
+                pattern: {
+                  value: /^[0-9]*$/,
+                  message: 'Este campo solo puede contener números'
+                }
+              })}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
+            />
+            {errors.numero_investigacion_previa && (
+              <span className="text-red-500 text-sm ml-2">{errors.numero_investigacion_previa.message}</span>
+            )}
           </div>
 
-          <div className='flex mb-3'>
-            <label className='mr-11'>N° de Instrucción Fiscal</label>
+          <div className='flex mb-3 items-center'>
+            <label className='mr-16'>N° de Instrucción Fiscal</label>
             <input type="text" id='numero_instruccion_fiscal'
               name='numero_instruccion_fiscal'
               onChange={handleChange}
-             
-            className="block w-200 rounded-md border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 uppercase" />
+              {...register('numero_instruccion_fiscal', {
+                required: 'El campo Instrucción Fiscal es obligatorio',
+                maxLength: {
+                  value: 50,
+                  message: 'El campo Instrucción Fiscal debe tener maximo 15 caracteres'
+                },
+                minLength: {
+                  value: 5,
+                  message: 'El campo Instrucción Fiscal debe minimo 5 caracteres'
+                },
+
+              })}
+              className="block w-200 rounded-md border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 uppercase" />
+            {errors.numero_instruccion_fiscal && (
+              <span className="text-red-500 text-sm ml-2">{errors.numero_instruccion_fiscal.message}</span>
+            )}
           </div>
 
-          <div className='flex  mb-3'>
+          <div className='flex  mb-3 items-center'>
             <label className='mr-7'>Mes de ingreso de Disposiciones Fiscales</label>
-            <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='mes_ingreso' name='mes_ingreso' onChange={handleChange} >
+            <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='mes_ingreso' name='mes_ingreso'
+
+              onChange={handleChange}
+              {...register('mes_ingreso', {
+                required: { value: true, message: 'Debe seleccionar un mes' }
+              })} >
+
               <option value="">-- Seleccione un mes --</option>
               <option value="ENERO">ENERO</option>
               <option value="FEBRERO">FEBRERO</option>
@@ -396,11 +439,13 @@ const handleChange = (e) => {
               <option value="NOVIEMBRE">NOVIEMBRE</option>
               <option value="DICIEMBRE">DICIEMBRE</option>
             </select >
+            {errors.mes_ingreso && (<span className="text-red-500 text-sm ml-2 mb-3">{errors.mes_ingreso.message}</span>
+            )}
           </div >
 
 
           <div className='flex mb-3 '>
-            <label className='mr-7'>Apellidos y Nombres del Agente </label>
+            <label className='mr-11'>Apellidos y Nombres del Agente </label>
             <Stack spacing={2} sx={{ width: 500 }}>
               <Autocomplete
                 id="apellidos_nombres_agente"
@@ -408,9 +453,14 @@ const handleChange = (e) => {
                 freeSolo
                 options={agenteNom}
                 onChange={handlenomAgenteSelect}
-                
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField {...params}
+                  {...register('apellidos_nombres_agente', {
+                    required: 'Debe seleccionar el nombre de un agente',
+                  })} />}
               />
+              {errors.apellidos_nombres_agente && (
+                <span className="text-red-500 text-sm ml-2">{errors.apellidos_nombres_agente.message}</span>
+              )}
             </Stack>
           </div>
           <div className='flex flex-row'>
@@ -418,10 +468,11 @@ const handleChange = (e) => {
             <input type="text" id='grado_agente'
               name='grado_agente' onChange={handleChange}
               disabled
-              value={selectedAgente && agenteGrado[selectedAgente] }
+              value={selectedAgente && agenteGrado[selectedAgente]}
               className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+             
             />
-
+           
           </div>
 
         </div>
@@ -431,58 +482,64 @@ const handleChange = (e) => {
 
           <div className='flex mb-3 place-content-center'>
             <label className='mr-7 pt-4 '>Realice la Búsqueda para la Localización </label>
-            <Stack spacing={2} sx={{ width: 300 }}>
+            <Stack spacing={2} sx={{ width: 600 }}>
               <Autocomplete
-                id="free-solo-demo"
+                id="localizacion"
                 freeSolo
                 options={codDistrito}
                 onChange={handleLocalizacionSelect}
-                renderInput={(params) => <TextField {...params} label="Codigo-Provincia-Distrito-Zona" />}
+                renderInput={(params) => <TextField {...params} label="Codigo-Provincia-Distrito-Zona"  
+                {...register('localizacion', {
+                  required: 'Debe realizar la busqueda de la Localizacion para añadir la informacion',
+                })} />}
               />
+              {errors.localizacion && (
+                <span className="text-red-500 text-sm ml-2">{errors.localizacion.message}</span>
+              )}
             </Stack>
           </div>
           <div className='flex flex-row'>
-                <label className='mr-7 pt-5'>Cod Distrito:</label>
-                <input type="text" id='cod_distrito' name='cod_distrito' onChange={handleChange}
-                  disabled
-                  value={selectedLocalidad && distrito[selectedLocalidad]?.cod_distrito}
-                  className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-                />
-              </div>
+            <label className='mr-4 pt-5'>Cod Distrito:</label>
+            <input type="text" id='cod_distrito' name='cod_distrito' onChange={handleChange}
+              disabled
+              value={selectedLocalidad && distrito[selectedLocalidad]?.cod_distrito}
+              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-64'
+            />
+          </div>
 
-              <div className='flex flex-row'>
-                <label className='mr-7 pt-5'>Distrito:</label>
-                <input type="text" id='distrito' name='distrito' onChange={handleChange}
-                  disabled
-                  value={selectedLocalidad && distrito[selectedLocalidad]?.distrito }
-                  className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-                />
-              </div>
-              <div className='flex flex-row'>
-                <label className='mr-7 pt-5'>Zona:</label>
-                <input type="text" id='zona' name='zona' onChange={handleChange}
-                  disabled
-                  value={selectedLocalidad && distrito[selectedLocalidad]?.zona }
-                  className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-                />
-              </div>
-              <div className='flex flex-row'>
-                <label className='mr-7 pt-5'>Canton:</label>
-                <input type="text" id='canton' name='canton' onChange={handleChange}
-                  disabled
-                  value={selectedLocalidad && distrito[selectedLocalidad]?.canton }
-                  className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-                />
-              </div>
-             
-              <div className='flex flex-row'>
-                <label className='mr-7 pt-5'>Provincia:</label>
-                <input type="text" id='provincia' name='provincia' onChange={handleChange}
-                  disabled
-                  value={selectedLocalidad && distrito[selectedLocalidad]?.subzona }
-                  className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-                />
-              </div>
+          <div className='flex flex-row'>
+            <label className='mr-11 pt-5'>Distrito:</label>
+            <input type="text" id='distrito' name='distrito' onChange={handleChange}
+              disabled
+              value={selectedLocalidad && distrito[selectedLocalidad]?.distrito}
+              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5  w-64'
+              />
+          </div>
+          <div className='flex flex-row'>
+            <label className='mr-16 pt-5'>Zona:</label>
+            <input type="text" id='zona' name='zona' onChange={handleChange}
+              disabled
+              value={selectedLocalidad && distrito[selectedLocalidad]?.zona}
+              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-64'
+              />
+          </div>
+          <div className='flex flex-row'>
+            <label className='mr-12 pt-5'>Cantón:</label>
+            <input type="text" id='canton' name='canton' onChange={handleChange}
+              disabled
+              value={selectedLocalidad && distrito[selectedLocalidad]?.canton}
+              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-64'
+              />
+           </div>
+
+          <div className='flex flex-row'>
+            <label className='mr-7 pt-5'>Provincia:</label>
+            <input type="text" id='provincia' name='provincia' onChange={handleChange}
+              disabled
+              value={selectedLocalidad && distrito[selectedLocalidad]?.subzona}
+              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-64'
+            />
+          </div>
 
         </div>
 
@@ -490,65 +547,105 @@ const handleChange = (e) => {
 
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Delito </h1>
           <div className='flex mb-3'>
-            <label className='mr-7'>Delito Tipificado en Delegación</label>
-            <Stack spacing={2} sx={{ width: 300 }}>
+            <label className='mr-7 mt-4'>Delito Tipificado en Delegación</label>
+            <Stack spacing={2} sx={{ width: 500 }}>
               <Autocomplete
                 id="delito_tipificado_delegacion"
                 name="delito_tipificado_delegacion"
                 freeSolo
                 options={delitoNom}
                 onChange={handleDelitoSelect}
-                renderInput={(params) => <TextField {...params} label="Delito - Sección" />}
+                renderInput={(params) => <TextField {...params} label="Delito - Sección"
+                  {...register('delito_tipificado_delegacion', {
+                    required: 'El campo Delito Tipificado en Delegación debe estar lleno',
+                  })} />}
               />
-              <div className='flex flex-row'>
-                <label className='mr-7 pt-5'>Tipo Delito: </label>
-                <input type="text" id='tipo_delito' name='tipo_delito' onChange={handleChange}
-                  disabled
-                  value={selectedDelito && delitoData[selectedDelito]?.seccion}
-                  className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-                />
-
-              </div>
-              <div className='flex flex-row'>
-                <label className='mr-7 pt-5'>Tipo Desgregado: </label>
-                <input type="text" id='delito_desagregacion_policia_judicial' name='delito_desagregacion_policia_judicial' onChange={handleChange}
-                  disabled
-                  value={selectedDelito && delitoData[selectedDelito]?.delito}
-                  className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-                />
-
-              </div>
+              {errors.delito_tipificado_delegacion && (
+                <span className="text-red-500 text-sm ml-2">{errors.delito_tipificado_delegacion.message}</span>
+              )}
             </Stack>
+
+          </div>
+          <div className='flex flex-row'>
+            <label className='mr-5 pt-5'>Tipo Delito: </label>
+            <input type="text" id='tipo_delito' name='tipo_delito' onChange={handleChange}
+              disabled
+              value={selectedDelito && delitoData[selectedDelito]?.seccion}
+              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-96'
+              
+            />
+            
+          </div>
+
+          <div className='flex flex-row'>
+            <label className='mr-7 pt-5'>Delito Desagregación Policia Judicial: </label>
+            <input type="text" id='delito_desagregacion_policia_judicial' name='delito_desagregacion_policia_judicial' onChange={handleChange}
+              disabled
+              value={selectedDelito && delitoData[selectedDelito]?.delito}
+              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-96'
+              
+            />
+           
+          </div>
+          <div className='flex mb-3'>
+            <label className='mr-16'>Fecha de la Infracción/Delito</label>
+            <input type="Date" id='fecha_infraccion_delito' name='fecha_infraccion_delito' onChange={handleChange}
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
+              {...register('fecha_infraccion_delito', {
+                required: 'El campo Fecha de la Infracción/Delitodebe estar lleno ',
+              })}
+            />
+            {errors.fecha_infraccion_delito && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_infraccion_delito.message}</span>
+            )}
           </div>
 
           <div className='flex mb-3'>
-            <label className='mr-7'>Fecha de Infracción o Delito</label>
-            <input type="Date" id='fecha_infraccion_delito' name='fecha_infraccion_delito' onChange={handleChange} 
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+            <label className='mr-7 '>Apellidos y Nombres de la Víctima</label>
+            <input type="String" id='apellidos_nombres_victima' name='apellidos_nombres_victima' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
+              {...register('apellidos_nombres_victima', {
+                required: 'Este campo debe estar lleno ',
+              })}
+            />
+            {errors.apellidos_nombres_victima && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.apellidos_nombres_victima.message}</span>
+            )}
           </div>
 
-          <div className='flex mb-3'>
-            <label className='mr-7 '>Apellidos y Nombres de la Victima</label>
-            <input type="String" id='apellidos_nombres_victima' name='apellidos_nombres_victima' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
-          </div>
-
-          <div className='flex  mb-3'>
+          <div className='flex  mb-3 items-center'>
             <label className='mr-7 '>Sexo</label>
-            <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='sexo_victima' name='sexo_victima' onChange={handleChange} >
+            <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='sexo_victima' name='sexo_victima' onChange={handleChange}
+              {...register('sexo_victima', {
+                required: { value: true, message: 'Debe seleccionar una opción' }
+              })}>
               <option value="">--Seleccione el sexo--</option>
               <option value="FEMENINO">FEMENINO</option>
               <option value="MASCULINO" >MASCULINO</option>
               <option value="SIN DATO">SIN DATO</option>
             </select>
+            {errors.sexo_victima && (<span className="text-red-500 text-sm ml-2 mb-3">{errors.sexo_victima.message}</span>
+            )}
           </div>
 
           <div className='flex mb-3'>
             <label className='mr-7'>Edad</label>
-            <input type="Number" id='edad_victima' name='edad_victima' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+            <input
+              type="number"
+              id='edad_victima'
+              name='edad_victima'
+              onChange={handleChange}
+              className="w-28 block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
+              {...register('edad_victima', {
+                validate: value => !value || value.length <= 2 || 'El campo debe tener máximo 2 caracteres'
+              })}
+            />
+            {errors.edad_victima && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.edad_victima.message}</span>
+            )}
           </div>
         </div>
+     
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Sospechoso</h1>
@@ -556,26 +653,86 @@ const handleChange = (e) => {
           <div className='flex mb-3'>
             <label className='mr-7'>Apellidos y Nombres del Detenido o Sospechoso</label>
             <input type="String" id='apellidos_nombres_sospechoso' name='apellidos_nombres_sospechoso' onChange={handleChange} 
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('apellidos_nombres_sospechoso', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  if (value.length < 2) return 'El campo debe tener al menos 2 caracteres'; // Verifica que tenga al menos 2 caracteres
+                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para letras y comas
+                  return regex.test(value) || 'El campo solo puede contener letras y comas';
+                }
+              })}
+            />
+            {errors.apellidos_nombres_sospechoso && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.apellidos_nombres_sospechoso.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Condición del Infractor Involucrado</label>
             <input type="String" id='condicion_infractor_involucrado' name='condicion_infractor_involucrado' onChange={handleChange} 
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('condicion_infractor_involucrado', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  if (value.length < 5) return 'El campo debe tener al menos 5 caracteres'; // Verifica que tenga al menos 2 caracteres
+                  const regex = /^[a-zA-Z,\s]*$/;// Expresión regular para letras y comas
+                  return regex.test(value) || 'El campo solo puede contener letras y comas';
+                }
+              })}
+            />
+            {errors.condicion_infractor_involucrado && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.condicion_infractor_involucrado.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Parentesco del Detenido o Sospechoso con la Victima</label>
-            <input type="String" id='parentesco_detenido_sospechoso_victima' name='parentesco_detenido_sospechoso_victima' onChange={handleChange}              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+            <input type="String" id='parentesco_detenido_sospechoso_victima' name='parentesco_detenido_sospechoso_victima' onChange={handleChange}              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            {...register('parentesco_detenido_sospechoso_victima', {
+              validate: value => {
+                if (!value) return true; // Si el campo está vacío, no se activa la validación
+                if (value.length < 5) return 'El campo debe tener al menos 5 caracteres'; // Verifica que tenga al menos 2 caracteres
+                const regex = /^[a-zA-Z,\s]*$/;// Expresión regular para letras y comas
+                return regex.test(value) || 'El campo solo puede contener letras y comas';
+              }
+            })}
+          />
+          {errors.parentesco_detenido_sospechoso_victima && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.parentesco_detenido_sospechoso_victima.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Alias del Sospechoso </label>
             <input type="String" id='alias_sospechoso' name='alias_sospechoso' onChange={handleChange}
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('alias_sospechoso', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  if (value.length < 4) return 'El campo debe tener al menos 4 caracteres'; // Verifica que tenga al menos 2 caracteres
+                  const regex = /^[a-zA-Z,\s]*$/;// Expresión regular para letras y comas
+                  return regex.test(value) || 'El campo solo puede contener letras y comas';
+                }
+              })}
+            />
+            {errors.alias_sospechoso && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.alias_sospechoso.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Placas del Vihículo Involucrado en el Delito</label>
             <input type="String" id='placa_vehiculo_involucrado' name='placa_vehiculo_involucrado' onChange={handleChange} 
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('placa_vehiculo_involucrado', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  if (value.length < 8) return 'El campo debe tener al menos 8 caracteres'; // Verifica que tenga al menos 2 caracteres
+                  const regex = /^[a-zA-Z0-9, -]*$/;// Expresión regular para letras y comas y guion
+                  return regex.test(value) || 'El campo solo puede contener  y comas para separar las placas';
+                }
+              })}
+            />
+            {errors.placa_vehiculo_involucrado && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.placa_vehiculo_involucrado.message}</span>
+            )}
           </div>
 
         </div>
@@ -586,33 +743,61 @@ const handleChange = (e) => {
           <div className='flex mb-3'>
             <label className='mr-7'>Apellidos y Nombres del Fiscal</label>
             <input type="String" id='apellidos_nombres_fiscal' name='apellidos_nombres_fiscal' onChange={handleChange} 
-                         className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
-          </div>
-
-          <p className='text-red-500'>anadir para fiscalia autocompletado  y numero, que se concadenan en "Unidad Especializada de Fiscalia"</p>
-          <Stack spacing={2} sx={{ width: 300 }}>
-            <Autocomplete
-              id="free-solo"
-              freeSolo
-              options={fiscaliaNom}
-              onChange={handleFiscaliaChange} // Usamos el mismo manejador para la fiscalía
-              renderInput={(params) => <TextField {...params} label="Fiscalía Nombre" />}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 w-72" 
+              {...register('apellidos_nombres_fiscal', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  if (value.length < 5) return 'El campo debe tener al menos 2 caracteres'; // Verifica que tenga al menos 2 caracteres
+                  const regex = /^[a-zA-Z\s]*$/; // Expresión regular para letras y comas
+                  return regex.test(value) || 'El campo solo puede contener letras';
+                }
+              })}
             />
+            {errors.apellidos_nombres_fiscal && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.apellidos_nombres_fiscal.message}</span>
+            )}
+          </div>
+          <div className='flex place-content-center mb-3' >
+            <div className='flex mr-5 '>
+              <label className='mr-2 mt-5'>Buscar Fiscalia</label>
+              <Stack spacing={2} sx={{ width: 300 }}>
+                <Autocomplete
+                  id="fiscaliaNombre"
+                  freeSolo
+                  options={fiscaliaNom}
+                  onChange={handleFiscaliaChange} // Usamos el mismo manejador para la fiscalía
+                  renderInput={(params) => <TextField {...params} label="Fiscalía Nombre" 
+                  />}
+              />
+            
+              </Stack>
+            </div>
 
-            <div className='flex mb-3'>
-              <label className='mr-4'>N° Fiscalía:</label>
+            <div className='flex mt-2'>
+              <label className='mr-4 mt-1'>N° Fiscalía:</label>
               <input
+                id='numerFiscalia'
                 type="number"
                 value={numeroFiscalia}
                 onChange={handleNumeroFiscaliaChange} // Usamos el mismo manejador para el número de fiscalía
                 className="block w-15 h-10 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
+                {...register('numerFiscalia', {
+                  validate: value => {
+                    if (!value) return true; // Si el campo está vacío, no se activa la validación
+                    const regex = /^[0-9]+$/; // Expresión regular para números
+                    return regex.test(value) || 'El campo solo puede contener números';
+                  }
+                })}
               />
+             {errors.numerFiscalia && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.numerFiscalia.message}</span>
+            )}
             </div>
-
-            
-          </Stack>
+          </div>
+          
+          
           <div className='flex mb-3'>
-              <label className='mr-4'>Unidad Especializada de Fiscalía:</label>
+              <label className='mr-4 mt-4' >Unidad Especializada de Fiscalía:</label>
               <input
                 type="text" id='unidad_especializada' name='unidad_especializada'
                 disabled
@@ -627,43 +812,117 @@ const handleChange = (e) => {
           <div className='flex mb-3'>
             <label className='mr-11'>Fecha de la Delegación</label>
             <input type="Date" id='fecha_delegacion' name='fecha_delegacion' onChange={handleChange}
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('fecha_delegacion', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  
+                }
+              })}
+            />
+           {errors.fecha_delegacion && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_delegacion.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7'>Fecha de Recepción en CIBERPOL</label>
+            <label className='mr-7'>Fecha de Recepción en PJ</label>
             <input type="Date" id='fecha_recepcion_pj' name='fecha_recepcion_pj' onChange={handleChange} 
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('fecha_recepcion_pj', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+      
+                }
+              })}
+            />
+           {errors.fecha_recepcion_pj && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_recepcion_pj.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Fecha de Recepción por parte del Agente Investigador </label>
             <input type="Date" id='fecha_recepcion_agente_investigador' name='fecha_recepcion_agente_investigador' onChange={handleChange} 
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('fecha_recepcion_agente_investigador', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+      
+                }
+              })}
+            />
+           {errors.fecha_recepcion_agente_investigador && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_recepcion_agente_investigador.message}</span>
+          )}
           </div>
 
           <div className='flex mb-3'>
             <label className='mr-7'>N° de Oficio con la que recibe la Diligencia el Agente</label>
             <input type="text" id='no_oficio_recibe_diligencia' name='no_oficio_recibe_diligencia' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('no_oficio_recibe_diligencia', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números y letras';
+                }
+              })}
+            />
+           {errors.no_oficio_recibe_diligencia && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_oficio_recibe_diligencia.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Plazo Otrogado (Días)</label>
             <input type="Number" id='plazo_otorgado_dias' name='plazo_otorgado_dias' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('plazo_otorgado_dias', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9]+$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números';
+                }
+              })}
+            />
+           {errors.plazo_otorgado_dias && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.plazo_otorgado_dias.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>N° art.444 COIP</label>
             <input type="String" id='numero_articulo' name='numero_articulo' onChange={handleChange}
-                         className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('numero_articulo', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,\s]+$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números y comas';
+                }
+              })}
+            />
+           {errors.numero_articulo && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.numero_articulo.message}</span>
+          )}
           </div>
         </div>
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>boleta</h1>
 
-          <div className=' mb-3'>
+          <div className='flex mb-3'>
             <label className='mr-7'>¿Qué art. cumplió dentro del plazo?</label>
             <input type="String" id='articulos_cumplidos' name='articulos_cumplidos' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('articulos_cumplidos', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,\s]+$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números y comas';
+                }
+              })}
+            />
+           {errors.articulos_cumplidos && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.articulos_cumplidos.message}</span>
+          )}
           </div>
           <div className='flex  mb-3'>
             <label className='mr-7'>Cumplimiento Parcial</label>
@@ -682,9 +941,19 @@ const handleChange = (e) => {
             </select>
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7'>Fecha de Cumplimiento o Descargo </label>
+            <label className='mr-7'>Fecha de Cumplimiento o Descargo de Delegación </label>
             <input type="Date" id='fecha_cumplimiento' name='fecha_cumplimiento' onChange={handleChange} 
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('fecha_cumplimiento', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+      
+                }
+              })}
+            />
+           {errors.fecha_cumplimiento && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_cumplimiento.message}</span>
+          )}
           </div>
           <div className='flex  mb-3'>
             <label className='mr-7'>En Investigación</label>
@@ -697,17 +966,50 @@ const handleChange = (e) => {
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Oficio de Descargo</label>
             <input type="text" id='numero_oficio_descargo' name='numero_oficio_descargo' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('numero_oficio_descargo', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números y letras';
+                }
+              })}
+            />
+           {errors.numero_oficio_descargo && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.numero_oficio_descargo.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 '>Versiones</label>
+            <label className='mr-7 '>Versiones (Número)</label>
             <input type="Number" id='versiones' name='versiones' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('versiones', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números y letras';
+                }
+              })}
+            />
+           {errors.versiones && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.versiones.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 '>Reconocimiento de Lugar de los Hechos</label>
+            <label className='mr-7 '>Reconocimiento de Lugar de los Hechos (Número)</label>
             <input type="Number" id='reconocimientos_lugar_hechos' name='reconocimientos_lugar_hechos' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('reconocimientos_lugar_hechos', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números y letras';
+                }
+              })}
+            />
+           {errors.reconocimientos_lugar_hechos && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.reconocimientos_lugar_hechos.message}</span>
+          )}
           </div>
           <div className='flex  mb-3'>
             <label className='mr-7'>¿Determinó posibles Responsables?</label>
@@ -718,7 +1020,7 @@ const handleChange = (e) => {
             </select>
           </div>
           <div className='flex  mb-3'>
-            <label className='mr-7'>Comparecencia del Sospechoso</label>
+            <label className='mr-14'>Comparecencia del Sospechoso</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='comparecencia_sospechoso' name='comparecencia_sospechoso' onChange={handleChange}   >
               <option value="">-- Seleccione --</option>
               <option value="SI" >SI</option>
@@ -726,7 +1028,7 @@ const handleChange = (e) => {
             </select>
           </div>
           <div className='flex  mb-3'>
-            <label className='mr-7'>Peticiones a Fiscalía</label>
+            <label className='mr-28'>Peticiones a Fiscalía</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='peticiones_fiscalia' name='peticiones_fiscalia' onChange={handleChange}  >
               <option value="">-- Seleccione --</option>
               <option value="SI" >SI</option>
@@ -736,7 +1038,18 @@ const handleChange = (e) => {
           <div className='flex mb-3'>
             <label className='mr-7 '>Tipo de Requermimientos</label>
             <input type="String" id='tipo_peticion' name='tipo_peticion' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('tipo_peticion', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números y letras y comas';
+                }
+              })}
+            />
+           {errors.tipo_peticion && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.tipo_peticion.message}</span>
+          )}
           </div>
 
 
@@ -748,63 +1061,195 @@ const handleChange = (e) => {
           <div className='flex mb-3'>
             <label className='mr-7 '>Nombre del Requerido en la Boleta</label>
             <input type="String" id='nombre_requerido_boleta' name='nombre_requerido_boleta' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('nombre_requerido_boleta', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  letras y comas';
+                }
+              })}
+            />
+           {errors.nombre_requerido_boleta && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.nombre_requerido_boleta.message}</span>
+          )}
           </div>
 
           <div className='mb-3'>
             <label className='mr-7 '>Apellidos y Nombres de los Detenidos, producto del Cumplimiento de la Disposición Fiscal</label>
             <input type="String" id='apellidos_nombres_detenidos_producto' name='apellidos_nombres_detenidos_producto' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('apellidos_nombres_detenidos_producto', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  letras y comas';
+                }
+              })}
+            />
+           {errors.apellidos_nombres_detenidos_producto && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.apellidos_nombres_detenidos_producto.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° Boletas Solicitadas</label>
             <input type="Number" id='no_boletas_solicitadas' name='no_boletas_solicitadas' onChange={handleChange}
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('no_boletas_solicitadas', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.no_boletas_solicitadas && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_boletas_solicitadas.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Detenidos producto de la Investigación</label>
             <input type="Number" id='no_detenidos_producto_investigacion' name='no_detenidos_producto_investigacion' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('no_detenidos_producto_investigacion', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.no_detenidos_producto_investigacion && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_detenidos_producto_investigacion.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Allanamientos</label>
             <input type="Number" id='allanamientos_numero' name='allanamientos_numero' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('allanamientos_numero', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.allanamientos_numero && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.allanamientos_numero.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Recuperaión de Bienes</label>
             <input type="Number" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange} 
-                          className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('recuperacion_bienes_evidencias', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.recuperacion_bienes_evidencias && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_bienes_evidencias.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Recuperación de Automotores</label>
             <input type="Number" id='recuperacion_automotores' name='recuperacion_automotores' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('recuperacion_automotores', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.recuperacion_automotores && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_automotores.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Recuperación Otros</label>
             <input type="Number" id='recuperacion_otros' name='recuperacion_otros' onChange={handleChange}
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('recuperacion_otros', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.recuperacion_otros && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_otros.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Notificaciones</label>
             <input type="Number" id='notificaciones' name='notificaciones' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('notificaciones', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.notificaciones && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.notificaciones.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Citaciones</label>
             <input type="Number" id='citaciones' name='citaciones' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('citaciones', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.citaciones && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.citaciones.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Peritajes</label>
             <input type="Number" id='peritajes' name='peritajes' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('peritajes', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.peritajes && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.peritajes.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Traslados</label>
             <input type="Number" id='traslados' name='traslados' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('traslados', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.traslados && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.traslados.message}</span>
+          )}
           </div>
 
 
@@ -824,27 +1269,82 @@ const handleChange = (e) => {
           <div className='flex mb-3'>
             <label className='mr-7'>Causas de Incumplimineto de la Investigación</label>
             <input type="String" id='causas_incumplimiento_investigacion' name='causas_incumplimiento_investigacion' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('causas_incumplimiento_investigacion', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  Letras y comas';
+                }
+              })}
+            />
+           {errors.causas_incumplimiento_investigacion && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.causas_incumplimiento_investigacion.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Nombre de los Detenidos Producto de la Investigación</label>
             <input type="String" id='nombre_detenidos_producto_investigacion' name='nombre_detenidos_producto_investigacion' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"  
+              {...register('nombre_detenidos_producto_investigacion', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  Letras y comas';
+                }
+              })}
+            />
+           {errors.nombre_detenidos_producto_investigacion && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.nombre_detenidos_producto_investigacion.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Observaciones</label>
             <input type="String" id='observaciones' name='observaciones' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('observaciones', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  Letras y comas';
+                }
+              })}
+            />
+           {errors.observaciones && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.observaciones.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Cantidad Sustraida</label>
             <input type="Number" id='cantidad_sustraida' name='cantidad_sustraida' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('cantidad_sustraida', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                }
+              })}
+            />
+           {errors.cantidad_sustraida && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.cantidad_sustraida.message}</span>
+          )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Entidad Financiera</label>
             <input type="String" id='entidad_financiera' name='entidad_financiera' onChange={handleChange}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              {...register('entidad_financiera', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener  Letras y comas';
+                }
+              })}
+            />
+           {errors.entidad_financiera && (
+            <span className="text-red-500 text-sm ml-2 mt-2">{errors.entidad_financiera.message}</span>
+          )}
           </div>
 
 
