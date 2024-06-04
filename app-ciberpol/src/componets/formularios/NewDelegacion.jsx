@@ -297,13 +297,25 @@ const handleChange = (e) => {
   setForm({...form, [name]: uppercaseValue });
 };
 
-const { register, handleSubmit, formState: { errors } } = useForm();
+const { register, handleSubmit, watch,formState: { errors } } = useForm();
 
+const numero_investigacion_previa = watch('numero_investigacion_previa');
+  const numero_instruccion_fiscal = watch('numero_instruccion_fiscal');
 
   const onSubmit = async(data) => { 
       //e.preventDefault()
         console.log("antes", data)
         try {
+          if (!numero_investigacion_previa && !numero_instruccion_fiscal) {
+            setMensaje({ respuesta: 'Debe llenar alguno de los dos campos de Investigación Previa o Instrucción Fiscal para registrar la Delegación', tipo: false });
+            setTipo(false);
+            setOpenDialog(true);
+            setTimeout(() => {
+              setOpenDialog(false);
+            }, 4000);
+            return;
+          }
+          
           const token = localStorage.getItem('token')
           const url = `${import.meta.env.VITE_BACKEND_URL}/registro/delegacion`
           //conversion de datos 
@@ -350,7 +362,7 @@ const { register, handleSubmit, formState: { errors } } = useForm();
             setOpenDialog(false);
               setForm
           }, 4000);
-      }
+        }
       
   }
 
@@ -372,18 +384,10 @@ const { register, handleSubmit, formState: { errors } } = useForm();
               name='numero_investigacion_previa'
               onChange={handleChange}
               {...register('numero_investigacion_previa', {
-                required: 'El campo Investigación Previa es obligatorio',
-                maxLength: {
-                  value: 15,
-                  message: 'El campo Investigación Previa debe tener 15 caracteres'
-                },
-                minLength: {
-                  value: 15,
-                  message: 'El campo Investigación Previa debe tener 15 caracteres'
-                },
-                pattern: {
-                  value: /^[0-9]*$/,
-                  message: 'Este campo solo puede contener números'
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  if (value.length < 5 || value.length > 50) return 'El campo debe tener entre 5 y 50 caracteres';
+                  return true; // Si la longitud está dentro del rango, no hay problemas
                 }
               })}
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
@@ -399,16 +403,11 @@ const { register, handleSubmit, formState: { errors } } = useForm();
               name='numero_instruccion_fiscal'
               onChange={handleChange}
               {...register('numero_instruccion_fiscal', {
-                required: 'El campo Instrucción Fiscal es obligatorio',
-                maxLength: {
-                  value: 50,
-                  message: 'El campo Instrucción Fiscal debe tener maximo 15 caracteres'
-                },
-                minLength: {
-                  value: 5,
-                  message: 'El campo Instrucción Fiscal debe minimo 5 caracteres'
-                },
-
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  if (value.length < 5 || value.length > 50) return 'El campo debe tener entre 5 y 50 caracteres';
+                  return true; // Si la longitud está dentro del rango, no hay problemas
+                }
               })}
               className="block w-200 rounded-md border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 uppercase" />
             {errors.numero_instruccion_fiscal && (
