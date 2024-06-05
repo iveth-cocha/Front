@@ -1,37 +1,72 @@
-import React from 'react'
-import { VscOpenPreview } from 'react-icons/vsc'
-import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import React, { useEffect, useState } from 'react'
+
 
 export const TablaActualizaciones = () => {
-    const navigate = useNavigate()
+  const [ingresos, setIngresos] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [globalFilterValue, setGlobalFilterValue] = useState('');
+
+  const listarMapeo = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const url = `${import.meta.env.VITE_BACKEND_URL}/mapeos`;
+      const options = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const respuesta = await axios.get(url, options);
+      setIngresos(respuesta.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    listarMapeo();
+  }, []);
+
+  const tableStyle = {
+    header: {
+      backgroundColor: '#203C6B',
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold', 
+        alignItems:'center',
+        
+    }
+};
     
   return (
-    <table className='w-full mt-5 table-auto shadow-lg  bg-white'>
-            <thead className='bg-sky-950 text-white'>
-                <tr>
-                    <th className='p-2'>Usuario</th>
-                    <th className='p-2'>Rol</th>                    
-                    <th className='p-2'>CI</th>
-                    <th className='p-2'>N° Investigación Previa</th>
-                    <th className='p-2'>Detalle</th>
-                    
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr className="border-b hover:bg-gray-300 text-center">
-                    <td>nombre</td>
-                    <td>registrador</td>
-                    <td>1700000001</td>
-                    <td>00023</td>
-                    
-                    <td className='py-2 text-center'>
-                        <VscOpenPreview  className="h-7 w-7 text-blue-800 cursor-pointer inline-block mr-2" onClick={() => navigate(`/mapeo/detalleMapeo`)} />
+    <div className=" flex justify-center">
+    <DataTable
+      value={ingresos}
+      sortField="id"
+      sortOrder={1} // Ascendente
+      paginator
+      rows={10}
+      dataKey="id"
+      filterDisplay="row"
+      loading={loading}
+      
+      emptyMessage="No Existen Ingresos en el Sistema"
+        style={tableStyle.header}
 
-                        
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    >
+      <Column className="text-center w-10 text-black bg-white my-20 border-b border-r border-slate-200 " field="id" header="N° " />
+      
+      <Column className="text-center w-10 text-black bg-white border-b  border-r border-slate-200" field="grado" header="Grado" />
+      <Column className="text-center w-64 text-black bg-white border-b  border-r border-slate-200" header="Agente" field="nombreAgente" style={{ minWidth: '8rem' }} />
+      <Column className="text-center w-72 text-black bg-white my-20 border-b border-r border-slate-200 " field="Rol" header="Rol" />
+      <Column className="text-center w-64 text-black bg-white border-b  border-r border-slate-200" header="Fecha y Hora de Ingreso" field="hora_entrada" style={{ minWidth: '8rem' }} />
+      <Column className="text-center w-64 text-black bg-white border-b  border-r border-slate-200" header="Fecha y Hora de Salida" field="hora_salida" style={{ minWidth: '8rem' }} />
+
+    </DataTable>
+  </div>
   )
 }
