@@ -32,6 +32,7 @@ const Login = () => {
       localStorage.setItem('grado', respuesta.data.grado);
       localStorage.setItem('nombre', respuesta.data.nombre);
       localStorage.setItem('Rol', respuesta.data.Rol);
+      localStorage.setItem('tokenSession', respuesta.data.tokenSession);
 
       if (respuesta.data.Rol === 'Visualizador') {
         localStorage.setItem('accessBlocked', 'true');
@@ -39,7 +40,7 @@ const Login = () => {
         localStorage.removeItem('accessBlocked');
       }
 
-      console.log('Usuario almacenado en localStorage:', respuesta.data.grado + respuesta.data.nombre + respuesta.data.Rol);
+      console.log('Usuario almacenado en localStorage:', respuesta.data.grado + respuesta.data.nombre + respuesta.data.Rol+ respuesta.data.tokenSession); 
 
       setAuth(respuesta.data);
       navigate('/delegaciones');

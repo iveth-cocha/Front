@@ -1,7 +1,9 @@
-import {React,useContext } from 'react';
+import {React,useContext, useEffect, useState } from 'react';
 import { FaRegUserCircle } from "react-icons/fa";
-import { Link, Outlet, useLocation, Navigate, } from 'react-router-dom';
+import { Link, Outlet, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import AuthContext from '../componets/context/AuthProvider';
+import axios from 'axios';
+
 
 
 
@@ -21,11 +23,38 @@ const Panel = () => {
     const nombre = localStorage.getItem('nombre');
     const rol = localStorage.getItem('Rol');
 
-    const handleLogout = () => {
+    const navigate = useNavigate();
+    const [tokenS, setTokenS] = useState(null);
+    const [mensaje, setMensaje] = useState({});
+  
+    const handleLogout = async () => {
+        const consultarToken = async () => {
+            try {
+                const tokenSession = localStorage.getItem('tokenSession');
+                console.log("token s", tokenSession); // Verifica que el token se muestra en la consola
+                const url = `${import.meta.env.VITE_BACKEND_URL}/logout/${tokenSession}`;
+                const options = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                };
+
+                const respuesta = await axios.post(url, {}, options);
+                console.log("respuesta solicitud", respuesta);
+                setTokenS(respuesta.data.msg);
+            } catch (error) {
+                setMensaje({ respuesta: error?.response?.data?.msg, tipo: false });
+            }
+        };
+
+        await consultarToken();
+        
         localStorage.removeItem('token');
         localStorage.removeItem('grado');
         localStorage.removeItem('nombre');
         localStorage.removeItem('Rol');
+        localStorage.removeItem('tokenSession');
+        navigate('/');
     };
 
 
@@ -86,7 +115,7 @@ const Panel = () => {
             <div className='flex-1 flex flex-col justify-between h-screen'>
                 <div className='bg-gradient-to-r from-blue-950 to-sky-950 py-2 flex md:justify-end items-center gap-5 justify-center'>
                     <div>
-                        <Link to='/' onClick={handleLogout}  className="text-white mr-3 text-md block hover:bg-red-900 text-center bg-red-800 px-4 py-1 rounded-lg">Salir</Link>
+                        <button  onClick={handleLogout}  className="text-white mr-3 text-md block hover:bg-red-900 text-center bg-red-800 px-4 py-1 rounded-lg">Salir</button>
                     </div>
                 </div>
                 <div className='overflow-y-scroll h-screen bg-cover bg-center p-10' style={{backgroundImage: `url('/fondo_base.jpg')`}}>
