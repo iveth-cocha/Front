@@ -591,7 +591,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <input type="Date" id='fecha_infraccion_delito' name='fecha_infraccion_delito' onChange={handleChange}
               className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('fecha_infraccion_delito', {
-                required: 'El campo Fecha de la Infracción/Delitodebe estar lleno ',
+                required: 'El campo Fecha de la Infracción/Delito debe estar lleno ',
               })}
             />
             {errors.fecha_infraccion_delito && (
@@ -655,9 +655,10 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <input type="String" id='apellidos_nombres_sospechoso' name='apellidos_nombres_sospechoso' onChange={handleChange} 
               className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
               {...register('apellidos_nombres_sospechoso', {
+
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  if (value.length < 2) return 'El campo debe tener al menos 2 caracteres'; // Verifica que tenga al menos 2 caracteres
+                  if (value.length < 5) return 'El campo debe tener al menos 5 caracteres'; // Verifica que tenga al menos 2 caracteres
                   const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para letras y comas
                   return regex.test(value) || 'El campo solo puede contener letras y comas';
                 }
@@ -745,12 +746,12 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <input type="String" id='apellidos_nombres_fiscal' name='apellidos_nombres_fiscal' onChange={handleChange} 
               className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 w-72" 
               {...register('apellidos_nombres_fiscal', {
-                validate: value => {
-                  if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  if (value.length < 5) return 'El campo debe tener al menos 2 caracteres'; // Verifica que tenga al menos 2 caracteres
-                  const regex = /^[a-zA-Z\s]*$/; // Expresión regular para letras y comas
-                  return regex.test(value) || 'El campo solo puede contener letras';
-                }
+                required: 'Debe proporcionar el nombre del fiscal',
+                pattern: {
+                  value: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
+                  message: 'El nombre solo puede contener letras'
+              }
+                
               })}
             />
             {errors.apellidos_nombres_fiscal && (
@@ -759,7 +760,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           </div>
           <div className='flex place-content-center mb-3' >
             <div className='flex mr-5 '>
-              <label className='mr-2 mt-5'>Buscar Fiscalia</label>
+              <label className='mr-2 mt-5'>Buscar Fiscalía</label>
               <Stack spacing={2} sx={{ width: 300 }}>
                 <Autocomplete
                   id="fiscaliaNombre"
@@ -767,9 +768,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                   options={fiscaliaNom}
                   onChange={handleFiscaliaChange} // Usamos el mismo manejador para la fiscalía
                   renderInput={(params) => <TextField {...params} label="Fiscalía Nombre" 
+                  {...register('fiscaliaNombre', {
+                    required: 'Seleccione el nombre de una Fiscalía',
+                  })} 
                   />}
               />
-            
+              {errors.fiscaliaNombre && (
+                <span className="text-red-500 text-sm ml-2">{errors.fiscaliaNombre.message}</span>
+              )}  
               </Stack>
             </div>
 
@@ -786,6 +792,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                     if (!value) return true; // Si el campo está vacío, no se activa la validación
                     const regex = /^[0-9]+$/; // Expresión regular para números
                     return regex.test(value) || 'El campo solo puede contener números';
+                   
                   }
                 })}
               />
@@ -814,10 +821,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <input type="Date" id='fecha_delegacion' name='fecha_delegacion' onChange={handleChange}
               className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
               {...register('fecha_delegacion', {
-                validate: value => {
-                  if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  
-                }
+                required: 'El campo Fecha de la Delegacion debe estar llena ',
               })}
             />
            {errors.fecha_delegacion && (
@@ -829,10 +833,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <input type="Date" id='fecha_recepcion_pj' name='fecha_recepcion_pj' onChange={handleChange} 
               className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
               {...register('fecha_recepcion_pj', {
-                validate: value => {
-                  if (!value) return true; // Si el campo está vacío, no se activa la validación
-      
-                }
+                required: 'El campo Fecha de  Recepción en PJ debe estar lleno ',
               })}
             />
            {errors.fecha_recepcion_pj && (
@@ -844,10 +845,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <input type="Date" id='fecha_recepcion_agente_investigador' name='fecha_recepcion_agente_investigador' onChange={handleChange} 
               className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
               {...register('fecha_recepcion_agente_investigador', {
-                validate: value => {
-                  if (!value) return true; // Si el campo está vacío, no se activa la validación
-      
-                }
+                required: 'El campo Fecha de Recepción por parte del Agente Investigador debe estar lleno ',
               })}
             />
            {errors.fecha_recepcion_agente_investigador && (
@@ -860,11 +858,11 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <input type="text" id='no_oficio_recibe_diligencia' name='no_oficio_recibe_diligencia' onChange={handleChange} 
               className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
               {...register('no_oficio_recibe_diligencia', {
-                validate: value => {
-                  if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z0-9,]*$/; // Expresión regular para números
-                  return regex.test(value) || 'El campo solo puede contener números y letras';
-                }
+                required: 'Este campo debe estar lleno ',
+                minLength: {
+                  value: 10,
+                  message: 'El texto debe tener al menos 10 caracteres'
+              }
               })}
             />
            {errors.no_oficio_recibe_diligencia && (
@@ -892,10 +890,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <input type="String" id='numero_articulo' name='numero_articulo' onChange={handleChange}
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
               {...register('numero_articulo', {
-                validate: value => {
-                  if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[0-9,\s]+$/; // Expresión regular para números
-                  return regex.test(value) || 'El campo solo puede contener números y comas';
+                required: 'Este campo es obligatorio ',
+                minLength: {
+                  value: 1,
+                  message: 'El texto debe tener al menos 1 caracter'
+                },  
+                pattern: {
+                value: /^[0-9,\s-]+$/,
+                message: 'El campo solo puede contener números, guiones y comas'
                 }
               })}
             />
@@ -915,8 +917,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
               {...register('articulos_cumplidos', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[0-9,\s]+$/; // Expresión regular para números
-                  return regex.test(value) || 'El campo solo puede contener números y comas';
+                  const regex = /^[0-9,\s-]+$/; // Expresión regular para números
+                  return regex.test(value) || 'El campo solo puede contener números, guiones y comas';
                 }
               })}
             />
@@ -970,8 +972,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
               {...register('numero_oficio_descargo', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z0-9,]*$/; // Expresión regular para números
-                  return regex.test(value) || 'El campo solo puede contener números y letras';
+                  const regex = /^[a-zA-Z0-9-]+$/; // Expresión regular para letras, números y guiones
+                  if (!regex.test(value)) {
+                    return 'El campo solo puede contener números, letras y guiones';
+                  }
+                  if (value.length < 23) {
+                    return 'El campo debe tener al menos 23 caracteres';
+                  }
+                  return true;
                 }
               })}
             />
@@ -1140,7 +1148,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           )}
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 '>Recuperaión de Bienes o evidencias</label>
+            <label className='mr-7 text-blue-600 '>Recuperaión de Bienes o evidencias</label>
             <input type="Number" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange} 
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
               {...register('recuperacion_bienes_evidencias', {
@@ -1263,6 +1271,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='informe_descargo' name='informe_descargo' onChange={handleChange}  >
               <option value="">-- Seleccione una opción-- </option>
               <option value="INFORME INVESTIGATIVO">INFORME INVESTIGATIVO</option>
+              <option value="INFORME DE CUMPLIMIENTO">INFORME DE CUMPLIMIENTO</option>
               <option value="PARTE DE DESCARGO">PARTE DE DESCARGO</option>
             </select>
           </div>
