@@ -697,7 +697,7 @@ const handleChange = (e) => {
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 '>N° de Recuperaión de Bienes</label>
+            <label className='mr-7 text-blue-400'>N° de Recuperaión de Bienes o evidencias</label>
             <input type="Number" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange} value={form.recuperacion_bienes_evidencias}
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
