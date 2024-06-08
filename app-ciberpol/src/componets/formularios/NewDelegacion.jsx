@@ -648,6 +648,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Sospechoso</h1>
+          <h2 className='text-blue-800  font-medium italic mb-5 text-center '>Llenar esta sección si existe en la boleta o en el proceso de Descargo</h2>
 
           <div className='flex mb-3'>
             <label className='mr-7'>Apellidos y Nombres del Detenido o Sospechoso</label>
@@ -905,7 +906,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
         </div>
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
-          <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>boleta</h1>
+          <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Cumplimiento</h1>
 
           <div className='flex mb-3'>
             <label className='mr-7'>¿Qué art. cumplió dentro del plazo?</label>
@@ -1055,7 +1056,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
         </div>
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
-          <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>observaciones</h1>
+          <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Resultados de operativos</h1>
 
           <div className='flex mb-3'>
             <label className='mr-7 '>Nombre del Requerido en la Boleta</label>
@@ -1139,7 +1140,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           )}
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 '>N° de Recuperaión de Bienes</label>
+            <label className='mr-7 '>Recuperaión de Bienes o evidencias</label>
             <input type="Number" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange} 
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
               {...register('recuperacion_bienes_evidencias', {
