@@ -393,7 +393,7 @@ const handleChange = (e) => {
               name='grado_agente' onChange={handleChange}
               disabled
               value={selectedAgente && agenteGrado[selectedAgente] || form.grado_agente}
-              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
+              className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-24'
             />
 
           </div>
@@ -406,33 +406,33 @@ const handleChange = (e) => {
                 <label className='mr-7 pt-5'>Cod Distrito:</label>
                 <input 
                   disabled value={form.cod_distrito}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md " />
               </div>
 
               <div className='flex flex-row mb-2'>
-                <label className='mr-7 pt-5'>Distrito:</label>
+                <label className='mr-16 pt-5'>Distrito:</label>
                 <input 
                   disabled value={form.distrito}
                   className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
               </div>
               <div className='flex flex-row mb-2'>
-                <label className='mr-7 pt-5'>Zona:</label>
+                <label className='mr-20 pt-5'>Zona:</label>
                 <input 
                   disabled value={form.zona}
                   className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
               </div>
               <div className='flex flex-row mb-2'>
-                <label className='mr-7 pt-5'>Canton:</label>
+                <label className='mr-16 pt-5'>Canton:</label>
                 <input 
                   disabled value={form.canton}
                   className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
               </div>
              
               <div className='flex flex-row mb-2'>
-                <label className='mr-7 pt-5'>Provincia:</label>
+                <label className='mr-10 pt-5'>Provincia:</label>
                 <input 
                   disabled value={form.provincia}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md ml-2" />
               </div>
 
         </div>
@@ -444,24 +444,24 @@ const handleChange = (e) => {
             <label className='mb-2 mr-3'>Delito Tipificado en Delegación</label>
             <input 
                   disabled value={form.delito_tipificado_delegacion}
-                  className="text-md w-96 text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-2 rounded-md w-96" />
             </div> 
             <div className='flex mb-3'> 
-            <label className='mb-2 mr-3'>Tipo Delito:</label>
+            <label className='mb-2 mr-12'>Tipo Delito:</label>
             <input 
                   disabled value={form.tipo_delito}
-                  className="text-md w-96 text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md w-96 text-black border-none bg-gray-200  p-2 rounded-md" />
             </div> 
             <div className='flex mb-3'> 
             <label className='mb-2 mr-3'>Tipo Desgregado:</label>
             <input 
                   disabled value={form.delito_desagregacion_policia_judicial}
-                  className="text-md w-96 text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md w-96 text-black border-none bg-gray-200  p-2 rounded-md" />
             </div>      
             
 
           <div className='flex mb-3'>
-            <label className='mr-7 text-red-600'>Fecha de Infracción o Delito</label>
+            <label className='mr-7 '>Fecha de Infracción o Delito</label>
             <input 
                   disabled value={form.fecha_infraccion_delito}
                   className="text-md  text-black border-none bg-gray-200  p-1 rounded-md" />
@@ -526,36 +526,19 @@ const handleChange = (e) => {
 
           <div className='flex mb-3'>
             <label className='mr-7'>Apellidos y Nombres del Fiscal</label>
-            <input type="String" id='apellidos_nombres_fiscal' name='apellidos_nombres_fiscal' onChange={handleChange} value={form.apellidos_nombres_fiscal}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+            <input 
+                  disabled value={form.apellidos_nombres_fiscal}
+                  className="text-md text-black border-none bg-gray-200  p-2 rounded-md" />
           </div>
 
-        <Stack spacing={2} sx={{ width: 300 }}>
-            <Autocomplete
-              id="free-solo"
-              freeSolo
-              options={fiscaliaNom}
-              onChange={handleFiscaliaChange} // Usamos el mismo manejador para la fiscalía
-              renderInput={(params) => <TextField {...params} label="Fiscalía Nombre" />}
-            />
-
-            <div className='flex mb-3'>
-              <label className='mr-4'>N° Fiscalía:</label>
-              <input
-                type="number"
-                value={numeroFiscalia}
-                onChange={handleNumeroFiscaliaChange} // Usamos el mismo manejador para el número de fiscalía
-                className="block w-15 h-10 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
-              />
-            </div>
-          </Stack>
+        
           <div className='flex mb-3'>
               <label className='mr-4'>Unidad Especializada de Fiscalía:</label>
               
               <input
                 type="text" id='unidad_especializada' name='unidad_especializada'
                 disabled
-                value={`${selectedFiscalia} - ${numeroFiscalia}` || form.unidad_especializada}
+                value={ form.unidad_especializada}
 
                 className="text-md w-96 text-black border-none bg-gray-200  p-1 rounded-md"/>
             </div>
@@ -563,26 +546,29 @@ const handleChange = (e) => {
 
 
           <div className='flex mb-3'>
-            <label className='mr-11'>Fecha de la Delegación</label>
-            <input type="Date" id='fecha_delegacion' name='fecha_delegacion' onChange={handleChange} value={form.fecha_delegacion}
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+            <label className='mr-12'>Fecha de la Delegación</label>
+            <input 
+                  disabled value={form.fecha_delegacion}
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Fecha de Recepción en CIBERPOL</label>
-            <input type="Date" id='fecha_recepcion_pj' name='fecha_recepcion_pj' onChange={handleChange} value={form.fecha_recepcion_pj}
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+            <input 
+                  disabled value={form.fecha_recepcion_pj}
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7'>Fecha de Recepción por parte del Agente Investigador </label>
-            <input type="Date" id='fecha_recepcion_agente_investigador' name='fecha_recepcion_agente_investigador' onChange={handleChange} value={form.fecha_recepcion_agente_investigador}
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+            <label className='mr-5'>Fecha de Recepción por parte del Agente Investigador </label>
+            <input 
+                  disabled value={form.fecha_recepcion_agente_investigador}
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
           </div>
 
           <div className='flex mb-3'>
             <label className='mr-7'>N° de Oficio con la que recibe la Diligencia el Agente</label>
             <input 
                   disabled value={form.no_oficio_recibe_diligencia}
-                  className="text-md  text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Plazo Otrogado (Días)</label>
@@ -597,7 +583,7 @@ const handleChange = (e) => {
         </div>
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
-          <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>boleta</h1>
+          <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Cumplimiento</h1>
 
           <div className=' mb-3'>
             <label className='mr-7'>¿Qué art. cumplió dentro del plazo?</label>
@@ -682,7 +668,7 @@ const handleChange = (e) => {
         </div>
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
-          <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>observaciones</h1>
+          <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Resultados de Operativos</h1>
 
           <div className='flex mb-3'>
             <label className='mr-7 '>Nombre del Requerido en la Boleta</label>
@@ -757,6 +743,7 @@ const handleChange = (e) => {
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='informe_descargo' name='informe_descargo' onChange={handleChange} value={form.informe_descargo} >
               <option value="">-- Seleccione una opción-- </option>
               <option value="INFORME INVESTIGATIVO">INFORME INVESTIGATIVO</option>
+              <option value="INFORME DE CUMPLIMIENTO">INFORME DE CUMPLIMIENTO</option>
               <option value="PARTE DE DESCARGO">PARTE DE DESCARGO</option>
             </select>
           </div>
