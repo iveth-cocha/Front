@@ -11,7 +11,7 @@ const Registro = () => {
         <div className='flex items-center'>
         <BiCaretLeftCircle  className='text-4xl text-sky-950'
         onClick={() => navigate(`/usuarios`)}/>
-        <h1 className='font-black text-4xl text-gray-500 uppercase'>Registrar Nuvo Usuario</h1>
+        <h1 className='font-black text-4xl text-gray-500 uppercase'>Registrar Nuevo Usuario</h1>
         
       </div>
       <hr className='my-4 border-sky-950  '/>
