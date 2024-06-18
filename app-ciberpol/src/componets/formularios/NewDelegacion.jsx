@@ -1,4 +1,4 @@
-import React ,{ useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 
 
 const NewDelegacion = () => {
-  
+
 
   const navigate = useNavigate();
   const [mensaje, setMensaje] = useState({})
@@ -34,7 +34,7 @@ const NewDelegacion = () => {
     tipo_delito: "",
     delito_tipificado_delegacion: "",
     delito_desagregacion_policia_judicial: "",
-    fecha_infraccion_delito:  "", //ver formato fecha
+    fecha_infraccion_delito: "", //ver formato fecha
     apellidos_nombres_victima: "",
     sexo_victima: "",
     edad_victima: null,
@@ -45,8 +45,8 @@ const NewDelegacion = () => {
     placa_vehiculo_involucrado: "",
     apellidos_nombres_fiscal: "",
     unidad_especializada: "",
-    fecha_delegacion:  "", //ver formato fecha
-    fecha_recepcion_pj:  "", //ver formato fecha
+    fecha_delegacion: "", //ver formato fecha
+    fecha_recepcion_pj: "", //ver formato fecha
     fecha_recepcion_agente_investigador: "", //ver formato fecha
     no_oficio_recibe_diligencia: "",
     plazo_otorgado_dias: null,
@@ -83,53 +83,53 @@ const NewDelegacion = () => {
     entidad_financiera: ""
   })
   const [openDialog, setOpenDialog] = useState(false);
-  
 
- 
+
+
 
   const [agenteNom, setAgenteNom] = useState([]);
-    const [agenteGrado, setAgenteGrado] = useState({});
-    const [selectedAgente, setSelectedAgente] = useState('');
+  const [agenteGrado, setAgenteGrado] = useState({});
+  const [selectedAgente, setSelectedAgente] = useState('');
 
-    // Efecto para obtener nombres de agentes
-    useEffect(() => {
-        const agentesNombres = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const url = `${import.meta.env.VITE_BACKEND_URL}/agentes`;
-                const options = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`
-                    }
-                };
-                const respuesta = await axios.get(url, options);
-                const nombresAgentes = respuesta.data.map(agentes => {
-                    const nombre = `${agentes.Apellido_Nombre}`;
-                    const grado = agentes.Grado;
-                    setAgenteGrado(prevState => ({
-                        ...prevState,
-                        [nombre]: grado
-                    }));
-                    return nombre;
-                });
-                setAgenteNom(nombresAgentes);
-            } catch (error) {
-                // Manejo de errores
-            }
+  // Efecto para obtener nombres de agentes
+  useEffect(() => {
+    const agentesNombres = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const url = `${import.meta.env.VITE_BACKEND_URL}/agentes`;
+        const options = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
         };
+        const respuesta = await axios.get(url, options);
+        const nombresAgentes = respuesta.data.map(agentes => {
+          const nombre = `${agentes.Apellido_Nombre}`;
+          const grado = agentes.Grado;
+          setAgenteGrado(prevState => ({
+            ...prevState,
+            [nombre]: grado
+          }));
+          return nombre;
+        });
+        setAgenteNom(nombresAgentes);
+      } catch (error) {
+        // Manejo de errores
+      }
+    };
 
-        agentesNombres();
-    }, []);
+    agentesNombres();
+  }, []);
 
-    const handlenomAgenteSelect = (event, value) => {
-      setSelectedAgente(value);
-      const gradoSeleccionado = agenteGrado[value] || '';
-      setForm({
-          ...form,
-          apellidos_nombres_agente: value,
-          grado_agente: gradoSeleccionado
-      });
+  const handlenomAgenteSelect = (event, value) => {
+    setSelectedAgente(value);
+    const gradoSeleccionado = agenteGrado[value] || '';
+    setForm({
+      ...form,
+      apellidos_nombres_agente: value,
+      grado_agente: gradoSeleccionado
+    });
   };
 
   // Estado para localidades
@@ -139,55 +139,55 @@ const NewDelegacion = () => {
 
   // Efecto para obtener localidades
   useEffect(() => {
-      const obtenerLocalidad = async () => {
-          try {
-              const token = localStorage.getItem('token');
-              const url = `${import.meta.env.VITE_BACKEND_URL}/localizaciones`;
-              const options = {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      Authorization: `Bearer ${token}`
-                  }
-              };
-              const respuesta = await axios.get(url, options);
-              const localidades = respuesta.data;
-
-              const distritosMap = localidades.reduce((acc, localidad) => {
-                  const localidadesCom = `${localidad.cod_distrito} -${localidad.subzona}- ${localidad.distrito} - ${localidad.zona}`;
-                  acc[localidadesCom] = {
-                      id: localidad.id,
-                      cod_distrito: localidad.cod_distrito,
-                      distrito: localidad.distrito,
-                      zona: localidad.zona,
-                      canton: localidad.canton,
-                      subzona: localidad.subzona,
-                  };
-                  return acc;
-              }, {});
-
-              setDistrito(distritosMap);
-              setCodDistrito(Object.keys(distritosMap));
-          } catch (error) {
-              console.error('Error al obtener las localidades', error);
+    const obtenerLocalidad = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const url = `${import.meta.env.VITE_BACKEND_URL}/localizaciones`;
+        const options = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
           }
-      };
+        };
+        const respuesta = await axios.get(url, options);
+        const localidades = respuesta.data;
 
-      obtenerLocalidad();
+        const distritosMap = localidades.reduce((acc, localidad) => {
+          const localidadesCom = `${localidad.cod_distrito} -${localidad.subzona}- ${localidad.distrito} - ${localidad.zona}`;
+          acc[localidadesCom] = {
+            id: localidad.id,
+            cod_distrito: localidad.cod_distrito,
+            distrito: localidad.distrito,
+            zona: localidad.zona,
+            canton: localidad.canton,
+            subzona: localidad.subzona,
+          };
+          return acc;
+        }, {});
+
+        setDistrito(distritosMap);
+        setCodDistrito(Object.keys(distritosMap));
+      } catch (error) {
+        console.error('Error al obtener las localidades', error);
+      }
+    };
+
+    obtenerLocalidad();
   }, []);
 
   // Manejador de selección de localidad
   const handleLocalizacionSelect = (event, value) => {
-      setSelectedLocalidad(value);
-      const localidadSeleccionada = distrito[value];
-      setForm({
-          ...form,
-          cod_distrito: localidadSeleccionada?.cod_distrito || '',
-          distrito: localidadSeleccionada?.distrito || '',
-          zona: localidadSeleccionada?.zona || '',
-          canton: localidadSeleccionada?.canton || '',
-          provincia: localidadSeleccionada?.subzona || ''
-      });
-      console.log("marets",setSelectedLocalidad(value))
+    setSelectedLocalidad(value);
+    const localidadSeleccionada = distrito[value];
+    setForm({
+      ...form,
+      cod_distrito: localidadSeleccionada?.cod_distrito || '',
+      distrito: localidadSeleccionada?.distrito || '',
+      zona: localidadSeleccionada?.zona || '',
+      canton: localidadSeleccionada?.canton || '',
+      provincia: localidadSeleccionada?.subzona || ''
+    });
+    console.log("marets", setSelectedLocalidad(value))
   };
 
   // Estado para delitos
@@ -198,181 +198,187 @@ const NewDelegacion = () => {
 
   // Efecto para obtener delitos
   useEffect(() => {
-      const obtenerDelitos = async () => {
-          try {
-              const token = localStorage.getItem('token');
-              const url = `${import.meta.env.VITE_BACKEND_URL}/delitos`;
-              const options = {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      Authorization: `Bearer ${token}`
-                  }
-              };
-              const respuesta = await axios.get(url, options);
-              const delitos = respuesta.data.map(delito => {
-                  const nombreDelito = `${delito.delito}  `;
-                  const seccion = delito.seccion;
-                  setDelitoData(prevState => ({
-                      ...prevState,
-                      [nombreDelito]: {
-                          seccion: delito.seccion,
-                          delito: delito.delito
-                      }
-                  }));
-                  return nombreDelito;
-              });
-              setDelitoNom(delitos);
-          } catch (error) {
-            
-              console.error('Error al obtener las delitos', error);
+    const obtenerDelitos = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const url = `${import.meta.env.VITE_BACKEND_URL}/delitos`;
+        const options = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
           }
-      };
+        };
+        const respuesta = await axios.get(url, options);
+        const delitos = respuesta.data.map(delito => {
+          const nombreDelito = `${delito.delito}  `;
+          const seccion = delito.seccion;
+          setDelitoData(prevState => ({
+            ...prevState,
+            [nombreDelito]: {
+              seccion: delito.seccion,
+              delito: delito.delito
+            }
+          }));
+          return nombreDelito;
+        });
+        setDelitoNom(delitos);
+      } catch (error) {
 
-      obtenerDelitos();
+        console.error('Error al obtener las delitos', error);
+      }
+    };
+
+    obtenerDelitos();
   }, []);
   const handleDelitoSelect = (event, value) => {
     setSelectedDelito(value);
     const seccionSeleccionada = delitoData[value]?.seccion || '';
     const delitoSeleccionado = delitoData[value]?.delito || '';
     setForm({
-        ...form,
-        tipo_delito: seccionSeleccionada,
-        delito_tipificado_delegacion: delitoSeleccionado,
-        delito_desagregacion_policia_judicial: delitoSeleccionado
+      ...form,
+      tipo_delito: seccionSeleccionada,
+      delito_tipificado_delegacion: delitoSeleccionado,
+      delito_desagregacion_policia_judicial: delitoSeleccionado
     });
-};
+  };
 
-// Estado para fiscalías
-const [fiscaliaNom, setFiscaliaNom] = useState([]);
-const [selectedFiscalia, setSelectedFiscalia] = useState("");
-const [numeroFiscalia, setNumeroFiscalia] = useState("");
+  // Estado para fiscalías
+  const [fiscaliaNom, setFiscaliaNom] = useState([]);
+  const [selectedFiscalia, setSelectedFiscalia] = useState("");
+  const [numeroFiscalia, setNumeroFiscalia] = useState("");
 
-// Efecto para obtener fiscalías
-useEffect(() => {
+  // Efecto para obtener fiscalías
+  useEffect(() => {
     const obtenerFiscalias = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const url = `${import.meta.env.VITE_BACKEND_URL}/fiscalias`;
-            const options = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            };
-            const respuesta = await axios.get(url, options);
-            const nombresFiscalias = respuesta.data.map(fiscalias => fiscalias.N_fiscalia);
-            setFiscaliaNom(nombresFiscalias);
-        } catch (error) {
-            console.error('Error al obtener las fiscalias:', error);
-        }
+      try {
+        const token = localStorage.getItem('token');
+        const url = `${import.meta.env.VITE_BACKEND_URL}/fiscalias`;
+        const options = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        };
+        const respuesta = await axios.get(url, options);
+        const nombresFiscalias = respuesta.data.map(fiscalias => fiscalias.N_fiscalia);
+        setFiscaliaNom(nombresFiscalias);
+      } catch (error) {
+        console.error('Error al obtener las fiscalias:', error);
+      }
     };
 
     obtenerFiscalias();
-}, []);
+  }, []);
 
-// Manejador de cambio de fiscalía
-const handleFiscaliaChange = (event, value) => {
+  // Manejador de cambio de fiscalía
+  const handleFiscaliaChange = (event, value) => {
     setSelectedFiscalia(value);
     const unidadEspecializada = `${value || ''} - ${numeroFiscalia || ''}`;
     setForm({
-        ...form,
-        unidad_especializada: unidadEspecializada.trim()
+      ...form,
+      unidad_especializada: unidadEspecializada.trim()
     });
-};
+  };
 
-// Manejador de cambio de número de fiscalía
-const handleNumeroFiscaliaChange = (event) => {
+  // Manejador de cambio de número de fiscalía
+  const handleNumeroFiscaliaChange = (event) => {
     const { value } = event.target;
-    setNumeroFiscalia(value);
-    const unidadEspecializada = `${selectedFiscalia || ''} - ${value || ''}`;
-    setForm({
+    // Validar que el valor ingresado sean máximo 2 dígitos numéricos o esté vacío
+    const isValid = !value || /^\d{0,2}$/.test(value);
+    // Si la validación es correcta, actualizamos el estado del número de fiscalía
+    if (isValid) {
+      setNumeroFiscalia(value);
+      const unidadEspecializada = `${selectedFiscalia || ''} - ${value || ''}`;
+      setForm({
         ...form,
         unidad_especializada: unidadEspecializada.trim()
-    });
-};
+      });
+    }
+  };
+  
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  const uppercaseValue = value.toUpperCase();
-  setForm({...form, [name]: uppercaseValue });
-};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const uppercaseValue = value.toUpperCase();
+    setForm({ ...form, [name]: uppercaseValue });
+  };
 
-const { register, handleSubmit, watch,formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-const numero_investigacion_previa = watch('numero_investigacion_previa');
+  const numero_investigacion_previa = watch('numero_investigacion_previa');
   const numero_instruccion_fiscal = watch('numero_instruccion_fiscal');
 
-  const onSubmit = async(data) => { 
-      //e.preventDefault()
-        console.log("antes", data)
-        try {
-          if (!numero_investigacion_previa && !numero_instruccion_fiscal) {
-            setMensaje({ respuesta: 'Debe llenar alguno de los dos campos de Investigación Previa o Instrucción Fiscal para registrar la Delegación', tipo: false });
-            setTipo(false);
-            setOpenDialog(true);
-            setTimeout(() => {
-              setOpenDialog(false);
-            }, 4000);
-            return;
-          }
-          
-          const token = localStorage.getItem('token')
-          const url = `${import.meta.env.VITE_BACKEND_URL}/registro/delegacion`
-          //conversion de datos 
-          const formData = {
-            ...form,
-            ...data,
-            numero_investigacion_previa: data.numero_investigacion_previa !== null && data.numero_investigacion_previa !== '' ? parseInt(data.numero_investigacion_previa) : null,
-            edad_victima: data.edad_victima !== null && data.edad_victima !== '' ? parseInt(data.edad_victima) : null,
-            plazo_otorgado_dias: data.plazo_otorgado_dias !== null && data.plazo_otorgado_dias !== '' ? parseInt(data.plazo_otorgado_dias) : null,
-            versiones: data.versiones !== null && data.versiones !== '' ? parseInt(data.versiones) : null,
-            reconocimientos_lugar_hechos: data.reconocimientos_lugar_hechos !== null && data.reconocimientos_lugar_hechos !== '' ? parseInt(data.reconocimientos_lugar_hechos) : null,
-            no_boletas_solicitadas: data.no_boletas_solicitadas !== null && data.no_boletas_solicitadas !== '' ? parseInt(data.no_boletas_solicitadas) : null,
-            no_detenidos_producto_investigacion: data.no_detenidos_producto_investigacion !== null && data.no_detenidos_producto_investigacion !== '' ? parseInt(data.no_detenidos_producto_investigacion) : null,
-            allanamientos_numero: data.allanamientos_numero !== null && data.allanamientos_numero !== '' ? parseInt(data.allanamientos_numero) : null,
-            recuperacion_bienes_evidencias: data.recuperacion_bienes_evidencias !== null && data.recuperacion_bienes_evidencias !== '' ? parseInt(data.recuperacion_bienes_evidencias) : null,
-            recuperacion_automotores: data.recuperacion_automotores !== null && data.recuperacion_automotores !== '' ? parseInt(data.recuperacion_automotores) : null,
-            recuperacion_otros: data.recuperacion_otros !== null && data.recuperacion_otros !== '' ? parseInt(data.recuperacion_otros) : null,
-            notificaciones: data.notificaciones !== null && data.notificaciones !== '' ? parseInt(data.notificaciones) : null,
-            citaciones: data.citaciones !== null && data.citaciones !== '' ? parseInt(data.citaciones) : null,
-            peritajes: data.peritajes !== null && data.peritajes !== '' ? parseInt(data.peritajes) : null,
-            traslados: data.traslados !== null && data.traslados !== '' ? parseInt(data.traslados) : null,
-          };
-          console.log('ANTES DE ENVIAR:', formData);
-          const options={
-              headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${token}`
-              }
-          }
-          await axios.post(url,formData,options)
-          console.log('DESPUES:', formData);
-          setMensaje({ respuesta:"Delegación agregada Correctamente", tipo: true })
-          setTipo(tipo)
-          setOpenDialog(true);
-          setTimeout(() => {
-            setOpenDialog(false);
-              navigate('/delegaciones');
-          }, 3000);
-      } catch (error) {
-          setMensaje({ respuesta: error.response.data.msg, tipo: false })
-          setTipo(tipo)
-          setOpenDialog(true);
-          setTimeout(() => {
-            setOpenDialog(false);
-              setForm
-          }, 4000);
+  const onSubmit = async (data) => {
+    //e.preventDefault()
+    console.log("antes", data)
+    try {
+      if (!numero_investigacion_previa && !numero_instruccion_fiscal) {
+        setMensaje({ respuesta: 'Debe llenar alguno de los dos campos de Investigación Previa o Instrucción Fiscal para registrar la Delegación', tipo: false });
+        setTipo(false);
+        setOpenDialog(true);
+        setTimeout(() => {
+          setOpenDialog(false);
+        }, 4000);
+        return;
+      }
+
+      const token = localStorage.getItem('token')
+      const url = `${import.meta.env.VITE_BACKEND_URL}/registro/delegacion`
+      //conversion de datos 
+      const formData = {
+        ...form,
+        ...data,
+        numero_investigacion_previa: data.numero_investigacion_previa !== null && data.numero_investigacion_previa !== '' ? parseInt(data.numero_investigacion_previa) : null,
+        edad_victima: data.edad_victima !== null && data.edad_victima !== '' ? parseInt(data.edad_victima) : null,
+        plazo_otorgado_dias: data.plazo_otorgado_dias !== null && data.plazo_otorgado_dias !== '' ? parseInt(data.plazo_otorgado_dias) : null,
+        versiones: data.versiones !== null && data.versiones !== '' ? parseInt(data.versiones) : null,
+        reconocimientos_lugar_hechos: data.reconocimientos_lugar_hechos !== null && data.reconocimientos_lugar_hechos !== '' ? parseInt(data.reconocimientos_lugar_hechos) : null,
+        no_boletas_solicitadas: data.no_boletas_solicitadas !== null && data.no_boletas_solicitadas !== '' ? parseInt(data.no_boletas_solicitadas) : null,
+        no_detenidos_producto_investigacion: data.no_detenidos_producto_investigacion !== null && data.no_detenidos_producto_investigacion !== '' ? parseInt(data.no_detenidos_producto_investigacion) : null,
+        allanamientos_numero: data.allanamientos_numero !== null && data.allanamientos_numero !== '' ? parseInt(data.allanamientos_numero) : null,
+        recuperacion_bienes_evidencias: data.recuperacion_bienes_evidencias !== null && data.recuperacion_bienes_evidencias !== '' ? parseInt(data.recuperacion_bienes_evidencias) : null,
+        recuperacion_automotores: data.recuperacion_automotores !== null && data.recuperacion_automotores !== '' ? parseInt(data.recuperacion_automotores) : null,
+        recuperacion_otros: data.recuperacion_otros !== null && data.recuperacion_otros !== '' ? parseInt(data.recuperacion_otros) : null,
+        notificaciones: data.notificaciones !== null && data.notificaciones !== '' ? parseInt(data.notificaciones) : null,
+        citaciones: data.citaciones !== null && data.citaciones !== '' ? parseInt(data.citaciones) : null,
+        peritajes: data.peritajes !== null && data.peritajes !== '' ? parseInt(data.peritajes) : null,
+        traslados: data.traslados !== null && data.traslados !== '' ? parseInt(data.traslados) : null,
+      };
+      console.log('ANTES DE ENVIAR:', formData);
+      const options = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         }
-      
+      }
+      await axios.post(url, formData, options)
+      console.log('DESPUES:', formData);
+      setMensaje({ respuesta: "Delegación agregada Correctamente", tipo: true })
+      setTipo(tipo)
+      setOpenDialog(true);
+      setTimeout(() => {
+        setOpenDialog(false);
+        navigate('/delegaciones');
+      }, 3000);
+    } catch (error) {
+      setMensaje({ respuesta: error.response.data.msg, tipo: false })
+      setTipo(tipo)
+      setOpenDialog(true);
+      setTimeout(() => {
+        setOpenDialog(false);
+        setForm
+      }, 4000);
+    }
+
   }
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
-};
+  };
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-     
+
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2 '>
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Asiganción de la Investigacion </h1>
 
@@ -469,9 +475,9 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
               disabled
               value={selectedAgente && agenteGrado[selectedAgente]}
               className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5'
-             
+
             />
-           
+
           </div>
 
         </div>
@@ -487,10 +493,10 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 freeSolo
                 options={codDistrito}
                 onChange={handleLocalizacionSelect}
-                renderInput={(params) => <TextField {...params} label="Codigo-Provincia-Distrito-Zona"  
-                {...register('localizacion', {
-                  required: 'Debe realizar la busqueda de la Localizacion para añadir la informacion',
-                })} />}
+                renderInput={(params) => <TextField {...params} label="Codigo-Provincia-Distrito-Zona"
+                  {...register('localizacion', {
+                    required: 'Debe realizar la busqueda de la Localizacion para añadir la informacion',
+                  })} />}
               />
               {errors.localizacion && (
                 <span className="text-red-500 text-sm ml-2">{errors.localizacion.message}</span>
@@ -512,7 +518,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
               disabled
               value={selectedLocalidad && distrito[selectedLocalidad]?.distrito}
               className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5  w-64'
-              />
+            />
           </div>
           <div className='flex flex-row'>
             <label className='mr-16 pt-5'>Zona:</label>
@@ -520,7 +526,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
               disabled
               value={selectedLocalidad && distrito[selectedLocalidad]?.zona}
               className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-64'
-              />
+            />
           </div>
           <div className='flex flex-row'>
             <label className='mr-12 pt-5'>Cantón:</label>
@@ -528,8 +534,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
               disabled
               value={selectedLocalidad && distrito[selectedLocalidad]?.canton}
               className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-64'
-              />
-           </div>
+            />
+          </div>
 
           <div className='flex flex-row'>
             <label className='mr-7 pt-5'>Provincia:</label>
@@ -571,9 +577,9 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
               disabled
               value={selectedDelito && delitoData[selectedDelito]?.seccion}
               className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-96'
-              
+
             />
-            
+
           </div>
 
           <div className='flex flex-row'>
@@ -582,9 +588,9 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
               disabled
               value={selectedDelito && delitoData[selectedDelito]?.delito}
               className='border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-96'
-              
+
             />
-           
+
           </div>
           <div className='flex mb-3'>
             <label className='mr-16'>Fecha de la Infracción/Delito</label>
@@ -644,7 +650,7 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
             )}
           </div>
         </div>
-     
+
 
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>Sospechoso</h1>
@@ -652,8 +658,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
 
           <div className='flex mb-3'>
             <label className='mr-7'>Apellidos y Nombres del Detenido o Sospechoso</label>
-            <input type="String" id='apellidos_nombres_sospechoso' name='apellidos_nombres_sospechoso' onChange={handleChange} 
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='apellidos_nombres_sospechoso' name='apellidos_nombres_sospechoso' onChange={handleChange}
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('apellidos_nombres_sospechoso', {
 
                 validate: value => {
@@ -670,8 +676,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Condición del Infractor Involucrado</label>
-            <input type="String" id='condicion_infractor_involucrado' name='condicion_infractor_involucrado' onChange={handleChange} 
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='condicion_infractor_involucrado' name='condicion_infractor_involucrado' onChange={handleChange}
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('condicion_infractor_involucrado', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -687,24 +693,24 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Parentesco del Detenido o Sospechoso con la Victima</label>
-            <input type="String" id='parentesco_detenido_sospechoso_victima' name='parentesco_detenido_sospechoso_victima' onChange={handleChange}              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
-            {...register('parentesco_detenido_sospechoso_victima', {
-              validate: value => {
-                if (!value) return true; // Si el campo está vacío, no se activa la validación
-                if (value.length < 5) return 'El campo debe tener al menos 5 caracteres'; // Verifica que tenga al menos 2 caracteres
-                const regex = /^[a-zA-Z,\s]*$/;// Expresión regular para letras y comas
-                return regex.test(value) || 'El campo solo puede contener letras y comas';
-              }
-            })}
-          />
-          {errors.parentesco_detenido_sospechoso_victima && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.parentesco_detenido_sospechoso_victima.message}</span>
-          )}
+            <input type="String" id='parentesco_detenido_sospechoso_victima' name='parentesco_detenido_sospechoso_victima' onChange={handleChange} className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
+              {...register('parentesco_detenido_sospechoso_victima', {
+                validate: value => {
+                  if (!value) return true; // Si el campo está vacío, no se activa la validación
+                  if (value.length < 5) return 'El campo debe tener al menos 5 caracteres'; // Verifica que tenga al menos 2 caracteres
+                  const regex = /^[a-zA-Z,\s]*$/;// Expresión regular para letras y comas
+                  return regex.test(value) || 'El campo solo puede contener letras y comas';
+                }
+              })}
+            />
+            {errors.parentesco_detenido_sospechoso_victima && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.parentesco_detenido_sospechoso_victima.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Alias del Sospechoso </label>
             <input type="String" id='alias_sospechoso' name='alias_sospechoso' onChange={handleChange}
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('alias_sospechoso', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -720,8 +726,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Placas del Vihículo Involucrado en el Delito</label>
-            <input type="String" id='placa_vehiculo_involucrado' name='placa_vehiculo_involucrado' onChange={handleChange} 
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='placa_vehiculo_involucrado' name='placa_vehiculo_involucrado' onChange={handleChange}
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('placa_vehiculo_involucrado', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -743,15 +749,15 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
 
           <div className='flex mb-3'>
             <label className='mr-7'>Apellidos y Nombres del Fiscal</label>
-            <input type="String" id='apellidos_nombres_fiscal' name='apellidos_nombres_fiscal' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 w-72" 
+            <input type="String" id='apellidos_nombres_fiscal' name='apellidos_nombres_fiscal' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 w-72"
               {...register('apellidos_nombres_fiscal', {
                 required: 'Debe proporcionar el nombre del fiscal',
                 pattern: {
                   value: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
                   message: 'El nombre solo puede contener letras'
-              }
-                
+                }
+
               })}
             />
             {errors.apellidos_nombres_fiscal && (
@@ -767,112 +773,100 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                   freeSolo
                   options={fiscaliaNom}
                   onChange={handleFiscaliaChange} // Usamos el mismo manejador para la fiscalía
-                  renderInput={(params) => <TextField {...params} label="Fiscalía Nombre" 
-                  {...register('fiscaliaNombre', {
-                    required: 'Seleccione el nombre de una Fiscalía',
-                  })} 
+                  renderInput={(params) => <TextField {...params} label="Fiscalía Nombre"
+                    {...register('fiscaliaNombre', {
+                      required: 'Seleccione el nombre de una Fiscalía',
+                    })}
                   />}
-              />
-              {errors.fiscaliaNombre && (
-                <span className="text-red-500 text-sm ml-2">{errors.fiscaliaNombre.message}</span>
-              )}  
+                />
+                {errors.fiscaliaNombre && (
+                  <span className="text-red-500 text-sm ml-2">{errors.fiscaliaNombre.message}</span>
+                )}
               </Stack>
             </div>
-
             <div className='flex mt-2'>
               <label className='mr-4 mt-1'>N° Fiscalía:</label>
               <input
-                id='numerFiscalia'
-                type="number"
+                id='numeroFiscalia'
+                type="text" // Cambiamos el tipo de input a "text"
                 value={numeroFiscalia}
-                onChange={handleNumeroFiscaliaChange} // Usamos el mismo manejador para el número de fiscalía
+                onChange={handleNumeroFiscaliaChange}
                 className="block w-15 h-10 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
-                {...register('numerFiscalia', {
-                  validate: value => {
-                    if (!value) return true; // Si el campo está vacío, no se activa la validación
-                    const regex = /^[0-9]+$/; // Expresión regular para números
-                    return regex.test(value) || 'El campo solo puede contener números';
-                   
-                  }
-                })}
               />
-             {errors.numerFiscalia && (
-              <span className="text-red-500 text-sm ml-2 mt-2">{errors.numerFiscalia.message}</span>
-            )}
             </div>
           </div>
-          
-          
-          <div className='flex mb-3'>
-              <label className='mr-4 mt-4' >Unidad Especializada de Fiscalía:</label>
-              <input
-                type="text" id='unidad_especializada' name='unidad_especializada'
-                disabled
-                value={`${selectedFiscalia} - ${numeroFiscalia}`}
 
-                className="border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-96"
-              />
-            </div>
+
+          <div className='flex mb-3'>
+            <label className='mr-4 mt-4' >Unidad Especializada de Fiscalía:</label>
+            <input
+              type="text" id='unidad_especializada' name='unidad_especializada'
+              disabled
+              value={`${selectedFiscalia} - ${numeroFiscalia}`}
+
+              className="border-2 p-2 mt-2 placeholder-gray-200 bg-slate-300 rounded-md mb-5 w-96"
+            />
+          </div>
 
 
 
           <div className='flex mb-3'>
             <label className='mr-11'>Fecha de la Delegación</label>
             <input type="Date" id='fecha_delegacion' name='fecha_delegacion' onChange={handleChange}
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('fecha_delegacion', {
                 required: 'El campo Fecha de la Delegacion debe estar llena ',
               })}
             />
-           {errors.fecha_delegacion && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_delegacion.message}</span>
-          )}
+            {errors.fecha_delegacion && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_delegacion.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Fecha de Recepción en PJ</label>
-            <input type="Date" id='fecha_recepcion_pj' name='fecha_recepcion_pj' onChange={handleChange} 
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Date" id='fecha_recepcion_pj' name='fecha_recepcion_pj' onChange={handleChange}
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('fecha_recepcion_pj', {
                 required: 'El campo Fecha de  Recepción en PJ debe estar lleno ',
               })}
             />
-           {errors.fecha_recepcion_pj && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_recepcion_pj.message}</span>
-          )}
+            {errors.fecha_recepcion_pj && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_recepcion_pj.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Fecha de Recepción por parte del Agente Investigador </label>
-            <input type="Date" id='fecha_recepcion_agente_investigador' name='fecha_recepcion_agente_investigador' onChange={handleChange} 
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Date" id='fecha_recepcion_agente_investigador' name='fecha_recepcion_agente_investigador' onChange={handleChange}
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('fecha_recepcion_agente_investigador', {
                 required: 'El campo Fecha de Recepción por parte del Agente Investigador debe estar lleno ',
               })}
             />
-           {errors.fecha_recepcion_agente_investigador && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_recepcion_agente_investigador.message}</span>
-          )}
+            {errors.fecha_recepcion_agente_investigador && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_recepcion_agente_investigador.message}</span>
+            )}
           </div>
 
           <div className='flex mb-3'>
             <label className='mr-7'>N° de Oficio con la que recibe la Diligencia el Agente</label>
-            <input type="text" id='no_oficio_recibe_diligencia' name='no_oficio_recibe_diligencia' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="text" id='no_oficio_recibe_diligencia' name='no_oficio_recibe_diligencia' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('no_oficio_recibe_diligencia', {
                 required: 'Este campo debe estar lleno ',
                 minLength: {
                   value: 10,
                   message: 'El texto debe tener al menos 10 caracteres'
-              }
+                }
               })}
             />
-           {errors.no_oficio_recibe_diligencia && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_oficio_recibe_diligencia.message}</span>
-          )}
+            {errors.no_oficio_recibe_diligencia && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_oficio_recibe_diligencia.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Plazo Otrogado (Días)</label>
-            <input type="Number" id='plazo_otorgado_dias' name='plazo_otorgado_dias' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='plazo_otorgado_dias' name='plazo_otorgado_dias' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('plazo_otorgado_dias', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -881,29 +875,29 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.plazo_otorgado_dias && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.plazo_otorgado_dias.message}</span>
-          )}
+            {errors.plazo_otorgado_dias && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.plazo_otorgado_dias.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>N° art.444 COIP</label>
             <input type="String" id='numero_articulo' name='numero_articulo' onChange={handleChange}
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('numero_articulo', {
                 required: 'Este campo es obligatorio ',
                 minLength: {
                   value: 1,
                   message: 'El texto debe tener al menos 1 caracter'
-                },  
+                },
                 pattern: {
-                value: /^[0-9,\s-]+$/,
-                message: 'El campo solo puede contener números, guiones y comas'
+                  value: /^[0-9,\s-]+$/,
+                  message: 'El campo solo puede contener números, guiones y comas'
                 }
               })}
             />
-           {errors.numero_articulo && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.numero_articulo.message}</span>
-          )}
+            {errors.numero_articulo && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.numero_articulo.message}</span>
+            )}
           </div>
         </div>
 
@@ -912,8 +906,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
 
           <div className='flex mb-3'>
             <label className='mr-7'>¿Qué art. cumplió dentro del plazo?</label>
-            <input type="String" id='articulos_cumplidos' name='articulos_cumplidos' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='articulos_cumplidos' name='articulos_cumplidos' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('articulos_cumplidos', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -922,9 +916,9 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.articulos_cumplidos && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.articulos_cumplidos.message}</span>
-          )}
+            {errors.articulos_cumplidos && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.articulos_cumplidos.message}</span>
+            )}
           </div>
           <div className='flex  mb-3'>
             <label className='mr-7'>Cumplimiento Parcial</label>
@@ -944,18 +938,18 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Fecha de Cumplimiento o Descargo de Delegación </label>
-            <input type="Date" id='fecha_cumplimiento' name='fecha_cumplimiento' onChange={handleChange} 
-              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Date" id='fecha_cumplimiento' name='fecha_cumplimiento' onChange={handleChange}
+              className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('fecha_cumplimiento', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-      
+
                 }
               })}
             />
-           {errors.fecha_cumplimiento && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_cumplimiento.message}</span>
-          )}
+            {errors.fecha_cumplimiento && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.fecha_cumplimiento.message}</span>
+            )}
           </div>
           <div className='flex  mb-3'>
             <label className='mr-7'>En Investigación</label>
@@ -967,8 +961,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Oficio de Descargo</label>
-            <input type="text" id='numero_oficio_descargo' name='numero_oficio_descargo' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="text" id='numero_oficio_descargo' name='numero_oficio_descargo' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('numero_oficio_descargo', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -983,14 +977,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.numero_oficio_descargo && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.numero_oficio_descargo.message}</span>
-          )}
+            {errors.numero_oficio_descargo && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.numero_oficio_descargo.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>Versiones (Número)</label>
-            <input type="Number" id='versiones' name='versiones' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='versiones' name='versiones' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('versiones', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -999,14 +993,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.versiones && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.versiones.message}</span>
-          )}
+            {errors.versiones && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.versiones.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>Reconocimiento de Lugar de los Hechos (Número)</label>
-            <input type="Number" id='reconocimientos_lugar_hechos' name='reconocimientos_lugar_hechos' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='reconocimientos_lugar_hechos' name='reconocimientos_lugar_hechos' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('reconocimientos_lugar_hechos', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1015,9 +1009,9 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.reconocimientos_lugar_hechos && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.reconocimientos_lugar_hechos.message}</span>
-          )}
+            {errors.reconocimientos_lugar_hechos && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.reconocimientos_lugar_hechos.message}</span>
+            )}
           </div>
           <div className='flex  mb-3'>
             <label className='mr-7'>¿Determinó posibles Responsables?</label>
@@ -1045,8 +1039,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>Tipo de Requermimientos</label>
-            <input type="String" id='tipo_peticion' name='tipo_peticion' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='tipo_peticion' name='tipo_peticion' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('tipo_peticion', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1055,9 +1049,9 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.tipo_peticion && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.tipo_peticion.message}</span>
-          )}
+            {errors.tipo_peticion && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.tipo_peticion.message}</span>
+            )}
           </div>
 
 
@@ -1068,8 +1062,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
 
           <div className='flex mb-3'>
             <label className='mr-7 '>Nombre del Requerido en la Boleta</label>
-            <input type="String" id='nombre_requerido_boleta' name='nombre_requerido_boleta' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='nombre_requerido_boleta' name='nombre_requerido_boleta' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('nombre_requerido_boleta', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1078,15 +1072,15 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.nombre_requerido_boleta && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.nombre_requerido_boleta.message}</span>
-          )}
+            {errors.nombre_requerido_boleta && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.nombre_requerido_boleta.message}</span>
+            )}
           </div>
 
           <div className='mb-3'>
             <label className='mr-7 '>Apellidos y Nombres de los Detenidos, producto del Cumplimiento de la Disposición Fiscal</label>
-            <input type="String" id='apellidos_nombres_detenidos_producto' name='apellidos_nombres_detenidos_producto' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='apellidos_nombres_detenidos_producto' name='apellidos_nombres_detenidos_producto' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('apellidos_nombres_detenidos_producto', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1095,14 +1089,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.apellidos_nombres_detenidos_producto && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.apellidos_nombres_detenidos_producto.message}</span>
-          )}
+            {errors.apellidos_nombres_detenidos_producto && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.apellidos_nombres_detenidos_producto.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° Boletas Solicitadas</label>
             <input type="Number" id='no_boletas_solicitadas' name='no_boletas_solicitadas' onChange={handleChange}
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('no_boletas_solicitadas', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1111,14 +1105,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.no_boletas_solicitadas && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_boletas_solicitadas.message}</span>
-          )}
+            {errors.no_boletas_solicitadas && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_boletas_solicitadas.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Detenidos producto de la Investigación</label>
-            <input type="Number" id='no_detenidos_producto_investigacion' name='no_detenidos_producto_investigacion' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='no_detenidos_producto_investigacion' name='no_detenidos_producto_investigacion' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('no_detenidos_producto_investigacion', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1127,14 +1121,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.no_detenidos_producto_investigacion && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_detenidos_producto_investigacion.message}</span>
-          )}
+            {errors.no_detenidos_producto_investigacion && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.no_detenidos_producto_investigacion.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Allanamientos</label>
-            <input type="Number" id='allanamientos_numero' name='allanamientos_numero' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='allanamientos_numero' name='allanamientos_numero' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('allanamientos_numero', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1143,14 +1137,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.allanamientos_numero && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.allanamientos_numero.message}</span>
-          )}
+            {errors.allanamientos_numero && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.allanamientos_numero.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 text-blue-600 '>Recuperaión de Bienes o evidencias</label>
-            <input type="Number" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('recuperacion_bienes_evidencias', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1159,14 +1153,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.recuperacion_bienes_evidencias && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_bienes_evidencias.message}</span>
-          )}
+            {errors.recuperacion_bienes_evidencias && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_bienes_evidencias.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Recuperación de Automotores</label>
-            <input type="Number" id='recuperacion_automotores' name='recuperacion_automotores' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='recuperacion_automotores' name='recuperacion_automotores' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('recuperacion_automotores', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1175,14 +1169,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.recuperacion_automotores && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_automotores.message}</span>
-          )}
+            {errors.recuperacion_automotores && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_automotores.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Recuperación Otros</label>
             <input type="Number" id='recuperacion_otros' name='recuperacion_otros' onChange={handleChange}
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('recuperacion_otros', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1191,14 +1185,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.recuperacion_otros && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_otros.message}</span>
-          )}
+            {errors.recuperacion_otros && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.recuperacion_otros.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Notificaciones</label>
-            <input type="Number" id='notificaciones' name='notificaciones' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='notificaciones' name='notificaciones' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('notificaciones', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1207,14 +1201,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.notificaciones && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.notificaciones.message}</span>
-          )}
+            {errors.notificaciones && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.notificaciones.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Citaciones</label>
-            <input type="Number" id='citaciones' name='citaciones' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='citaciones' name='citaciones' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('citaciones', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1223,14 +1217,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.citaciones && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.citaciones.message}</span>
-          )}
+            {errors.citaciones && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.citaciones.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Peritajes</label>
-            <input type="Number" id='peritajes' name='peritajes' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='peritajes' name='peritajes' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('peritajes', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1239,14 +1233,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.peritajes && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.peritajes.message}</span>
-          )}
+            {errors.peritajes && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.peritajes.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Traslados</label>
-            <input type="Number" id='traslados' name='traslados' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='traslados' name='traslados' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('traslados', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1255,9 +1249,9 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.traslados && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.traslados.message}</span>
-          )}
+            {errors.traslados && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.traslados.message}</span>
+            )}
           </div>
 
 
@@ -1277,8 +1271,8 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Causas de Incumplimineto de la Investigación</label>
-            <input type="String" id='causas_incumplimiento_investigacion' name='causas_incumplimiento_investigacion' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='causas_incumplimiento_investigacion' name='causas_incumplimiento_investigacion' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('causas_incumplimiento_investigacion', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1287,14 +1281,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.causas_incumplimiento_investigacion && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.causas_incumplimiento_investigacion.message}</span>
-          )}
+            {errors.causas_incumplimiento_investigacion && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.causas_incumplimiento_investigacion.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Nombre de los Detenidos Producto de la Investigación</label>
-            <input type="String" id='nombre_detenidos_producto_investigacion' name='nombre_detenidos_producto_investigacion' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"  
+            <input type="String" id='nombre_detenidos_producto_investigacion' name='nombre_detenidos_producto_investigacion' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('nombre_detenidos_producto_investigacion', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1303,14 +1297,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.nombre_detenidos_producto_investigacion && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.nombre_detenidos_producto_investigacion.message}</span>
-          )}
+            {errors.nombre_detenidos_producto_investigacion && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.nombre_detenidos_producto_investigacion.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Observaciones</label>
-            <input type="String" id='observaciones' name='observaciones' onChange={handleChange} 
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="String" id='observaciones' name='observaciones' onChange={handleChange}
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('observaciones', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1319,14 +1313,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.observaciones && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.observaciones.message}</span>
-          )}
+            {errors.observaciones && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.observaciones.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Cantidad Sustraida</label>
-            <input type="Number" id='cantidad_sustraida' name='cantidad_sustraida' onChange={handleChange} 
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+            <input type="Number" id='cantidad_sustraida' name='cantidad_sustraida' onChange={handleChange}
+              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('cantidad_sustraida', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1335,14 +1329,14 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.cantidad_sustraida && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.cantidad_sustraida.message}</span>
-          )}
+            {errors.cantidad_sustraida && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.cantidad_sustraida.message}</span>
+            )}
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Entidad Financiera</label>
             <input type="String" id='entidad_financiera' name='entidad_financiera' onChange={handleChange}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" 
+              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('entidad_financiera', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
@@ -1351,43 +1345,43 @@ const numero_investigacion_previa = watch('numero_investigacion_previa');
                 }
               })}
             />
-           {errors.entidad_financiera && (
-            <span className="text-red-500 text-sm ml-2 mt-2">{errors.entidad_financiera.message}</span>
-          )}
+            {errors.entidad_financiera && (
+              <span className="text-red-500 text-sm ml-2 mt-2">{errors.entidad_financiera.message}</span>
+            )}
           </div>
 
 
         </div>
-        
+
         <div className="mx-8">
-        <button className="py-2 w-full block text-center bg-sky-950 text-gray-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-950 hover:text-white"
-                type="submit" >Agregar Delegacion</button>      
+          <button className="py-2 w-full block text-center bg-sky-950 text-gray-300 border rounded-xl hover:scale-100 duration-300 hover:bg-blue-950 hover:text-white"
+            type="submit" >Agregar Delegacion</button>
         </div>
 
       </form>
       <Dialog
-    open={openDialog}
-    onClose={handleCloseDialog}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-    
->
-    
-    <DialogContent>
-        <DialogContentText id="alert-dialog-description" tipo={mensaje.tipo}>
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+
+      >
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description" tipo={mensaje.tipo}>
             {mensaje.respuesta}
-        </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-        <Button onClick={handleCloseDialog} autoFocus>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} autoFocus>
             Ok
-        </Button>
-    </DialogActions>
-</Dialog>
+          </Button>
+        </DialogActions>
+      </Dialog>
 
     </div>
-    
-      
+
+
   )
 }
 
