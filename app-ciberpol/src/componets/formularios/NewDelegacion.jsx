@@ -68,7 +68,7 @@ const NewDelegacion = () => {
     no_boletas_solicitadas: null,
     no_detenidos_producto_investigacion: null,
     allanamientos_numero: null,
-    recuperacion_bienes_evidencias: null,
+    recuperacion_bienes_evidencias: "",
     recuperacion_automotores: null,
     recuperacion_otros: null,
     notificaciones: null,
@@ -336,7 +336,6 @@ const NewDelegacion = () => {
         no_boletas_solicitadas: data.no_boletas_solicitadas !== null && data.no_boletas_solicitadas !== '' ? parseInt(data.no_boletas_solicitadas) : null,
         no_detenidos_producto_investigacion: data.no_detenidos_producto_investigacion !== null && data.no_detenidos_producto_investigacion !== '' ? parseInt(data.no_detenidos_producto_investigacion) : null,
         allanamientos_numero: data.allanamientos_numero !== null && data.allanamientos_numero !== '' ? parseInt(data.allanamientos_numero) : null,
-        recuperacion_bienes_evidencias: data.recuperacion_bienes_evidencias !== null && data.recuperacion_bienes_evidencias !== '' ? parseInt(data.recuperacion_bienes_evidencias) : null,
         recuperacion_automotores: data.recuperacion_automotores !== null && data.recuperacion_automotores !== '' ? parseInt(data.recuperacion_automotores) : null,
         recuperacion_otros: data.recuperacion_otros !== null && data.recuperacion_otros !== '' ? parseInt(data.recuperacion_otros) : null,
         notificaciones: data.notificaciones !== null && data.notificaciones !== '' ? parseInt(data.notificaciones) : null,
@@ -1156,13 +1155,13 @@ const causasClass = isCausasDisabled
             )}
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 text-blue-600 '>Recuperaión de Bienes o evidencias</label>
-            <input type="Number" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange}
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
+            <label className='mr-7'>Recuperaión de Bienes o evidencias</label>
+            <input type="text" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange}
+              className="block w-96 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('recuperacion_bienes_evidencias', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[0-9,]*$/; // Expresión regular para números
+                  const regex =/^[a-zA-Z0-9,\-\sáéíóúÁÉÍÓÚñÑ]*$/; // Expresión regular para números
                   return regex.test(value) || 'El campo solo puede contener  numeros y comas';
                 }
               })}

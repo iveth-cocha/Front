@@ -67,7 +67,7 @@ const UpdateDelegacion = ({ delegacion }) => {
     no_boletas_solicitadas: delegacion?.no_boletas_solicitadas??null,
     no_detenidos_producto_investigacion: delegacion?.no_detenidos_producto_investigacion??null,
     allanamientos_numero: delegacion?.allanamientos_numero??null,
-    recuperacion_bienes_evidencias: delegacion?.recuperacion_bienes_evidencias??null,
+    recuperacion_bienes_evidencias: delegacion?.recuperacion_bienes_evidencias??"",
     recuperacion_automotores: delegacion?.recuperacion_automotores??null,
     recuperacion_otros: delegacion?.recuperacion_otros?? null,
     notificaciones: delegacion?.notificaciones?? null,
@@ -303,7 +303,6 @@ const handleChange = (e) => {
             no_boletas_solicitadas: form.no_boletas_solicitadas !== null && form.no_boletas_solicitadas !== '' ? parseInt(form.no_boletas_solicitadas) : null,
             no_detenidos_producto_investigacion: form.no_detenidos_producto_investigacion !== null && form.no_detenidos_producto_investigacion !== '' ? parseInt(form.no_detenidos_producto_investigacion) : null,
             allanamientos_numero: form.allanamientos_numero !== null && form.allanamientos_numero !== '' ? parseInt(form.allanamientos_numero) : null,
-            recuperacion_bienes_evidencias: form.recuperacion_bienes_evidencias !== null && form.recuperacion_bienes_evidencias !== '' ? parseInt(form.recuperacion_bienes_evidencias) : null,
             recuperacion_automotores: form.recuperacion_automotores !== null && form.recuperacion_automotores !== '' ? parseInt(form.recuperacion_automotores) : null,
             recuperacion_otros: form.recuperacion_otros !== null && form.recuperacion_otros !== '' ? parseInt(form.recuperacion_otros) : null,
             notificaciones: form.notificaciones !== null && form.notificaciones !== '' ? parseInt(form.notificaciones) : null,
@@ -711,9 +710,9 @@ const causasClass = isCausasDisabled
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 text-blue-400'>N° de Recuperaión de Bienes o evidencias</label>
-            <input type="Number" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange} value={form.recuperacion_bienes_evidencias}
-              className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+            <label className='mr-7'>N° de Recuperaión de Bienes o evidencias</label>
+            <input type="text" id='recuperacion_bienes_evidencias' name='recuperacion_bienes_evidencias' onChange={handleChange} value={form.recuperacion_bienes_evidencias}
+              className="block w-96 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° de Recuperación de Automotores</label>
