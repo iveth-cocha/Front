@@ -341,6 +341,20 @@ const handleChange = (e) => {
     setOpenDialog(false);
 };
 
+const [isCausasDisabled, setIsCausasDisabled] = useState(form.informe_descargo !== 'PARTE DE DESCARGO');
+
+useEffect(() => {
+  if (form.informe_descargo !== 'PARTE DE DESCARGO') {
+    setForm((prevForm) => ({ ...prevForm, causas_incumplimiento_investigacion: "" }));
+  }
+setIsCausasDisabled(form.informe_descargo !== 'PARTE DE DESCARGO');
+}, [form.informe_descargo]);
+
+
+
+const causasClass = isCausasDisabled
+    ? "uppercase block w-2000 rounded-md border border-gray-300 bg-gray-200 text-gray-400 cursor-not-allowed focus:outline-none h-8"
+    : "uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500";
   return (
       <div>
         <form onSubmit={handleSubmit} >
@@ -625,12 +639,12 @@ const handleChange = (e) => {
               className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 '>Versiones</label>
+            <label className='mr-7 '>Versiones (Número)</label>
             <input type="Number" id='versiones' name='versiones' onChange={handleChange} value={form.versiones}
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 '>Reconocimiento de Lugar de los Hechos</label>
+            <label className='mr-7 '>Reconocimiento de Lugar de los Hechos (Número)</label>
             <input type="Number" id='reconocimientos_lugar_hechos' name='reconocimientos_lugar_hechos' onChange={handleChange} value={form.reconocimientos_lugar_hechos}
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
@@ -750,7 +764,7 @@ const handleChange = (e) => {
           <div className='flex mb-3'>
             <label className='mr-7'>Causas de Incumplimineto de la Investigación</label>
             <input type="String" id='causas_incumplimiento_investigacion' name='causas_incumplimiento_investigacion' onChange={handleChange} value={form.causas_incumplimiento_investigacion}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              disabled={isCausasDisabled} className={causasClass}/>
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Nombre de los Detenidos Producto de la Investigación</label>
