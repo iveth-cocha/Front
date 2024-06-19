@@ -2,12 +2,14 @@ import axios from 'axios';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import React, { useEffect, useState } from 'react'
+import Mensaje from './Alertas/Mensaje';
 
 
 export const TablaActualizaciones = () => {
   const [ingresos, setIngresos] = useState(null);
   const [loading, setLoading] = useState(true);
   const [globalFilterValue, setGlobalFilterValue] = useState('');
+  const [mensaje, setMensaje] = useState({})
 
   const listarMapeo = async () => {
     try {
@@ -41,9 +43,48 @@ export const TablaActualizaciones = () => {
         
     }
 };
-    
+const handleDelete = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const url = `${import.meta.env.VITE_BACKEND_URL}/eliminar-mapeos`;
+     const options = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+  await axios.delete(url, options );
+
+  listarMapeo();
+  setMensaje({ respuesta: 'Todos los mapeos han sido eliminados correctamente', tipo: true });
+  setTimeout(() => {
+    setMensaje({});
+  }, 3000);
+  } catch (error) {
+      setMensaje({ respuesta: error?.response?.data?.msg, tipo: false });
+      setTimeout(() => {
+        setMensaje({});
+      }, 3000);
+
+  }
+};
   return (
-    <div className=" flex justify-center">
+    <div>
+      <div  className="flex justify-end">
+      <input
+        type="submit"
+        className=' bg-gray-600 w-auto p-3  text-white font-bold rounded-lg 
+                  hover:bg-red-500 cursor-pointer transition-all ml-auto mb-5'
+                  onClick={handleDelete}  
+        value='Eliminar registros de la tabla'
+      />
+      </div>
+      
+       <div>
+        {mensaje.respuesta && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
+        </div>
+      <div className=" flex justify-center">
+            
     <DataTable
       value={ingresos}
       sortField="id"
@@ -68,5 +109,7 @@ export const TablaActualizaciones = () => {
 
     </DataTable>
   </div>
+    </div>
+    
   )
 }
