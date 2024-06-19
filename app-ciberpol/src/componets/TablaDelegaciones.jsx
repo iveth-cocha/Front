@@ -108,8 +108,6 @@ const TablaDelegaciones = () => {
     <div className=" flex w-full">
       <DataTable
         value={delegaciones}
-        sortField="orden"
-        sortOrder={1} // Ascendente
         paginator
         rows={10}
         dataKey="id"
