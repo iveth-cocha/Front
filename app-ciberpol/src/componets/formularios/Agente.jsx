@@ -133,15 +133,25 @@ const handleCloseDialog = () => {
             />
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7'>Grado</label>
-            <input
-              type="text"
-              name="Grado"
-              id='Grado'
-              value={form.Grado}
-              onChange={handleChange}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
-            />
+            <label className='mr-7 mt-4'>Grado</label>
+            <select  className='border-2 w-2000 p-2 mt-2 rounded-md mb-5' id='Grado'
+              name='Grado' onChange={handleChange} value={form.Grado}>
+              <option value="">-- Seleccione --</option>
+              <option value="POLI.">POLI.</option>
+              <option value="CBOS.">CBOS.</option>
+              <option value="CBOP.">CBOP.</option>
+              <option value="SGOS.">SGOS.</option>
+              <option value="SGOP.">SGOP.</option>
+              <option value="SBOS.">SBOS.</option>
+              <option value="SBOP.">SBOP.</option>
+              <option value="SBOM.">SBOM.</option>
+              <option value="KDTE.">KDTE.</option>
+              <option value="SBTE.">SBTE.</option>
+              <option value="TNTE.">TNTE.</option>
+              <option value="CPTN.">CPTN.</option>
+              <option value="MAYR.">MAYR.</option>
+              <option value="TNCL.">TNCL.</option>
+            </select>
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Cédula</label>
@@ -184,14 +194,13 @@ const handleCloseDialog = () => {
             />
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7'>Género</label>
-            <input
-              type="text"
-              name="Genero"
-              value={form.Genero}
-              onChange={handleChange}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
-            />
+            <label className='mr-7 mt-4'>Género</label>
+            <select  className='border-2 w-2000 p-2 mt-2 rounded-md mb-5' id='Genero'
+              onChange={handleChange} name="Genero" value={form.Genero} >
+              <option value="">-- Seleccione --</option>
+              <option value="FEMENINO">FEMENINO</option>
+              <option value="MASCULINO">MASCULINO</option>
+            </select>
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Estado Civil</label>
