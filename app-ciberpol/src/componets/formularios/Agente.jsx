@@ -47,35 +47,35 @@ const Agente = ({agente}) => {
   const [openDialog, setOpenDialog] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (agente?.Cedula) {
-      console.log("dentro delif")
-      const token = localStorage.getItem('token');
-      let url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/agente/${agente?.Cedula}`;
-      
-      const formData = {
-        ...form,
-        Terno: form.Terno !== null && form.Terno !== '' ? parseInt(form.Terno) : null,
-        Camisa: form.Camisa !== null && form.Camisa !== '' ? parseInt(form.Camisa) : null,
-        Calzado: form.Calzado !== null && form.Calzado !== '' ? parseInt(form.Calzado) : null,
-        Cabeza: form.Cabeza !== null && form.Cabeza !== '' ? parseInt(form.Cabeza) : null,
-      };
-      const options = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      };
-      await axios.put(url, formData, options)
-      console.log("actualizar",formData)
-      setMensaje({ respuesta: 'Informacion delAgente actualizada correctamente', tipo: true });
-      setOpenDialog(true);
-      setTimeout(() => {
-        setOpenDialog(false);
-        navigate(`/agentes`)
-        }, 2000);
-    } else {
       try {
-        const token = localStorage.getItem('token')
+        if (agente?.Cedula) {
+          console.log("dentro delif")
+          const token = localStorage.getItem('token');
+          let url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/agente/${agente?.Cedula}`;
+          
+          const formData = {
+            ...form,
+            Terno: form.Terno !== null && form.Terno !== '' ? parseInt(form.Terno) : null,
+            Camisa: form.Camisa !== null && form.Camisa !== '' ? parseInt(form.Camisa) : null,
+            Calzado: form.Calzado !== null && form.Calzado !== '' ? parseInt(form.Calzado) : null,
+            Cabeza: form.Cabeza !== null && form.Cabeza !== '' ? parseInt(form.Cabeza) : null,
+          };
+          const options = {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            }
+          };
+          await axios.put(url, formData, options)
+          console.log("actualizar",formData)
+          setMensaje({ respuesta: 'Informacion delAgente actualizada correctamente', tipo: true });
+          setOpenDialog(true);
+          setTimeout(() => {
+            setOpenDialog(false);
+            navigate(`/agentes`)
+            }, 2000);
+        } else{
+          const token = localStorage.getItem('token')
         const url = `${import.meta.env.VITE_BACKEND_URL}/registro/agente`
         const formData = {
           ...form,
@@ -100,6 +100,8 @@ const Agente = ({agente}) => {
 
         }, 3000);
 
+        }
+
       } catch (error) {
         setMensaje({
           respuesta: error?.response?.data?.errors?.[0]?.msg || error?.response?.data?.msg,
@@ -111,7 +113,7 @@ const Agente = ({agente}) => {
           setOpenDialog(false);
         }, 3000);
       }
-    }
+    
   }
 
 const handleCloseDialog = () => {
