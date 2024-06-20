@@ -678,7 +678,7 @@ const causasClass = isCausasDisabled
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
                   if (value.length < 5) return 'El campo debe tener al menos 5 caracteres'; // Verifica que tenga al menos 2 caracteres
-                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para letras y comas
+                  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ,\s]*$/; // Expresión regular para letras y comas
                   return regex.test(value) || 'El campo solo puede contener letras y comas';
                 }
               })}
@@ -728,7 +728,7 @@ const causasClass = isCausasDisabled
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
                   if (value.length < 4) return 'El campo debe tener al menos 4 caracteres'; // Verifica que tenga al menos 2 caracteres
-                  const regex = /^[a-zA-Z,\s]*$/;// Expresión regular para letras y comas
+                  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ,\s]*$/;// Expresión regular para letras y comas
                   return regex.test(value) || 'El campo solo puede contener letras y comas';
                 }
               })}
@@ -801,7 +801,7 @@ const causasClass = isCausasDisabled
               <label className='mr-4 mt-1'>N° Fiscalía:</label>
               <input
                 id='numeroFiscalia'
-                type="text" // Cambiamos el tipo de input a "text"
+                type="text" 
                 value={numeroFiscalia}
                 onChange={handleNumeroFiscaliaChange}
                 className="block w-15 h-10 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
@@ -1057,7 +1057,7 @@ const causasClass = isCausasDisabled
               {...register('tipo_peticion', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z0-9,]*$/; // Expresión regular para números
+                  const regex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ,\s-]*$/; // Expresión regular para números
                   return regex.test(value) || 'El campo solo puede contener números y letras y comas';
                 }
               })}
@@ -1080,7 +1080,7 @@ const causasClass = isCausasDisabled
               {...register('nombre_requerido_boleta', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z,]*$/; // Expresión regular para números
+                  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ,\s]*$/; 
                   return regex.test(value) || 'El campo solo puede contener  letras y comas';
                 }
               })}
@@ -1097,7 +1097,7 @@ const causasClass = isCausasDisabled
               {...register('apellidos_nombres_detenidos_producto', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z,]*$/; // Expresión regular para números
+                  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ,\s]*$/;
                   return regex.test(value) || 'El campo solo puede contener  letras y comas';
                 }
               })}
@@ -1161,8 +1161,8 @@ const causasClass = isCausasDisabled
               {...register('recuperacion_bienes_evidencias', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex =/^[a-zA-Z0-9,\-\sáéíóúÁÉÍÓÚñÑ]*$/; // Expresión regular para números
-                  return regex.test(value) || 'El campo solo puede contener  numeros y comas';
+                  const regex =/^[a-zA-Z0-9,\-\sáéíóúÁÉÍÓÚñÑ]*$/; 
+                  return regex.test(value) || 'El campo acepta numeros, letras, comas y guiones';
                 }
               })}
             />
@@ -1289,7 +1289,7 @@ const causasClass = isCausasDisabled
               {...register('causas_incumplimiento_investigacion', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para números
+                  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ,\s]*$/;
                   return regex.test(value) || 'El campo solo puede contener  Letras y comas';
                 }
               })}
@@ -1305,7 +1305,7 @@ const causasClass = isCausasDisabled
               {...register('nombre_detenidos_producto_investigacion', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para números
+                  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ,\s]*$/;
                   return regex.test(value) || 'El campo solo puede contener  Letras y comas';
                 }
               })}
@@ -1321,7 +1321,7 @@ const causasClass = isCausasDisabled
               {...register('observaciones', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para números
+                  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ,\s]*$/; 
                   return regex.test(value) || 'El campo solo puede contener  Letras y comas';
                 }
               })}
@@ -1353,7 +1353,7 @@ const causasClass = isCausasDisabled
               {...register('entidad_financiera', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  const regex = /^[a-zA-Z,\s]*$/; // Expresión regular para números
+                  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ,\s]*$/;
                   return regex.test(value) || 'El campo solo puede contener  Letras y comas';
                 }
               })}
