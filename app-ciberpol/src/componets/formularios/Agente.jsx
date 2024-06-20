@@ -145,7 +145,6 @@ const handleCloseDialog = () => {
               <option value="SBOS.">SBOS.</option>
               <option value="SBOP.">SBOP.</option>
               <option value="SBOM.">SBOM.</option>
-              <option value="KDTE.">KDTE.</option>
               <option value="SBTE.">SBTE.</option>
               <option value="TNTE.">TNTE.</option>
               <option value="CPTN.">CPTN.</option>
