@@ -744,9 +744,9 @@ const causasClass = isCausasDisabled
               {...register('placa_vehiculo_involucrado', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
-                  if (value.length < 8) return 'El campo debe tener al menos 8 caracteres'; // Verifica que tenga al menos 2 caracteres
-                  const regex = /^[a-zA-Z0-9, -]*$/;// Expresión regular para letras y comas y guion
-                  return regex.test(value) || 'El campo solo puede contener  y comas para separar las placas';
+                  if (value.length !== 8) return 'El campo debe tener 8 caracteres'; // Verifica que tenga exactamente 8 caracteres
+                  const regex = /^[a-zA-Z0-9-]*$/; // Expresión regular para letras, números y guiones
+                  return regex.test(value) || 'El campo solo puede contener letras, números y guiones';
                 }
               })}
             />
