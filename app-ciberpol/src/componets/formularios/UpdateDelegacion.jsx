@@ -14,8 +14,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 
 
 const UpdateDelegacion = ({ delegacion }) => {
-    console.log("Prop  recibida:", delegacion);
-  console.log("nota", delegacion?.id)
 
   const navigate = useNavigate();
   const [mensaje, setMensaje] = useState({})
@@ -88,7 +86,7 @@ const UpdateDelegacion = ({ delegacion }) => {
 
   useEffect(() => {
     if (delegacion?.id) {
-        setForm(delegacion);console.log("Delegacion recibida:", delegacion);
+        setForm(delegacion);
         if (delegacion.unidad_especializada) {
             const [selected, numero] = delegacion.unidad_especializada.split('-');
             setSelectedFiscalia(selected);
@@ -289,7 +287,6 @@ const handleChange = (e) => {
       e.preventDefault()
       try{
         if(delegacion?.id){
-          console.log("if",delegacion?.id)
           const token = localStorage.getItem('token')
           const url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/delegacion/${delegacion?.id}`
           //conversion de datos 

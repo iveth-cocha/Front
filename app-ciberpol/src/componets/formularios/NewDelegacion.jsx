@@ -187,8 +187,7 @@ const NewDelegacion = () => {
       canton: localidadSeleccionada?.canton || '',
       provincia: localidadSeleccionada?.subzona || ''
     });
-    console.log("marets", setSelectedLocalidad(value))
-  };
+    };
 
   // Estado para delitos
   const [delitoNom, setDelitoNom] = useState([]);
@@ -310,7 +309,6 @@ const NewDelegacion = () => {
 
   const onSubmit = async (data) => {
     //e.preventDefault()
-    console.log("antes", data)
     try {
       if (!numero_investigacion_previa && !numero_instruccion_fiscal) {
         setMensaje({ respuesta: 'Debe llenar alguno de los dos campos de Investigación Previa o Instrucción Fiscal para registrar la Delegación', tipo: false });
@@ -343,7 +341,6 @@ const NewDelegacion = () => {
         peritajes: data.peritajes !== null && data.peritajes !== '' ? parseInt(data.peritajes) : null,
         traslados: data.traslados !== null && data.traslados !== '' ? parseInt(data.traslados) : null,
       };
-      console.log('ANTES DE ENVIAR:', formData);
       const options = {
         headers: {
           'Content-Type': 'application/json',
@@ -351,7 +348,6 @@ const NewDelegacion = () => {
         }
       }
       await axios.post(url, formData, options)
-      console.log('DESPUES:', formData);
       setMensaje({ respuesta: "Delegación agregada Correctamente", tipo: true })
       setTipo(tipo)
       setOpenDialog(true);

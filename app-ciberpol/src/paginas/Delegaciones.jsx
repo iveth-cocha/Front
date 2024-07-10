@@ -1,8 +1,7 @@
 import React from 'react'
 import TablaDelegaciones from '../componets/TablaDelegaciones'
 import { useNavigate } from 'react-router-dom'
-import { IoSearch } from "react-icons/io5";
-import Asiganacion from '../componets/formularios/Asignacion';
+
 
 
 const Delegaciones = () => {

@@ -26,14 +26,8 @@ const ActualizarUser = () => {
               Authorization: `Bearer ${token}`
             }
           };
-          //console.log('URL de la solicitud:', url);
-          //console.log('Encabezados de la solicitud:', options.headers);
-          //console.log('ID del usuario:', id);
           const respuesta = await axios.get(url, options);
-          //console.log("respuesta solicitud", respuesta)
           setUsuario(respuesta.data.msg);
-          //console.log('Datos del usuario:', respuesta.data.msg);
-          
           
         } catch (error) {
           setMensaje({ respuesta: error.response.data.msg, tipo: false });

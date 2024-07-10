@@ -29,7 +29,6 @@ const ActualizarDelegacion = () => {
                 }
                 const respuesta = await axios.get(url, options)
                 setDelegacion(respuesta.data)
-                console.log("respuesta", respuesta.data)
             } catch (error) {
                 setMensaje({ respuesta: error.response.data.msg, tipo: false })
             }

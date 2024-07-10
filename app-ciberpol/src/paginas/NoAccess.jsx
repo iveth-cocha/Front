@@ -1,8 +1,5 @@
 import React from 'react'
-
 import { useNavigate } from 'react-router-dom'
-import { IoSearch } from "react-icons/io5";
-import Asiganacion from '../componets/formularios/Asignacion';
 import TablaVisualidorD from '../componets/TablaVisualidorD';
 
 

@@ -25,7 +25,6 @@ const DetalleDelegacion = () => {
                 }
             }
             const respuesta = await axios.get(url, options);
-        console.log('detalle', respuesta.data); // Verificar los datos aquí
         setDelegacion(respuesta.data);
         } catch (error) {
           setMensaje({ respuesta: error.response?.data?.msg || 'Error al obtener la delegación', tipo: false });

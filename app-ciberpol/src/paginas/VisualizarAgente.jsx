@@ -24,8 +24,6 @@ const VisualizarAgente = () => {
             }
             const respuesta = await axios.get(url, options)
             setAgente(respuesta.data);
-        // <-- Agregar console.log aquí
-        console.log("respuesta", respuesta.data);
         } catch (error) {
             setMensaje({ respuesta: error.response.data.msg, tipo: false })
         }

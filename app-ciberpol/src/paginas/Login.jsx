@@ -40,9 +40,7 @@ const Login = () => {
         localStorage.removeItem('accessBlocked');
       }
 
-      console.log('Usuario almacenado en localStorage:', respuesta.data.grado + respuesta.data.nombre + respuesta.data.Rol+ respuesta.data.tokenSession); 
-
-      setAuth(respuesta.data);
+     setAuth(respuesta.data);
       navigate('/delegaciones');
     } catch (error) {
       setMensaje({respuesta: error?.response?.data?.errors?.[0]?.msg || error?.response?.data?.msg,

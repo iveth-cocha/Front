@@ -8,7 +8,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Agente = ({agente}) => {
-  console.log("prop",agente)
   
   const navigate = useNavigate();
   const [mensaje, setMensaje] = useState({})
@@ -49,7 +48,6 @@ const Agente = ({agente}) => {
     e.preventDefault()
       try {
         if (agente?.Cedula) {
-          console.log("dentro delif")
           const token = localStorage.getItem('token');
           let url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/agente/${agente?.Cedula}`;
           
@@ -67,7 +65,6 @@ const Agente = ({agente}) => {
             }
           };
           await axios.put(url, formData, options)
-          console.log("actualizar",formData)
           setMensaje({ respuesta: 'Informacion delAgente actualizada correctamente', tipo: true });
           setOpenDialog(true);
           setTimeout(() => {
@@ -91,7 +88,6 @@ const Agente = ({agente}) => {
           }
         }
         await axios.post(url, formData, options)
-        console.log('DESPUES:', formData);
         setMensaje({ respuesta: "Agente añadido a la Lista", tipo: true })
         setOpenDialog(true);
         setTimeout(() => {

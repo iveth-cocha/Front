@@ -31,7 +31,6 @@ const Panel = () => {
         const consultarToken = async () => {
             try {
                 const tokenSession = localStorage.getItem('tokenSession');
-                console.log("token s", tokenSession); // Verifica que el token se muestra en la consola
                 const url = `${import.meta.env.VITE_BACKEND_URL}/logout/${tokenSession}`;
                 const options = {
                     headers: {
@@ -40,7 +39,6 @@ const Panel = () => {
                 };
 
                 const respuesta = await axios.post(url, {}, options);
-                console.log("respuesta solicitud", respuesta);
                 setTokenS(respuesta.data.msg);
             } catch (error) {
                 setMensaje({ respuesta: error?.response?.data?.msg, tipo: false });
