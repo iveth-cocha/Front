@@ -382,8 +382,8 @@ const NewDelegacion = () => {
 
 
 const causasClass = isCausasDisabled
-    ? "uppercase block w-2000 rounded-md border border-gray-300 bg-gray-200 text-gray-400 cursor-not-allowed focus:outline-none h-8"
-    : "uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500";
+    ? "uppercase block w-96 rounded-md border border-gray-300 bg-gray-200 text-gray-400 cursor-not-allowed focus:outline-none h-8"
+    : "uppercase block w-96 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500";
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -1297,7 +1297,7 @@ const causasClass = isCausasDisabled
           <div className='flex mb-3'>
             <label className='mr-7'>Nombre de los Detenidos Producto de la Investigación</label>
             <input type="String" id='nombre_detenidos_producto_investigacion' name='nombre_detenidos_producto_investigacion' onChange={handleChange}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
+              className="uppercase block w-80 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500"
               {...register('nombre_detenidos_producto_investigacion', {
                 validate: value => {
                   if (!value) return true; // Si el campo está vacío, no se activa la validación
