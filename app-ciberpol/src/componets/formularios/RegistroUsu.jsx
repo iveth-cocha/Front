@@ -169,7 +169,7 @@ const RegistroUsu = ({ usuario }) => {
             />
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7'>Rol:</label>
+            <label className='mr-7 mt-4'>Rol:</label>
             <select className='border-2 w-2000 p-2 mt-2 rounded-md mb-5' id='Rol' onChange={handleRolChange} value={form.Rol}>
               <option value="">Seleccione el rol</option>
               <option value="Administrador">Administrador</option>
