@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "http://192.168.5.100:3000/api/$1"
+      "destination": "https://ec57-186-47-74-235.ngrok-free.app/api/$1"
     },
     {
-      "source": "(.*)",
-      "destination": "/"
+      "source": "/(.*)",
+      "destination": "/$1"
     }
   ]
 }
