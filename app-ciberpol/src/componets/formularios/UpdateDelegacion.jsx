@@ -352,8 +352,8 @@ setIsCausasDisabled(form.informe_descargo !== 'PARTE DE DESCARGO');
 
 
 const causasClass = isCausasDisabled
-    ? "uppercase block w-2000 rounded-md border border-gray-300 bg-gray-200 text-gray-400 cursor-not-allowed focus:outline-none h-8"
-    : "uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500";
+    ? "uppercase block w-96 rounded-md border border-gray-300 bg-gray-200 text-gray-400 cursor-not-allowed focus:outline-none h-8"
+    : "uppercase block w-96 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500";
   return (
       <div>
         <form onSubmit={handleSubmit} >
@@ -483,11 +483,11 @@ const causasClass = isCausasDisabled
           <div className='flex mb-3'>
             <label className='mr-7 '>Apellidos y Nombres de la Victima</label>
             <input type="String" id='apellidos_nombres_victima' name='apellidos_nombres_victima' onChange={handleChange} value={form.apellidos_nombres_victima}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-80 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
 
           <div className='flex  mb-3'>
-            <label className='mr-7 '>Sexo</label>
+            <label className='mr-7 mt-3'>Sexo</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='sexo_victima' name='sexo_victima' onChange={handleChange} value={form.sexo_victima}>
               <option value="">--Seleccione el sexo--</option>
               <option value="FEMENINO">FEMENINO</option>
@@ -509,7 +509,7 @@ const causasClass = isCausasDisabled
           <div className='flex mb-3'>
             <label className='mr-7'>Apellidos y Nombres del Detenido o Sospechoso</label>
             <input type="String" id='apellidos_nombres_sospechoso' name='apellidos_nombres_sospechoso' onChange={handleChange} value={form.apellidos_nombres_sospechoso}
-              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500 w-80" />
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Condición del Infractor Involucrado</label>
@@ -541,7 +541,7 @@ const causasClass = isCausasDisabled
             <label className='mr-7'>Apellidos y Nombres del Fiscal</label>
             <input 
                   disabled value={form.apellidos_nombres_fiscal}
-                  className="text-md text-black border-none bg-gray-200  p-2 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-2 rounded-md w-80" />
           </div>
 
         
@@ -604,7 +604,7 @@ const causasClass = isCausasDisabled
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex  mb-3'>
-            <label className='mr-7'>Cumplimiento Parcial</label>
+            <label className='mr-7 mt-3'>Cumplimiento Parcial</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='cumplimiento_parcial' name='cumplimiento_parcial' onChange={handleChange}  value={form.cumplimiento_parcial}>
               <option value="">-- Seleccione --</option>
               <option value="SI" >SI</option>
@@ -612,7 +612,7 @@ const causasClass = isCausasDisabled
             </select>
           </div>
           <div className='flex  mb-3'>
-            <label className='mr-7'>Cumplimiento Total</label>
+            <label className='mr-7 mt-3'>Cumplimiento Total</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='cumplimiento_total' name='cumplimiento_total' onChange={handleChange} value={form.cumplimiento_total}  >
               <option value="">-- Seleccione --</option>
               <option value="SI" >SI</option>
@@ -625,7 +625,7 @@ const causasClass = isCausasDisabled
               className="block  rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex  mb-3'>
-            <label className='mr-7'>En Investigación</label>
+            <label className='mr-7 mt-3'>En Investigación</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='en_investigacion' name='en_investigacion' onChange={handleChange} value={form.en_investigacion} >
               <option value="">-- Seleccione --</option>
               <option value="SI" >SI</option>
@@ -648,7 +648,7 @@ const causasClass = isCausasDisabled
               className="block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex  mb-3'>
-            <label className='mr-7'>¿Determinó posibles Responsables?</label>
+            <label className='mr-7 mt-3'>¿Determinó posibles Responsables?</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='determino_posibles_responsables' name='determino_posibles_responsables' onChange={handleChange} value={form.determino_posibles_responsables}>
               <option value="">-- Seleccione --</option>
               <option value="SI" >SI</option>
@@ -656,7 +656,7 @@ const causasClass = isCausasDisabled
             </select>
           </div>
           <div className='flex  mb-3'>
-            <label className='mr-7'>Comparecencia del Sospechoso</label>
+            <label className='mr-7 mt-3'>Comparecencia del Sospechoso</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='comparecencia_sospechoso' name='comparecencia_sospechoso' onChange={handleChange}  value={form.comparecencia_sospechoso} >
               <option value="">-- Seleccione --</option>
               <option value="SI" >SI</option>
@@ -664,7 +664,7 @@ const causasClass = isCausasDisabled
             </select>
           </div>
           <div className='flex  mb-3'>
-            <label className='mr-7'>Peticiones a Fiscalía</label>
+            <label className='mr-7 mt-3'>Peticiones a Fiscalía</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='peticiones_fiscalia' name='peticiones_fiscalia' onChange={handleChange}  value={form.peticiones_fiscalia}>
               <option value="">-- Seleccione --</option>
               <option value="SI" >SI</option>
@@ -672,7 +672,7 @@ const causasClass = isCausasDisabled
             </select>
           </div>
           <div className='flex mb-3'>
-            <label className='mr-7 '>Tipo de Requermimientos</label>
+            <label className='mr-7 '>Tipo de Requerimientos</label>
             <input type="String" id='tipo_peticion' name='tipo_peticion' onChange={handleChange} value={form.tipo_peticion}
               className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
@@ -686,13 +686,13 @@ const causasClass = isCausasDisabled
           <div className='flex mb-3'>
             <label className='mr-7 '>Nombre del Requerido en la Boleta</label>
             <input type="String" id='nombre_requerido_boleta' name='nombre_requerido_boleta' onChange={handleChange} value={form.nombre_requerido_boleta}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-80 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
 
           <div className='mb-3'>
             <label className='mr-7 '>Apellidos y Nombres de los Detenidos, producto del Cumplimiento de la Disposición Fiscal</label>
             <input type="String" id='apellidos_nombres_detenidos_producto' name='apellidos_nombres_detenidos_producto' onChange={handleChange} value={form.apellidos_nombres_detenidos_producto}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-96 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex mb-3'>
             <label className='mr-7 '>N° Boletas Solicitadas</label>
@@ -752,7 +752,7 @@ const causasClass = isCausasDisabled
         <div className='rounded-md border-2 border-sky-950 p-8 mb-2'>
           <h1 className='text-gray-500 uppercase font-semibold underline  mb-5  '>informe</h1>
           <div className='flex  mb-3'>
-            <label className='mr-7 '>Informe o Descargo</label>
+            <label className='mr-7 mt-3'>Informe o Descargo</label>
             <select className='border-2 w-2000 p-2 mt-2  rounded-md mb-5' id='informe_descargo' name='informe_descargo' onChange={handleChange} value={form.informe_descargo} >
               <option value="">-- Seleccione una opción-- </option>
               <option value="INFORME INVESTIGATIVO">INFORME INVESTIGATIVO</option>
@@ -768,7 +768,7 @@ const causasClass = isCausasDisabled
           <div className='flex mb-3'>
             <label className='mr-7'>Nombre de los Detenidos Producto de la Investigación</label>
             <input type="String" id='nombre_detenidos_producto_investigacion' name='nombre_detenidos_producto_investigacion' onChange={handleChange} value={form.nombre_detenidos_producto_investigacion}
-              className="uppercase block w-2000 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
+              className="uppercase block w-80 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-sky-900 py-1 px-2 text-gray-500" />
           </div>
           <div className='flex mb-3'>
             <label className='mr-7'>Observaciones</label>
