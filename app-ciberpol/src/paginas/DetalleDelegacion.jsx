@@ -83,7 +83,7 @@ const delegacionCompleta = completarDatos(delegacion);
                 <label className='mr-7 font-bold'>Apellidos y Nombres del Agente</label>
                 <input 
                   disabled value={delegacionCompleta.apellidos_nombres_agente}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-96" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Grado Agente</label>
@@ -102,25 +102,25 @@ const delegacionCompleta = completarDatos(delegacion);
                   className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
               </div>
               <div className='flex mb-3'>
-                <label className='mr-7 font-bold'>Distrito:</label>
+                <label className='mr-16 font-bold'>Distrito:</label>
                 <input 
                   disabled value={delegacionCompleta.distrito}
                   className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
               </div>
               <div className='flex mb-3'>
-                <label className='mr-7 font-bold'>Zona:</label>
+                <label className='mr-20 font-bold'>Zona:</label>
                 <input 
                   disabled value={delegacionCompleta.zona}
                   className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
               </div>
               <div className='flex mb-3'>
-                <label className='mr-7 font-bold'>Canton:</label>
+                <label className='mr-16 font-bold'>Canton:</label>
                 <input 
                   disabled value={delegacionCompleta.canton}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-auto" />
               </div>
               <div className='flex mb-3'>
-                <label className='mr-7 font-bold'>Provincia:</label>
+                <label className='mr-12 font-bold'>Provincia:</label>
                 <input 
                   disabled value={delegacionCompleta.provincia}
                   className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
@@ -133,19 +133,19 @@ const delegacionCompleta = completarDatos(delegacion);
                 <label className='mr-7 font-bold'>Delito Tipificado en Delegación</label>
                 <input 
                   disabled value={delegacionCompleta.delito_tipificado_delegacion}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-64" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Tipo Delito:</label>
                 <input 
                   disabled value={delegacionCompleta.tipo_delito}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-96" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Tipo Desgregado:</label>
                 <input 
                   disabled value={delegacionCompleta.delito_desagregacion_policia_judicial}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-64" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Fecha de Infracción o Delito</label>
@@ -157,7 +157,7 @@ const delegacionCompleta = completarDatos(delegacion);
                 <label className='mr-7 font-bold'>Apellidos y Nombres de la Victima</label>
                 <input 
                   disabled value={delegacionCompleta.apellidos_nombres_victima}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-80" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Sexo</label>
@@ -179,7 +179,7 @@ const delegacionCompleta = completarDatos(delegacion);
                 <label className='mr-7 font-bold'>Apellidos y Nombres del Detenido o Sospechoso</label>
                 <input 
                   disabled value={delegacionCompleta.apellidos_nombres_sospechoso}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-80" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Condición del Infractor Involucrado</label>
@@ -213,13 +213,13 @@ const delegacionCompleta = completarDatos(delegacion);
                 <label className='mr-7 font-bold'>Apellidos y Nombres del Fiscal</label>
                 <input 
                   disabled  value={delegacionCompleta.apellidos_nombres_fiscal}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-80" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Unidad Especializada de Fiscalía:</label>
                 <input 
                   disabled  value={delegacionCompleta.unidad_especializada}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-96" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Fecha de la Delegación</label>
@@ -341,13 +341,14 @@ const delegacionCompleta = completarDatos(delegacion);
                 <label className='mr-7 font-bold'>Nombre del Requerido en la Boleta</label>
                 <input 
                   disabled value={delegacionCompleta.nombre_requerido_boleta}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-80" />
               </div>
-              <div className='flex mb-3'>
-                <label className='mr-7 font-bold'>Apellidos y Nombres de los Detenidos, producto del Cumplimiento de la Disposición Fiscal</label>
-                <input 
-                  disabled value={delegacionCompleta.apellidos_nombres_detenidos_producto}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+              <div className='flex flex-col mb-3'>
+                <label className='mb-2 font-bold'>Apellidos y Nombres de los Detenidos, producto del Cumplimiento de la Disposición Fiscal</label>
+                <input
+                  disabled
+                  value={delegacionCompleta.apellidos_nombres_detenidos_producto}
+                  className="text-md text-black border-none bg-gray-200 p-1 rounded-md w-96" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>N° Boletas Solicitadas</label>
@@ -368,10 +369,10 @@ const delegacionCompleta = completarDatos(delegacion);
                   className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
               </div>
               <div className='flex mb-3'>
-                <label className='mr-7 font-bold'>N° de Recuperaión de Bienes</label>
+                <label className='mr-7 font-bold'>N° de Recuperaión de Bienes o Evidencias</label>
                 <input 
                   disabled value={delegacionCompleta.recuperacion_bienes_evidencias}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-96" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>N° de Recuperación de Automotores</label>
@@ -422,7 +423,7 @@ const delegacionCompleta = completarDatos(delegacion);
                 <label className='mr-7 font-bold'>Causas de Incumplimineto de la Investigación</label>
                 <input 
                   disabled value={delegacionCompleta.causas_incumplimiento_investigacion}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-80" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Nombre de los Detenidos Producto de la Investigación</label>
@@ -434,7 +435,7 @@ const delegacionCompleta = completarDatos(delegacion);
                 <label className='mr-7 font-bold'>Observaciones</label>
                 <input 
                   disabled  value={delegacionCompleta.observaciones}
-                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md" />
+                  className="text-md text-black border-none bg-gray-200  p-1 rounded-md w-80" />
               </div>
               <div className='flex mb-3'>
                 <label className='mr-7 font-bold'>Cantidad Sustraida</label>
