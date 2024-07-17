@@ -42,13 +42,13 @@ const Registrar = () => {
     return (
         <div className="h-screen bg-cover bg-center  flex flex-col justify-center items-center" style={{ backgroundImage: `url('/fondo_base.jpg')` }} >
             <div className="p-3 bg-blue-900 rounded-lg border  font-serif ">
-                <div className='flex items-center justify-center bg-no-repeat bg-top mb-2'>
+                <div className='flex items-center justify-center bg-no-repeat bg-top mb-2 mt-2'>
                     <img src="/logo_policia.png" className=' h-20' />
                     <img src="/logo_ciberpol.png" className='h-20' />
                 </div>
-                <p className='text-slate-300 uppercase text-lg mb-2 text-center'>Solicitud de Registro para acceder al Sistema</p>
+                <p className='text-slate-300 uppercase text-lg  text-center'>Solicitud de Registro para acceder al Sistema</p>
                 
-                <div className='p-8'>
+                <div className='p-5'>
                 {Object.keys(mensaje).length>0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
                 <form onSubmit={handleSubmit}  >
                     <div className=' mb-6'>

@@ -46,7 +46,7 @@ const Forgot = () => {
                 </div>
                 <h1 className="text-3xl font-bold underline text-red mb-3">SISTEMA DE DELEGACIONES</h1>
 
-                <h2 className="text-3xl font-bold text-red mb-4">Olvidó su Contraseña</h2>
+                <h2 className="text-3xl font-bold text-red mb-4">Olvido su Contraseña</h2>
                 {Object.keys(mensaje).length > 0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
 
                 <form onSubmit={handleSubmit}>
