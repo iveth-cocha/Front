@@ -5,8 +5,8 @@
       "destination": "https://ec57-186-47-74-235.ngrok-free.app/api/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/$1"
+      "source": "(.*)",
+      "destination": "/"
     }
   ]
 }
