@@ -25,7 +25,7 @@ const Newpassword = () => {
         e.preventDefault();
     
         try {
-          const url = `${import.meta.env.VITE_BACKEND_URL}/actualizar-password/${token}`;
+          const url = `${import.meta.env.VITE_BACKEND_URL}/crear-password/${token}`;
           const response = await axios.put(url, form); // Envía los datos del formulario en la solicitud
           setMensaje({ respuesta: response.data.msg, tipo: true });
           setTimeout(() => {

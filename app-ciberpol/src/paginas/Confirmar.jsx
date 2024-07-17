@@ -31,7 +31,7 @@ const Confirmar = () => {
                   <img src="/logo_ciberpol.png" className='h-32' />
               </div>
               <p className="text-3xl md:text-4xl lg:text-3xl text-gray-800 mt-8 uppercase">Página de confirmación de cuenta</p>
-              <p className="md:text-lg lg:text-xl text-gray-600 mt-8  ">Es necesario que crees una contraseña   
+              <p className="md:text-lg lg:text-xl text-gray-600 mt-8  ">Es necesario crear una contraseña   
                 <Link to={`/actualizar-contrasena/${token}`}  className=" text-gray-600 hover:text-blue-900 underline pl-2">Clic para crear contraseña</Link>
               </p>
 
