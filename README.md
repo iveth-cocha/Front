@@ -21,7 +21,7 @@ se plantea el desarrollo del frontend para el Sistema de Delegaciones.
 </p>
 
 ## Manual de usuario
-El manual de usario se encuentra disponible en el siguiente "enlace" 
+El manual de usario se encuentra disponible en el siguiente [enlace](https://www.youtube.com/watch?v=4j6foOG5MQw)
 
 ## Manual de instalación
 Para instalar el componente frontend, se deben realizar los siguientes pasos:
